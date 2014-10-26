@@ -12,6 +12,7 @@ public class HomePage extends Page {
 
 	@Override
 	public void body() {
-		out.println("Home page");
+
+        out.println("Home page");
 	}
 }
