@@ -4,6 +4,7 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 
 ## What's done
 ##### Before Second Monday
+- Wiki
 - Milestone and Issues Setting
 - Study gitignore syntax
 - Study MarkDown syntax

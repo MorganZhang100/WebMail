@@ -11,6 +11,7 @@ public class HomePage extends Page {
 
 	public void verify() { }
 
+    @Override
     public void headerMore() {
         out.println("<link href=\"http://localhost:8081/css/login.css\" rel=\"stylesheet\">");
     }
@@ -39,7 +40,7 @@ public class HomePage extends Page {
                 "      </div>\n" +
                 "\n" +
                 "      <p class=\"text-center\">\n" +
-                "        <a>Create an account</a>\n" +
+                "        <a href=\"register\">Create an account</a>\n" +
                 "      </p>\n" +
                 "\n" +
                 "    </div>");
