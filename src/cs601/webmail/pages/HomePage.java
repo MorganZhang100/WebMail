@@ -46,7 +46,6 @@ public class HomePage extends Page {
 
                 ResultSet rs = statement.executeQuery("select * from mytable");
                 while( rs.next() ) {
-                    // read the result set
                     out.println("id = " + rs.getString("id"));
                     out.println("value = " + rs.getInt("value"));
                     out.println("<br>");

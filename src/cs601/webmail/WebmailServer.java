@@ -18,8 +18,7 @@ public class WebmailServer {
 		String logDir = args[1];
         Server server = new Server(8080);
 
-		ServletContextHandler context = new
-		            ServletContextHandler(ServletContextHandler.SESSIONS);
+		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath("/");
 		server.setHandler(context);
 
