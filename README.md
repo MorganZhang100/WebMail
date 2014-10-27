@@ -8,7 +8,7 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 
 ## Now Pages
 <img align=top src="figures/login.jpg" width="320">
-<img align=top src="figures/UserRegister.jpg" width="280">
+<img align=top src="figures/UserRegister.jpg" width="320">
 
 ## What's done
 ##### Before Second Monday

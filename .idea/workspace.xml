@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14316b36-6979-4854-89e0-09f89a409f32" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/figures/UserRegister.jpg" afterPath="$PROJECT_DIR$/figures/UserRegister.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/figures/login.jpg" afterPath="$PROJECT_DIR$/figures/login.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="MorganZhang1991-webmail.iws" />
@@ -80,8 +82,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4954955" vertical-offset="0" max-vertical-offset="465">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.5855856" vertical-offset="0" max-vertical-offset="465">
+              <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -953,8 +955,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4954955" vertical-offset="0" max-vertical-offset="465">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.5855856" vertical-offset="0" max-vertical-offset="465">
+          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
           <folding />
         </state>
       </provider>
