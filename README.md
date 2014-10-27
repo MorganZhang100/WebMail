@@ -7,8 +7,8 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 - Let server run on Digital Ocean
 
 ## Now Pages
-<img align=top src="figures/login.jpg">
-<img align=top src="figures/UserRegister.jpg">
+<img align=top src="figures/login.jpg" width="320">
+<img align=top src="figures/UserRegister.jpg" width="280">
 
 ## What's done
 ##### Before Second Monday
