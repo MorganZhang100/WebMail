@@ -11,61 +11,37 @@ public class HomePage extends Page {
 
 	public void verify() { }
 
+    public void headerMore() {
+        out.println("<link href=\"http://localhost:8081/css/login.css\" rel=\"stylesheet\">");
+    }
+
 	@Override
 	public void body() {
-
-        String dbFile = "/Users/Morgan/test.db";
-        Connection db = null;
-        long start = System.currentTimeMillis();
-        try {
-            try {
-                Class.forName("org.sqlite.JDBC"); // force load of driver
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                db = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            // DO SOMETHINE WITH db to read/write
-
-            long stop = System.currentTimeMillis();
-            out.printf("SQL exe time %1.1f minutes\n", (stop-start)/1000.0/60.0);
-            out.println("<br>");
-
-            Statement statement = null;
-
-            try {
-                statement = db.createStatement();
-
-                statement.executeUpdate("insert into mytable(value) values('Morgan'); ");
-
-                statement.close();
-
-                ResultSet rs = statement.executeQuery("select * from mytable");
-                while( rs.next() ) {
-                    out.println("id = " + rs.getString("id"));
-                    out.println("value = " + rs.getInt("value"));
-                    out.println("<br>");
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        finally {
-            if ( db!=null ) {
-                try {
-                    db.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-
-        out.println("Home page");
+        out.println("<div class=\"container\">\n" +
+                "\n" +
+                "      <h2 class=\"form-signin-heading text-center\">Sign in with your Account</h2>\n" +
+                "\n" +
+                "      <div class=\"card card-signin\">\n" +
+                "        <img class=\"img-circle profile-img\" src=\"http://localhost:8081/img/avatar.png\" alt=\"\">\n" +
+                "        <form class=\"form-signin\" role=\"form\">\n" +
+                "          <input type=\"email\" class=\"form-control\" placeholder=\"Email\" required autofocus>\n" +
+                "          <input type=\"password\" class=\"form-control\" placeholder=\"Password\" required>\n" +
+                "          <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Sign in</button>\n" +
+                "\n" +
+                "          <div>\n" +
+                "            <a class=\"pull-right\">Need help?</a>\n" +
+                "            <label class=\"checkbox\">\n" +
+                "              <input type=\"checkbox\" value=\"remember-me\"> Stay signed in\n" +
+                "            </label>\n" +
+                "          </div>\n" +
+                "\n" +
+                "        </form>\n" +
+                "      </div>\n" +
+                "\n" +
+                "      <p class=\"text-center\">\n" +
+                "        <a>Create an account</a>\n" +
+                "      </p>\n" +
+                "\n" +
+                "    </div>");
 	}
 }

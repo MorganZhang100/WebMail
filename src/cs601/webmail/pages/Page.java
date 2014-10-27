@@ -67,15 +67,39 @@ public abstract class Page {
 		}
 	}
 
+    public void headerMore() {} // overwrite by other page
+
 	public void header() {
-		out.println("<html>");
-		out.println("<body>");
+        out.println("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "  <head>\n" +
+                "    <meta charset=\"utf-8\">\n" +
+                "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
+                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
+                "    <title>Morgan Mail</title>\n" +
+                "\n" +
+                "    <!-- Bootstrap -->\n" +
+                "    <link href=\"http://localhost:8081/todc-bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n" +
+                "    <!-- TODC Bootstrap theme -->\n" +
+                "    <link href=\"http://localhost:8081/todc-bootstrap/css/todc-bootstrap.min.css\" rel=\"stylesheet\">" +
+                "<script src=\"http://localhost:8081/js/jquery-1.11.1.min.js\"></script>\n" +
+                "    <!-- Include all compiled plugins (below), or include individual files as needed -->\n" +
+                "    <script src=\"http://localhost:8081/todc-bootstrap/js/bootstrap.min.js\"></script>");
+
+        headerMore();
+
+        out.println("</head>" + "<body>");
 	}
 
 	public abstract void body();
 
+    public void footerMore() {} // overwrite by other page
+
 	public void footer() {
 		out.println("</body>");
+
+        footerMore();
+
 		out.println("</html>");
 	}
 }
