@@ -97,9 +97,7 @@ public abstract class Page {
 
 	public void footer() {
 		out.println("</body>");
-
         footerMore();
-
 		out.println("</html>");
 	}
 }

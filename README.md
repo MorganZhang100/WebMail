@@ -11,6 +11,11 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 <img align=top src="figures/UserRegister.jpg" width="320">
 
 ## What's done
+##### Before Third Monday
+- Study how to debug
+- make POST handler
+- make Ajax POST
+
 ##### Before Second Monday
 - Login Page UI, User Register Page UI
 - Wiki
