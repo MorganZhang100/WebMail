@@ -44,7 +44,7 @@ public abstract class PostHandler {
 	}
 
 	public void generate() {
-		handleDefaultArgs();
+		//handleDefaultArgs();
 		try {
 			verify(); // check args before generation
 			body();

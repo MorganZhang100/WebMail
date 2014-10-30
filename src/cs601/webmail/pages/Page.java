@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 public abstract class Page {
 	HttpServletRequest request;
@@ -91,7 +92,7 @@ public abstract class Page {
         out.println("</head>" + "<body>");
 	}
 
-	public abstract void body();
+	public abstract void body() throws SQLException, ClassNotFoundException;
 
     public void footerMore() {} // overwrite by other page
 

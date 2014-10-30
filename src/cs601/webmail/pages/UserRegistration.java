@@ -58,7 +58,7 @@ public class UserRegistration extends Page {
                 "            <label for=\"Password\">Password</label>\n" +
                 "            <input type=\"password\" class=\"form-control\" id=\"Password\" placeholder=\"Your Password\" name=\"pwd\">\n" +
                 "          </div>" +
-                "          <button class=\"btn btn-lg btn-primary btn-block\" id=\"register_button\">Register</button>\n" +
+                "          <a class=\"btn btn-lg btn-primary btn-block\" id=\"register_button\">Register</a> \n" +
                 "\n" +
                 "        </form>\n" +
                 "      </div>\n" +
@@ -71,8 +71,8 @@ public class UserRegistration extends Page {
 
                 "<script>\n" +
                 "$('#register_button').click(function() {\n" +
-                "  var d = $(\"#login_form\").serializeArray();\nF" +
-                "$.post(\"registerPost\", d, function(result) { alert(result); });\n" +
+                "  var d = $(\"#login_form\").serializeArray();\n" +
+                "$.post(\"registerPost\", d, function(result) {alert(result); });\n" +
                 "});" +
                 "</script>");
 	}
