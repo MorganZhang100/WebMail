@@ -1,6 +1,6 @@
 package cs601.webmail.post_handler;
 
-import cs601.webmail.pages.Page;
+import cs601.webmail.SQLQueryHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,20 +16,28 @@ public class UserRegistrationPostHandler extends PostHandler {
 	}
 
 	@Override
-	public void body() throws IOException {
+	public void body() throws IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
 
+        String name =request.getParameter("name");
+        String pwd =request.getParameter("pwd");
 
-//        String name =request.getParameter("name");
-//        String password =request.getParameter("password");
-//
-//        name = URLDecoder.decode(name, "utf-8");                 //处理中文乱码2
-//        password = URLDecoder.decode(password,"utf-8");
+        name = URLDecoder.decode(name, "utf-8");                 //处理中文乱码2
+        pwd = URLDecoder.decode(pwd,"utf-8");
 
-        out.println("{data from:\"UserRegistrationPostHandler\"} ");
-
+        SQLQueryHandler sql = new SQLQueryHandler("select * from USER where login_name = '" + name + "';");
+        ResultSet rs = sql.query();
+        if(rs.next()) {
+            out.println("{state:\"fail\",message=\"This login name already exists\"} ");
+        }
+        else {
+            sql.newQuery("insert into USER(login_name,pwd) values('" + name + "','" + pwd + "');");
+            sql.execute();
+            out.println("{state:\"success\"}");
+        }
+        sql.close();
     }
 }

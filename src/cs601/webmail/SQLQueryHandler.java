@@ -9,7 +9,7 @@ import java.sql.*;
 public class SQLQueryHandler {
 
 	String query;
-    String dbFile = "/Users/Morgan/test.db";
+    String dbFile = "/Users/Morgan/Documents/MorganZhang1991-webmail/src/cs601/webmail/MorganWebMail.sqlite";
     Connection db = null;
     Statement statement = null;
 
@@ -25,10 +25,12 @@ public class SQLQueryHandler {
     }
 
     public int execute() throws SQLException {
+        System.out.println(query);
         return statement.executeUpdate(query);
     }
 
     public ResultSet query() throws SQLException {
+        System.out.println(query);
         return statement.executeQuery(query);
     }
 

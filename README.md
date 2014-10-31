@@ -8,6 +8,7 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 
 ## What's done
 ##### Before Third Monday
+- Achieve User Register Page with Ajax method
 - Study how to debug
 - Add POST handler
 - Add SQL Query Handler

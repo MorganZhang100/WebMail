@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 
 public abstract class PostHandler {
 	HttpServletRequest request;
@@ -44,7 +45,7 @@ public abstract class PostHandler {
 	}
 
 	public void generate() {
-		//handleDefaultArgs();
+		handleDefaultArgs();
 		try {
 			verify(); // check args before generation
 			body();
@@ -65,5 +66,5 @@ public abstract class PostHandler {
 		}
 	}
 
-	public abstract void body() throws IOException;
+	public abstract void body() throws IOException, SQLException, ClassNotFoundException;
 }
