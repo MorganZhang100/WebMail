@@ -1,15 +1,16 @@
 package cs601.webmail.pages;
 
 import cs601.webmail.managers.ErrorManager;
+import cs601.webmail.post_handler.LoginPost;
+import cs601.webmail.post_handler.LogoutPost;
 import cs601.webmail.post_handler.PostHandler;
-import cs601.webmail.post_handler.UserRegistrationPostHandler;
+import cs601.webmail.post_handler.RegisterPost;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,10 +18,13 @@ import java.util.Map;
 public class DispatchServlet extends HttpServlet {
 	public static Map<String,Class> mapping = new HashMap<String, Class>();
 	static {
-		mapping.put("/", HomePage.class);
+		mapping.put("/", LoginPage.class);
         mapping.put("/news", NewsPage.class);
-        mapping.put("/register", UserRegistration.class);
-        mapping.put("/registerPost", UserRegistrationPostHandler.class);
+        mapping.put("/register", RegisterPage.class);
+        mapping.put("/home", HomePage.class);
+        mapping.put("/RegisterPost", RegisterPost.class);
+        mapping.put("/LogoutPost", LogoutPost.class);
+        mapping.put("/LoginPost", LoginPost.class);
 	}
 
     @Override

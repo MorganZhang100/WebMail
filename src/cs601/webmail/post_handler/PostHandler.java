@@ -3,12 +3,15 @@ package cs601.webmail.post_handler;
 import cs601.webmail.managers.ErrorManager;
 import cs601.webmail.misc.VerifyException;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+
+import org.json.JSONException;
 
 public abstract class PostHandler {
 	HttpServletRequest request;
@@ -66,5 +69,5 @@ public abstract class PostHandler {
 		}
 	}
 
-	public abstract void body() throws IOException, SQLException, ClassNotFoundException;
+	public abstract void body() throws IOException, SQLException, ClassNotFoundException, JSONException;
 }

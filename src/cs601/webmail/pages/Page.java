@@ -1,6 +1,8 @@
 package cs601.webmail.pages;
 
+import cs601.webmail.managers.CookieManager;
 import cs601.webmail.managers.ErrorManager;
+import cs601.webmail.managers.UserManager;
 import cs601.webmail.misc.VerifyException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,11 +31,18 @@ public abstract class Page {
 		}
 	}
 
-	public void verify() throws VerifyException {
+	public void verify() throws VerifyException, SQLException, ClassNotFoundException, IOException {
 		// handle default args like page number, etc...
 		// verify that arguments make sense
 		// implemented by subclass typically
 		// VerifyException is a custom Exception subclass
+        String uri = request.getRequestURI();
+        if(uri.equals("/home")) {
+            UserManager user = new UserManager();
+            if(!user.isValidLoginedUser(request,response)) {
+                response.sendRedirect("/");
+            }
+        }
 	}
 
 	public void handleDefaultArgs() {
@@ -83,7 +92,7 @@ public abstract class Page {
                 "    <link href=\"http://localhost:8081/todc-bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n" +
                 "    <!-- TODC Bootstrap theme -->\n" +
                 "    <link href=\"http://localhost:8081/todc-bootstrap/css/todc-bootstrap.min.css\" rel=\"stylesheet\">" +
-                "<script src=\"http://localhost:8081/js/jquery-1.11.1.min.js\"></script>\n" +
+                "    <script src=\"http://localhost:8081/js/jquery-1.11.1.min.js\"></script>\n" +
                 "    <!-- Include all compiled plugins (below), or include individual files as needed -->\n" +
                 "    <script src=\"http://localhost:8081/todc-bootstrap/js/bootstrap.min.js\"></script>");
 

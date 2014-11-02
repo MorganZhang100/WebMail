@@ -7,14 +7,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 
-public class UserRegistration extends Page {
-	public UserRegistration(HttpServletRequest request, HttpServletResponse response) {
+public class RegisterPage extends Page {
+	public RegisterPage(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 	}
 
     @Override
     public void headerMore() {
-        out.println("<link href=\"http://localhost:8081/css/login.css\" rel=\"stylesheet\">");
+        out.println("<link href=\"http://localhost:8081/css/login.css\" rel=\"stylesheet\">" );
     }
 
 	@Override
@@ -43,18 +43,8 @@ public class UserRegistration extends Page {
                 "        <a href=\"/\">back to login page</a>\n" +
                 "      </p>\n" +
                 "\n" +
-                "    </div>" +
-
-                "<script>\n" +
-                "$('#register_button').click(function() {\n" +
-                "   $.post(\"registerPost\", " +
-                "   { name: $('#loginName').val()  , " +
-                "     pwd: $('#Password').val()  " +
-                "   }, " +
-                "   function(result) {" +
-                "       alert(result); " +
-                "   });\n" +
-                "});" +
-                "</script>");
+                "    </div>"+
+                "    <script src=\"http://localhost:8081/js/register.js\"></script>"
+        );
 	}
 }
