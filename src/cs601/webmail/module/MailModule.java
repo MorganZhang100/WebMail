@@ -1,13 +1,11 @@
-package cs601.webmail.managers;
+package cs601.webmail.module;
 
-import cs601.webmail.SQLQueryHandler;
+import cs601.webmail.manager.SQLQueryManager;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MailManager {
+public class MailModule {
 
     private String fromName = null;
     private String fromAddress = null;
@@ -151,7 +149,7 @@ public class MailManager {
     }
 
     public void toStore() throws SQLException, ClassNotFoundException {
-        SQLQueryHandler sql = new SQLQueryHandler("select * from MAIL where message_id = '" + this.messageId + "';");
+        SQLQueryManager sql = new SQLQueryManager("select * from MAIL where message_id = '" + this.messageId + "';");
         ResultSet rs = sql.query();
 
         if(rs.next()) {
@@ -161,9 +159,10 @@ public class MailManager {
         else {
             int int_isComplate = 0;
             if(isComplate()) int_isComplate = 1;
+            long currentTime = System.currentTimeMillis();
 
-            sql.newQuery("insert into MAIL(user_id,subject,from_name,from_address,to_name,to_address,body,content_type,charset,content_transfer_encoding,mime_version,raw,date_string,is_complete,message_id) " +
-                    "values('0','" + subject + "','" + fromName + "','" + fromAddress + "','" + toName + "','" + toAddress + "','" + body + "','" + contentType + "','" + charset + "','" + contentTransferEncoding + "','" + mimeVersion + "','" + raw + "','" + date + "'," + int_isComplate + ",'" + messageId + "');");
+            sql.newQuery("insert into MAIL(user_id,subject,from_name,from_address,to_name,to_address,body,content_type,charset,content_transfer_encoding,mime_version,raw,date_string,is_complete,message_id,add_time) " +
+                    "values('0','" + subject + "','" + fromName + "','" + fromAddress + "','" + toName + "','" + toAddress + "','" + body + "','" + contentType + "','" + charset + "','" + contentTransferEncoding + "','" + mimeVersion + "','" + raw + "','" + date + "'," + int_isComplate + ",'" + messageId + "',"+ currentTime + " );");
             sql.execute();
             sql.close();
 

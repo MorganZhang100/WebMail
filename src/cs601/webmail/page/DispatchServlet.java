@@ -1,6 +1,6 @@
-package cs601.webmail.pages;
+package cs601.webmail.page;
 
-import cs601.webmail.managers.ErrorManager;
+import cs601.webmail.manager.ErrorManager;
 import cs601.webmail.post_handler.LoginPost;
 import cs601.webmail.post_handler.LogoutPost;
 import cs601.webmail.post_handler.PostHandler;

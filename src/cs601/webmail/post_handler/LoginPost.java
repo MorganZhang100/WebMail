@@ -1,6 +1,6 @@
 package cs601.webmail.post_handler;
 
-import cs601.webmail.managers.UserManager;
+import cs601.webmail.module.UserModule;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,7 +30,7 @@ public class LoginPost extends PostHandler {
         name = URLDecoder.decode(name, "utf-8");
         pwd = URLDecoder.decode(pwd,"utf-8");
 
-        UserManager user = new UserManager();
+        UserModule user = new UserModule();
         user.setLoginName(name);
         user.setPwd(pwd);
 

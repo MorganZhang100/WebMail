@@ -1,4 +1,4 @@
-package cs601.webmail.managers;
+package cs601.webmail.manager;
 
 public class ErrorManager {
 	private static ErrorManager instance;

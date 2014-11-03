@@ -1,19 +1,16 @@
-package cs601.webmail;
-
-import cs601.webmail.managers.ErrorManager;
-import cs601.webmail.misc.VerifyException;
+package cs601.webmail.manager;
 
 import java.sql.*;
 
 
-public class SQLQueryHandler {
+public class SQLQueryManager {
 
 	String query;
     String dbFile = "/Users/Morgan/Documents/MorganZhang1991-webmail/src/cs601/webmail/MorganWebMail.sqlite";
     Connection db = null;
     Statement statement = null;
 
-	public SQLQueryHandler(String s) throws ClassNotFoundException, SQLException {
+	public SQLQueryManager(String s) throws ClassNotFoundException, SQLException {
 		this.query = s;
         Class.forName("org.sqlite.JDBC");
         db = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
@@ -25,12 +22,12 @@ public class SQLQueryHandler {
     }
 
     public int execute() throws SQLException {
-        System.out.println(query);
+        //System.out.println(query);
         return statement.executeUpdate(query);
     }
 
     public ResultSet query() throws SQLException {
-        System.out.println(query);
+        //System.out.println(query);
         return statement.executeQuery(query);
     }
 

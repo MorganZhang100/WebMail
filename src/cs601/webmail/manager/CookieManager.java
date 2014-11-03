@@ -1,4 +1,4 @@
-package cs601.webmail.managers;
+package cs601.webmail.manager;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

@@ -1,14 +1,12 @@
-package cs601.webmail.pages;
+package cs601.webmail.page;
 
-import cs601.webmail.managers.CookieManager;
-import cs601.webmail.managers.ErrorManager;
-import cs601.webmail.managers.UserManager;
+import cs601.webmail.manager.ErrorManager;
+import cs601.webmail.module.UserModule;
 import cs601.webmail.misc.VerifyException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
@@ -38,7 +36,7 @@ public abstract class Page {
 		// VerifyException is a custom Exception subclass
         String uri = request.getRequestURI();
         if(uri.equals("/home")) {
-            UserManager user = new UserManager();
+            UserModule user = new UserModule();
             if(!user.isValidLoginedUser(request,response)) {
                 response.sendRedirect("/");
             }

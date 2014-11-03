@@ -1,6 +1,6 @@
-package cs601.webmail.pages;
+package cs601.webmail.page;
 
-import cs601.webmail.SQLQueryHandler;
+import cs601.webmail.manager.SQLQueryManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +13,7 @@ public class NewsPage extends Page {
 
 	@Override
 	public void body() throws SQLException, ClassNotFoundException {
-        SQLQueryHandler sql = new SQLQueryHandler("insert into mytable(value) values('Morgan');");
+        SQLQueryManager sql = new SQLQueryManager("insert into mytable(value) values('Morgan');");
         sql.execute();
 
         sql.newQuery("select * from mytable");

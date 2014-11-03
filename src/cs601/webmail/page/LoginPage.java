@@ -1,8 +1,7 @@
-package cs601.webmail.pages;
+package cs601.webmail.page;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.*;
 
 public class LoginPage extends Page {
 	public LoginPage(HttpServletRequest request, HttpServletResponse response) {

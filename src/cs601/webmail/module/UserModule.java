@@ -1,13 +1,14 @@
-package cs601.webmail.managers;
+package cs601.webmail.module;
 
-import cs601.webmail.SQLQueryHandler;
+import cs601.webmail.manager.SQLQueryManager;
+import cs601.webmail.manager.CookieManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserManager {
+public class UserModule {
 
     private String loginName = null;
     private String pwd = null;
@@ -25,7 +26,7 @@ public class UserManager {
     }
 
     public boolean newUser(String name, String pwd, HttpServletResponse reponse) throws SQLException, ClassNotFoundException {
-        SQLQueryHandler sql = new SQLQueryHandler("select * from USER where login_name = '" + name + "';");
+        SQLQueryManager sql = new SQLQueryManager("select * from USER where login_name = '" + name + "';");
         ResultSet rs = sql.query();
 
         if(rs.next()) {
@@ -33,7 +34,9 @@ public class UserManager {
             return false;
         }
         else {
-            sql.newQuery("insert into USER(login_name,pwd) values('" + name + "','" + pwd + "');");
+            long currentTime = System.currentTimeMillis();
+
+            sql.newQuery("insert into USER(login_name,pwd,add_time) values('" + name + "','" + pwd + "'," + currentTime + " );");
             sql.execute();
             sql.close();
 
@@ -45,7 +48,7 @@ public class UserManager {
     }
 
     public void currentUser(HttpServletRequest request) {
-        String name = CookieManager.getCookieValue(request,"login_name");
+        String name = CookieManager.getCookieValue(request, "login_name");
         this.loginName = name;
     }
 
@@ -61,7 +64,7 @@ public class UserManager {
         String name = CookieManager.getCookieValue(request,"login_name");
         if(name == null) return false;
         else {
-            SQLQueryHandler sql = new SQLQueryHandler("select * from USER where login_name = '" + name + "';");
+            SQLQueryManager sql = new SQLQueryManager("select * from USER where login_name = '" + name + "';");
             ResultSet rs = sql.query();
 
 
@@ -80,7 +83,7 @@ public class UserManager {
     }
 
     public boolean isValidUser(HttpServletRequest request,HttpServletResponse response) throws SQLException, ClassNotFoundException {
-        SQLQueryHandler sql = new SQLQueryHandler("select * from USER where login_name = '" + loginName + "' and pwd ='" + pwd + "';");
+        SQLQueryManager sql = new SQLQueryManager("select * from USER where login_name = '" + loginName + "' and pwd ='" + pwd + "';");
         ResultSet rs = sql.query();
 
         if(rs.next()) {

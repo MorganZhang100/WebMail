@@ -1,6 +1,6 @@
 package cs601.webmail.post_handler;
 
-import cs601.webmail.managers.UserManager;
+import cs601.webmail.module.UserModule;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLDecoder;
 import java.sql.SQLException;
 
 
@@ -24,7 +23,7 @@ public class LogoutPost extends PostHandler {
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
 
-        UserManager user = new UserManager();
+        UserModule user = new UserModule();
         user.currentUser(request);
         user.userLogout(response);
 

@@ -1,6 +1,6 @@
-package cs601.webmail;
+package cs601.webmail.manager;
 
-import cs601.webmail.managers.MailManager;
+import cs601.webmail.module.MailModule;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,28 +8,27 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class POP3Handler {
+public class POP3Manager {
 
     private Socket socket;
     private boolean debug = true;
 
-    public static void main(String[] args) throws UnknownHostException, IOException {
+    public static void main(String[] args) throws IOException {
 
         String server = "pop.163.com";
         String user = "zfzzyx";
         String password = "zfzztc114";
-        POP3Handler pop3Handler = new POP3Handler(server,110);
-        pop3Handler.recieveMail(user,password);
+        POP3Manager pop3Manager = new POP3Manager(server,110);
+        pop3Manager.recieveMail(user,password);
     }
 
-    public POP3Handler(String server, int port) throws UnknownHostException, IOException{
+    public POP3Manager(String server, int port) throws IOException{
         try{
             socket = new Socket(server,port);
         }catch(Exception e){
@@ -115,7 +114,7 @@ public class POP3Handler {
     }
 
     //detail in email
-    public String getMessagedetail(BufferedReader in,MailManager mail){
+    public String getMessagedetail(BufferedReader in,MailModule mail){
         String message = "";
         String line;
         boolean body = false;
@@ -149,7 +148,7 @@ public class POP3Handler {
             if(!"+OK".equals(result)){
                 throw new IOException("Error in receiving email");
             }
-            MailManager mail = new MailManager();
+            MailModule mail = new MailModule();
 
             System.out.println("#"+i+" email");
 
@@ -196,7 +195,7 @@ public class POP3Handler {
         return m;
     }
 
-    void searchForInformation(String s, MailManager mail) {
+    void searchForInformation(String s, MailModule mail) {
         //for Content-Type
         Matcher m = resultOfRegExSearch(s, "(?<=Content-Type: )[\\S\\s]+(?=;)");
         if(m.find()) mail.setContentType(m.group());
