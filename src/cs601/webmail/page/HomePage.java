@@ -28,6 +28,24 @@ public class HomePage extends Page {
                     "       <div id=\"up_containter\">\n" +
                     "       </div>" +
                     "   </div>" +
+                    "</div>" +
+                    "<div id=\"mid_big_containter\"> " +
+                    "   <div class=\"container\">\n" +
+                    "       <div id=\"mid_containter\">\n" +
+                    "       </div>" +
+                    "   </div>" +
+                    "</div>" +
+                    "<div id=\"down_big_containter\"> " +
+                    "   <div class=\"container\">\n" +
+                    "       <div id=\"down_containter\">\n" +
+                    "           <div class=\"row\">" +
+                    "               <div class=\"col-lg-3\" id=\"down_left_big\">" +
+                    "               </div>" +
+                    "               <div class=\"col-lg-9\" id=\"down_right_big\">" +
+                    "               </div>" +
+                    "           </div>" +
+                    "       </div>" +
+                    "   </div>" +
                     "</div>");
 	}
 }

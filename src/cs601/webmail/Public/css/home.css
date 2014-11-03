@@ -1,7 +1,21 @@
 #up_containter{
-height:60px;
+    height:60px;
 }
 
 #up_big_containter{
-background:#e5e5e5;
+    background:#e5e5e5;
+}
+
+#mid_containter{
+    height:40px;
+}
+
+#mid_big_containter{
+    border-bottom-color: #E5E5E5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+#down_right_big{
+    background:#e5e5e5;
 }
