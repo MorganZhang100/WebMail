@@ -8,6 +8,8 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 
 ## What's done
 ##### Before Third Monday
+- Receive email through POP
+- Store email in DB
 - Achieve User Register, Log in, Log out with Ajax method
 - Add UserManager, CookieManager
 - Update Ajax to use JSON
