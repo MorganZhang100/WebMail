@@ -42,7 +42,7 @@ public class HomePage extends Page {
                     "           <div class=\"row\">" +
                     "               <div class=\"col-lg-3\" id=\"down_left_big\">" +
                     "                   <div class=\"left_buttons\">" +
-                    "                       <a href=\"\" id=\"inbox_button\" >Inbox</a>" +
+                    "                       <a href=\"#inbox\" id=\"inbox_button\" >Inbox</a>" +
                     "                       <script src=\"http://localhost:8081/js/home.js\"></script>" +
                     "                   </div>" +
                     "                   <div class=\"left_buttons\">" +

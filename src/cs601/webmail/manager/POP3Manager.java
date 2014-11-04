@@ -23,12 +23,12 @@ public class POP3Manager {
 
     public static void main(String[] args) throws IOException {
 
-//        String server = "pop.163.com";
-//        String user = "zfzzyx";
-//        String password = "zfzztc114";
-        String server = "pop.gmail.com";
-        String user = "morganzhang100@gmail.com";
-        String password = "zfzxsd114";
+        String server = "pop.163.com";
+        String user = "zfzzyx";
+        String password = "zfzztc114";
+//        String server = "pop.gmail.com";
+//        String user = "morganzhang100@gmail.com";
+//        String password = "zfzxsd114";
         POP3Manager pop3Manager = new POP3Manager(server,995);
         pop3Manager.recieveMail(user,password);
     }
@@ -130,11 +130,11 @@ public class POP3Manager {
             searchForInformation(line,mail);
 
             while(!".".equalsIgnoreCase(line)){
-                message = message + line + "\n";
+                message = message + line;
                 line = in.readLine();
 
                 if(!body) searchForInformation(line,mail);
-                else if(!line.equals(".")) bodyContent = bodyContent + line + "\n";
+                else if(!line.equals(".")) bodyContent = bodyContent + line;
                 if(line.equals("")) body = true;
             }
 
@@ -151,7 +151,7 @@ public class POP3Manager {
     public void retr(int mailNum,BufferedReader in,BufferedWriter out) throws IOException, SQLException, ClassNotFoundException {
         String result;
         //for(int i=1;i<=mailNum;i++){
-        for(int i=1;i<=1;i++){
+        for(int i=1;i<=5;i++){
             result = getResult(sendServer("retr "+i,in,out));
             if(!"+OK".equals(result)){
                 throw new IOException("Error in receiving email");

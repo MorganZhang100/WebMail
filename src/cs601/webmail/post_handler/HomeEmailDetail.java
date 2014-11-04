@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class HomeInboxPost extends PostHandler {
-	public HomeInboxPost(HttpServletRequest request, HttpServletResponse response) {
+public class HomeEmailDetail extends PostHandler {
+	public HomeEmailDetail(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 	}
 
@@ -26,29 +27,23 @@ public class HomeInboxPost extends PostHandler {
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
 
+        String mail_id =request.getParameter("mail_id");
+
+        mail_id = URLDecoder.decode(mail_id, "utf-8");
+        int IntMailId = Integer.parseInt(mail_id);
+
         UserModule user = new UserModule();
         user.getCurrentUser(request);
 
-        MailModule mail = new MailModule();
-        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, 9);
+        MailModule mail = new MailModule(user,IntMailId);
 
         JSONObject msg = new JSONObject();
-        JSONArray mailsBrief = new JSONArray();
 
-        int i;
-        for(i=0;i<mailList.size();i++) {
-            mail = mailList.get(i);
-            JSONObject oneMailBrief = new JSONObject();
-            oneMailBrief.put("from_name",mail.getFromName());
-            oneMailBrief.put("subject",mail.getSubject());
-            oneMailBrief.put("body",mail.getBody());
-            oneMailBrief.put("mail_id",mail.getMailId());
-
-            mailsBrief.put(oneMailBrief);
-        }
-
-        msg.put("mailAmount",mailList.size());
-        msg.put("mailsBrief",mailsBrief);
+        msg.put("subject",mail.getSubject());
+        msg.put("from_name",mail.getFromName());
+        msg.put("from_address",mail.getFromAddress());
+        msg.put("to_address",mail.getToAddress());
+        msg.put("body",mail.getBody());
 
         out.print(msg);
     }

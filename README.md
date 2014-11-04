@@ -9,6 +9,9 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 ## What's done
 ##### Before Forth Monday
 - Add SSL
+- Add DecodeManager
+- Inbox kind of work
+- Show email kind of work
 
 ##### Before Third Monday
 - Receive email through POP
@@ -29,7 +32,6 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 - Study MarkDown syntax
 - Connect to SQLite database
 - Jetty setting
-
 
 ##### Before First Monday
 - Study use Digital Ocean

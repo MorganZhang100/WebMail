@@ -1,7 +1,9 @@
 package cs601.webmail.module;
 
+import cs601.webmail.manager.DecodeManager;
 import cs601.webmail.manager.SQLQueryManager;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,6 +24,35 @@ public class MailModule {
     private String messageId = null;
     private String raw = null;
     private boolean complate = false;
+    private int mailId = -1;
+
+
+    public MailModule(UserModule user,int mail_id) throws SQLException, UnsupportedEncodingException, ClassNotFoundException {
+        SQLQueryManager sql = new SQLQueryManager("select mail_id,from_name,from_address,to_address,subject,body,content_transfer_encoding,charset from MAIL where user_id = " + 0 + " and mail_id = " + mail_id + " ; ");
+        ResultSet rs = sql.query();
+
+        if(rs.next()) {
+            this.setMailId(rs.getInt("mail_id"));
+            this.setFromName(rs.getString("from_name"));
+            this.setFromAddress(rs.getString("from_address"));
+            this.setToAddress(rs.getString("to_address"));
+            this.setSubject(rs.getString("subject"));
+            this.setCharset(rs.getString("charset"));
+
+            this.setContentTransferEncoding(rs.getString("content_transfer_encoding"));
+
+            String body = rs.getString("body");
+            if(this.getContentTransferEncoding().equals("base64")) body = DecodeManager.Base64(body,this.getCharset());
+            if(this.getContentTransferEncoding().equals("quoted-printable")) body = DecodeManager.DP(body,this.getCharset());
+            this.setBody(body);
+            sql.close();
+        }
+        //**此处应该处理rs.next()不存在的情况
+    }
+
+    public MailModule() {
+
+    }
 
     public String getFromName() {
         return fromName;
@@ -127,6 +158,14 @@ public class MailModule {
         this.raw = raw;
     }
 
+    public int getMailId() {
+        return mailId;
+    }
+
+    public void setMailId(int mailId) {
+        this.mailId = mailId;
+    }
+
     public boolean isComplate() {
         if(fromName != null && fromAddress != null && toName != null && toAddress != null && subject != null && mimeVersion != null && contentType != null && charset != null && contentTransferEncoding != null && date != null && body != null && messageId != null && raw != null) this.complate = true;
         else this.complate = false;
@@ -211,21 +250,31 @@ public class MailModule {
         }
     }
 
-    public ArrayList<MailModule> getBriefUserMails(UserModule user, int mailAmount) throws SQLException, ClassNotFoundException {
+    public ArrayList<MailModule> getBriefUserMails(UserModule user, int mailAmount) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
         //SQLQueryManager sql = new SQLQueryManager("select from_name,subject,body from MAIL where user_id = " + user.getUser_id() + " order by add_time desc limit 0," + mailAmount +"; ");
-        SQLQueryManager sql = new SQLQueryManager("select from_name,subject,body from MAIL where user_id = " + 0 + " order by add_time desc limit 0," + mailAmount +"; ");
+        SQLQueryManager sql = new SQLQueryManager("select mail_id,from_name,subject,body,content_transfer_encoding,charset from MAIL where user_id = " + 0 + " order by add_time desc limit 0," + mailAmount +"; ");
         ResultSet rs = sql.query();
 
         ArrayList<MailModule> arrayList = new ArrayList<MailModule>();
 
         while(rs.next()) {
             MailModule mail = new MailModule();
+            mail.setMailId(rs.getInt("mail_id"));
             mail.setFromName(rs.getString("from_name"));
             mail.setSubject(rs.getString("subject"));
-            mail.setBody(rs.getString("body").substring(0,5));
+            mail.setCharset(rs.getString("charset"));
+
+            mail.setContentTransferEncoding(rs.getString("content_transfer_encoding"));
+
+            String body = rs.getString("body");
+            if(mail.getContentTransferEncoding().equals("base64")) body = DecodeManager.Base64(body,mail.getCharset());
+            if(mail.getContentTransferEncoding().equals("quoted-printable")) body = DecodeManager.DP(body,mail.getCharset());
+            mail.setBody(body.substring(0, 5));
             arrayList.add(mail);
         }
         sql.close();
         return arrayList;
     }
+
+
 }

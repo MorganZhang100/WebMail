@@ -23,6 +23,7 @@ public class DispatchServlet extends HttpServlet {
         mapping.put("/LogoutPost", LogoutPost.class);
         mapping.put("/LoginPost", LoginPost.class);
         mapping.put("/HomeInboxPost", HomeInboxPost.class);
+        mapping.put("/HomeEmailDetail", HomeEmailDetail.class);
 	}
 
     @Override
