@@ -7,6 +7,9 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 <img align=top src="figures/UserRegister.jpg" width="320">
 
 ## What's done
+##### Before Forth Monday
+- Add SSL
+
 ##### Before Third Monday
 - Receive email through POP
 - Store email in DB

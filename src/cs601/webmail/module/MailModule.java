@@ -132,6 +132,11 @@ public class MailModule {
         return this.complate;
     }
 
+    public int getIsComplateInt() {
+        if(this.complate) return 1;
+        else return 0;
+    }
+
     public String toString() {
         String output = ">> Subject: " + this.subject + "\n";
         output += ">> From: " + this.fromName + "<" + this.fromAddress + ">" + "\n";
@@ -142,13 +147,28 @@ public class MailModule {
         output += ">> Content-Transfer-Encoding: " + this.contentTransferEncoding + "\n";
         output += ">> MIME-Version: " + this.mimeVersion + "\n";
         output += ">> Message-ID: " + this.messageId + "\n";
-        output += ">> Body: " + "\n" + this.body + "\n\n";
+        //output += ">> Body: " + "\n" + this.body + "\n\n";
         output += ">> RAW: " + "\n" + this.raw + "\n----------------------\n";
 
         return output;
     }
 
+    public String toStringBrief() {
+        String output = ">> Subject: " + this.subject + "\n";
+        output += ">> From: " + this.fromName + "<" + this.fromAddress + ">" + "\n";
+        output += ">> To: " + this.toName + "<" + this.toAddress + ">" + "\n";
+        output += ">> Date: " + this.date + "\n";
+        output += ">> Content-type: " + this.contentType + "\n";
+        output += ">> charset: " + this.charset + "\n";
+        output += ">> Content-Transfer-Encoding: " + this.contentTransferEncoding + "\n";
+        output += ">> MIME-Version: " + this.mimeVersion + "\n";
+        output += ">> Message-ID: " + this.messageId + "\n\n";
+
+        return output;
+    }
+
     public void toStore() throws SQLException, ClassNotFoundException {
+        //some bug here, this function is no longer in use
         SQLQueryManager sql = new SQLQueryManager("select * from MAIL where message_id = '" + this.messageId + "';");
         ResultSet rs = sql.query();
 
@@ -157,13 +177,33 @@ public class MailModule {
             return;
         }
         else {
-            int int_isComplate = 0;
-            if(isComplate()) int_isComplate = 1;
             long currentTime = System.currentTimeMillis();
 
-            sql.newQuery("insert into MAIL(user_id,subject,from_name,from_address,to_name,to_address,body,content_type,charset,content_transfer_encoding,mime_version,raw,date_string,is_complete,message_id,add_time) " +
-                    "values('0','" + subject + "','" + fromName + "','" + fromAddress + "','" + toName + "','" + toAddress + "','" + body + "','" + contentType + "','" + charset + "','" + contentTransferEncoding + "','" + mimeVersion + "','" + raw + "','" + date + "'," + int_isComplate + ",'" + messageId + "',"+ currentTime + " );");
-            sql.execute();
+            String queryStr = "insert into MAIL(user_id,subject,from_name,from_address,to_name,to_address,body,content_type,charset,content_transfer_encoding,mime_version,raw,date_string,is_complete,message_id,add_time) " +
+                    "values('0','" + subject + "','" + fromName + "','" + fromAddress + "','" + toName + "','" + toAddress + "','" + body + "','" + contentType + "','" + charset + "','" + contentTransferEncoding + "','" + mimeVersion + "','" + raw + "','" + date + "'," + this.getIsComplateInt() + ",'" + messageId + "',"+ currentTime + " );";
+
+            System.out.println("8888 " +queryStr);
+            sql.newQuery(queryStr);
+
+            int queryLines = sql.execute();
+            System.out.println(">>>> " + queryLines);
+            sql.close();
+
+            return;
+        }
+    }
+
+    public void toStorePreparedStatement() throws SQLException, ClassNotFoundException {
+        SQLQueryManager sql = new SQLQueryManager("select * from MAIL where message_id = '" + this.messageId + "';");
+        ResultSet rs = sql.query();
+
+        if(rs.next()) {
+            sql.close();
+            return;
+        }
+        else {
+            sql.newEmail(this);
+
             sql.close();
 
             return;

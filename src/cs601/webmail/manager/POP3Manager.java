@@ -2,12 +2,13 @@ package cs601.webmail.manager;
 
 import cs601.webmail.module.MailModule;
 
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.Socket;
 import java.sql.SQLException;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -16,21 +17,28 @@ import java.util.regex.Pattern;
 
 public class POP3Manager {
 
-    private Socket socket;
+    //private Socket socket;
+    private SSLSocket s;
     private boolean debug = true;
 
     public static void main(String[] args) throws IOException {
 
-        String server = "pop.163.com";
-        String user = "zfzzyx";
-        String password = "zfzztc114";
-        POP3Manager pop3Manager = new POP3Manager(server,110);
+//        String server = "pop.163.com";
+//        String user = "zfzzyx";
+//        String password = "zfzztc114";
+        String server = "pop.gmail.com";
+        String user = "morganzhang100@gmail.com";
+        String password = "zfzxsd114";
+        POP3Manager pop3Manager = new POP3Manager(server,995);
         pop3Manager.recieveMail(user,password);
     }
 
     public POP3Manager(String server, int port) throws IOException{
         try{
-            socket = new Socket(server,port);
+            SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory
+                    .getDefault();
+            s = (SSLSocket) factory.createSocket(server, port);
+            //socket = new Socket(server,port);
         }catch(Exception e){
             e.printStackTrace();
         }finally{
@@ -56,8 +64,6 @@ public class POP3Manager {
         StringTokenizer st = new StringTokenizer(line," ");
         return st.nextToken();
     }
-
-
 
     //Send Commend
     private String sendServer(String str,BufferedReader in,BufferedWriter out) throws IOException{
@@ -110,7 +116,6 @@ public class POP3Manager {
         }
         System.out.println("All have " + mailNum + " emails");
         return mailNum;
-
     }
 
     //detail in email
@@ -122,6 +127,8 @@ public class POP3Manager {
 
         try{
             line = in.readLine();
+            searchForInformation(line,mail);
+
             while(!".".equalsIgnoreCase(line)){
                 message = message + line + "\n";
                 line = in.readLine();
@@ -143,7 +150,8 @@ public class POP3Manager {
     //retr
     public void retr(int mailNum,BufferedReader in,BufferedWriter out) throws IOException, SQLException, ClassNotFoundException {
         String result;
-        for(int i=1;i<=mailNum;i++){
+        //for(int i=1;i<=mailNum;i++){
+        for(int i=1;i<=1;i++){
             result = getResult(sendServer("retr "+i,in,out));
             if(!"+OK".equals(result)){
                 throw new IOException("Error in receiving email");
@@ -155,10 +163,8 @@ public class POP3Manager {
             String raw = getMessagedetail(in, mail);
             mail.setRaw(raw);
 
-            //System.out.println(raw);
-
-            if(!mail.isComplate()) System.out.println(mail.toString());
-            mail.toStore();
+            if(!mail.isComplate()) System.out.println(mail.toStringBrief());
+            mail.toStorePreparedStatement();
         }
     }
 
@@ -174,8 +180,8 @@ public class POP3Manager {
     //receiving email
     public boolean recieveMail(String user,String password){
         try{
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
             user(user,in,out);
             pass(password,in,out);
             int mailNum;
