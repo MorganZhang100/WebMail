@@ -4,6 +4,7 @@ import cs601.webmail.module.UserModule;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 
 public class HomePage extends Page {
 	public HomePage(HttpServletRequest request, HttpServletResponse response) {
@@ -17,9 +18,9 @@ public class HomePage extends Page {
     }
 
 	@Override
-	public void body() {
+	public void body() throws SQLException, ClassNotFoundException {
         UserModule user = new UserModule();
-        user.currentUser(request);
+        user.getCurrentUser(request);
 
         out.println(user.getLoginName());
         out.println("<button id='logout'>Log Out</button><br><script src=\"http://localhost:8081/js/logout.js\"></script>");
@@ -40,6 +41,16 @@ public class HomePage extends Page {
                     "       <div id=\"down_containter\">\n" +
                     "           <div class=\"row\">" +
                     "               <div class=\"col-lg-3\" id=\"down_left_big\">" +
+                    "                   <div class=\"left_buttons\">" +
+                    "                       <a href=\"\" id=\"inbox_button\" >Inbox</a>" +
+                    "                       <script src=\"http://localhost:8081/js/home.js\"></script>" +
+                    "                   </div>" +
+                    "                   <div class=\"left_buttons\">" +
+                    "                       <a href=\"\">Sent</a>" +
+                    "                   </div>" +
+                    "                   <div class=\"left_buttons\">" +
+                    "                       <a href=\"\">Spam</a>" +
+                    "                   </div>" +
                     "               </div>" +
                     "               <div class=\"col-lg-9\" id=\"down_right_big\">" +
                     "               </div>" +

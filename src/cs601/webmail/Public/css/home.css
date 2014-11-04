@@ -19,3 +19,21 @@
 #down_right_big{
     background:#e5e5e5;
 }
+
+.left_buttons{
+    height:20px;
+}
+
+.left_buttons :hover{
+    background:#e5e5e5;
+}
+
+.left_buttons a{
+    color:black;
+    text-decoration : none;
+}
+
+.current_button{
+    color:red;
+    font-weight:bold;
+}

@@ -1,10 +1,7 @@
 package cs601.webmail.page;
 
 import cs601.webmail.manager.ErrorManager;
-import cs601.webmail.post_handler.LoginPost;
-import cs601.webmail.post_handler.LogoutPost;
-import cs601.webmail.post_handler.PostHandler;
-import cs601.webmail.post_handler.RegisterPost;
+import cs601.webmail.post_handler.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +22,7 @@ public class DispatchServlet extends HttpServlet {
         mapping.put("/RegisterPost", RegisterPost.class);
         mapping.put("/LogoutPost", LogoutPost.class);
         mapping.put("/LoginPost", LoginPost.class);
+        mapping.put("/HomeInboxPost", HomeInboxPost.class);
 	}
 
     @Override

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 public class UserModule {
 
     private String loginName = null;
+    private int user_id = -1;
     private String pwd = null;
 
     public String getLoginName() {
@@ -23,6 +24,14 @@ public class UserModule {
 
     public void setPwd(String password) {
         pwd = password;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public boolean newUser(String name, String pwd, HttpServletResponse reponse) throws SQLException, ClassNotFoundException {
@@ -47,9 +56,24 @@ public class UserModule {
         }
     }
 
-    public void currentUser(HttpServletRequest request) {
+    public boolean getCurrentUser(HttpServletRequest request) throws SQLException, ClassNotFoundException {
         String name = CookieManager.getCookieValue(request, "login_name");
         this.loginName = name;
+
+        SQLQueryManager sql = new SQLQueryManager("select user_id from USER where login_name = '" + name + "'; ");
+        ResultSet rs = sql.query();
+
+        if(rs.next()) {
+            this.user_id = rs.getInt("user_id");
+
+            sql.close();
+            return true;
+        }
+        else {
+            sql.close();
+
+            return false;
+        }
     }
 
     private void userLogin(HttpServletResponse response) {
@@ -66,7 +90,6 @@ public class UserModule {
         else {
             SQLQueryManager sql = new SQLQueryManager("select * from USER where login_name = '" + name + "';");
             ResultSet rs = sql.query();
-
 
             if(rs.next()) {
                 this.loginName = name;

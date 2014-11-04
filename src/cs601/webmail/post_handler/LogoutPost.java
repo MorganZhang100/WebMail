@@ -24,7 +24,7 @@ public class LogoutPost extends PostHandler {
         PrintWriter out = response.getWriter();
 
         UserModule user = new UserModule();
-        user.currentUser(request);
+        user.getCurrentUser(request);
         user.userLogout(response);
 
         JSONObject msg = new JSONObject();

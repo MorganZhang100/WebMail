@@ -1,20 +1,14 @@
-$("#register_button").click(
+$("#inbox_button").click(
     function() {
         $.post(
-            "RegisterPost",
+            "HomeInboxPost",
             {
-                name: $('#loginName').val(),
-                pwd: $('#Password').val()
+
             },
             function(result)
             {
-                switch(result.state) {
-                    case "success":
-                        window.location = "home";
-                        break;
-                    case "fail":
-                        alert(result.message);
-                        break;
+                for(var i=0; i<result.mailAmount; i++) {
+                    alert(result.mailsBrief[i].subject);
                 }
             },
             "json"

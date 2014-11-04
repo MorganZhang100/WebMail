@@ -4,6 +4,7 @@ import cs601.webmail.manager.SQLQueryManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MailModule {
 
@@ -208,5 +209,23 @@ public class MailModule {
 
             return;
         }
+    }
+
+    public ArrayList<MailModule> getBriefUserMails(UserModule user, int mailAmount) throws SQLException, ClassNotFoundException {
+        //SQLQueryManager sql = new SQLQueryManager("select from_name,subject,body from MAIL where user_id = " + user.getUser_id() + " order by add_time desc limit 0," + mailAmount +"; ");
+        SQLQueryManager sql = new SQLQueryManager("select from_name,subject,body from MAIL where user_id = " + 0 + " order by add_time desc limit 0," + mailAmount +"; ");
+        ResultSet rs = sql.query();
+
+        ArrayList<MailModule> arrayList = new ArrayList<MailModule>();
+
+        while(rs.next()) {
+            MailModule mail = new MailModule();
+            mail.setFromName(rs.getString("from_name"));
+            mail.setSubject(rs.getString("subject"));
+            mail.setBody(rs.getString("body").substring(0,5));
+            arrayList.add(mail);
+        }
+        sql.close();
+        return arrayList;
     }
 }
