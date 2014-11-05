@@ -12,6 +12,7 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 - Add DecodeManager
 - Inbox kind of work
 - Show email kind of work
+- Home Page UI kind of done
 
 ##### Before Third Monday
 - Receive email through POP

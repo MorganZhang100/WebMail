@@ -1,9 +1,10 @@
 #up_containter{
-    height:60px;
 }
 
 #up_big_containter{
     background:#e5e5e5;
+    padding-top:15px;
+    padding-bottom:15px;
 }
 
 #mid_containter{
@@ -22,6 +23,7 @@
 
 .left_buttons{
     height:20px;
+    margin-top:5px;
 }
 
 .left_buttons :hover{
@@ -42,11 +44,8 @@
 .email_brief {
 
     background:#e5e5e5;
-    border-bottom-color: #E5E5E5;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
 
-    border-top-color: #E5E5E5;
+    border-top-color: grey;
     border-top-style: solid;
     border-top-width: 1px;
 
@@ -61,4 +60,47 @@
 
 .email_brief :hover{
     color:black;
+}
+
+#email_detail{
+    background:white;
+}
+
+.email_subject{
+    font-size:24px;
+    border-bottom-color: #E5E5E5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-bottom:5px;
+}
+
+.email_head{
+    font-size:16px;
+    border-bottom-color: #E5E5E5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-bottom:5px;
+}
+
+.email_body{
+}
+
+#top_search_input{
+    height:30px;
+    margin-right:8px;
+    width:500px;
+}
+
+.top_search_div{
+}
+
+#user_login_name{
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-right:15px;
+}
+
+#logout_button{
+    padding-top:5px;
+    padding-bottom:5px;
 }

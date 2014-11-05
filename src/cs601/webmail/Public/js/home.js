@@ -11,7 +11,7 @@ $("#inbox_button").click(
                 var i;
                 for(i=0; i<result.mailAmount; i++) {
                     //
-                    $("#down_right_big").prepend("<a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6\" >" + result.mailsBrief[i].body + "</span></div></a>");
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
                 }
             },
             "json"
@@ -33,11 +33,24 @@ window.onhashchange = function() {
             function(result)
             {
                 $("#down_right_big").empty();
-                $("#down_right_big").prepend("<div class=\"email_body\" >" + result.body + "</div>");
-                $("#down_right_big").prepend("<div class=\"email_head\" ><span class=\"col-lg-6\" >" + result.from_name + "<" + result.from_address + "> </span><span class=\"col-lg-6\" > To me <" + result.to_address + "></span></div>");
+                $("#down_right_big").prepend("<div class=\"row\" id=\"email_detail\" ></div>");
+                $("#email_detail").prepend("<div class=\"email_body\" >" + result.body + "</div>");
+                $("#email_detail").prepend("<div class=\"email_head\" ><span class=\"col-lg-6\" >" + result.from_name + "&lt;" + result.from_address + "&gt; </span><span class=\"col-lg-6\" > To me &lt;" + result.to_address + "&gt;</span></div>");
+                $("#email_detail").prepend("<div class=\"email_subject\" ><span class=\"col-lg-12\" >" + result.subject + "</span></div>");
             },
             "json"
         );
     }
 
+    if(hashKey == "logout") {
+        $.post(
+            "LogoutPost",
+            {},
+            function(result)
+            {
+                window.location = "/";
+            },
+            "json"
+        );
+    }
 }

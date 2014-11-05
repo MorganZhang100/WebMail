@@ -22,11 +22,17 @@ public class HomePage extends Page {
         UserModule user = new UserModule();
         user.getCurrentUser(request);
 
-        out.println(user.getLoginName());
-        out.println("<button id='logout'>Log Out</button><br><script src=\"http://localhost:8081/js/logout.js\"></script>");
         out.println("<div id=\"up_big_containter\"> " +
                     "   <div class=\"container\">\n" +
                     "       <div id=\"up_containter\">\n" +
+                    "           <div class=\"top_search_div\">" +
+                    "               <input type=\"text\" class=\"form-control pull-left\" id=\"top_search_input\">\n" +
+                    "               <a class=\"btn btn-primary pull-left\" id=\"top_search_button\">Search</a>\n" +
+                    "           </div>" +
+                    "           <div class=\"top_right_div\">" +
+                    "               <a href=\"#logout\" class=\"pull-right\" id=\"logout_button\">Sign out</a>\n" +
+                    "               <span class=\"pull-right\" id=\"user_login_name\">Hello, " + user.getLoginName() + "</span>\n" +
+                    "           </div>" +
                     "       </div>" +
                     "   </div>" +
                     "</div>" +
@@ -41,7 +47,11 @@ public class HomePage extends Page {
                     "       <div id=\"down_containter\">\n" +
                     "           <div class=\"row\">" +
                     "               <div class=\"col-lg-3\" id=\"down_left_big\">" +
+                    "                   <div class=\"compose_button\">" +
+                    "                       <a type=\"button\" class=\"btn btn-danger\">Compose</a>" +
+                    "                   </div>" +
                     "                   <div class=\"left_buttons\">" +
+                    "                       " +
                     "                       <a href=\"#inbox\" id=\"inbox_button\" >Inbox</a>" +
                     "                       <script src=\"http://localhost:8081/js/home.js\"></script>" +
                     "                   </div>" +
@@ -50,6 +60,9 @@ public class HomePage extends Page {
                     "                   </div>" +
                     "                   <div class=\"left_buttons\">" +
                     "                       <a href=\"\">Spam</a>" +
+                    "                   </div>" +
+                    "                   <div class=\"left_buttons\">" +
+                    "                       <a href=\"\">Advanced Search</a>" +
                     "                   </div>" +
                     "               </div>" +
                     "               <div class=\"col-lg-9\" id=\"down_right_big\">" +
