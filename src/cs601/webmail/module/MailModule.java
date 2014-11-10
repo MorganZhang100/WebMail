@@ -33,10 +33,10 @@ public class MailModule {
 
         if(rs.next()) {
             this.setMailId(rs.getInt("mail_id"));
-            this.setFromName(rs.getString("from_name"));
+            this.setFromName(DecodeManager.getUTF8FromSubject(rs.getString("from_name")));
             this.setFromAddress(rs.getString("from_address"));
             this.setToAddress(rs.getString("to_address"));
-            this.setSubject(rs.getString("subject"));
+            this.setSubject(DecodeManager.getUTF8FromSubject(rs.getString("subject")));
             this.setCharset(rs.getString("charset"));
 
             this.setContentTransferEncoding(rs.getString("content_transfer_encoding"));
@@ -111,7 +111,8 @@ public class MailModule {
     }
 
     public String getCharset() {
-        return charset;
+        if(this.charset != null) return charset;
+        else return "";
     }
 
     public void setCharset(String charset) {
@@ -119,7 +120,8 @@ public class MailModule {
     }
 
     public String getContentTransferEncoding() {
-        return contentTransferEncoding;
+        if(this.contentTransferEncoding != null) return contentTransferEncoding;
+        else return "";
     }
 
     public void setContentTransferEncoding(String contentTransferEncoding) {
@@ -260,14 +262,24 @@ public class MailModule {
         while(rs.next()) {
             MailModule mail = new MailModule();
             mail.setMailId(rs.getInt("mail_id"));
-            mail.setFromName(rs.getString("from_name"));
-            mail.setSubject(rs.getString("subject"));
-            mail.setCharset(rs.getString("charset"));
+            mail.setFromName(DecodeManager.getUTF8FromSubject(rs.getString("from_name")));
+            mail.setSubject(DecodeManager.getUTF8FromSubject(rs.getString("subject")));
 
-            mail.setContentTransferEncoding(rs.getString("content_transfer_encoding"));
+            String charset = rs.getString("charset");
+            if(charset == null) charset = "";
+            mail.setCharset(charset);
+
+            String ContentTransferEncoding = rs.getString("content_transfer_encoding");
+            if(ContentTransferEncoding == null) ContentTransferEncoding = "";
+            mail.setContentTransferEncoding(ContentTransferEncoding);
+
+            //mail.setContentTransferEncoding(rs.getString("content_transfer_encoding"));
 
             String body = rs.getString("body");
-            if(mail.getContentTransferEncoding().equals("base64")) body = DecodeManager.Base64(body,mail.getCharset());
+            if(mail.getContentTransferEncoding().equals("base64")) {
+                body = DecodeManager.Base64(body,mail.getCharset());
+            }
+
             if(mail.getContentTransferEncoding().equals("quoted-printable")) body = DecodeManager.DP(body,mail.getCharset());
             mail.setBody(body.substring(0, 5));
             arrayList.add(mail);
@@ -275,6 +287,4 @@ public class MailModule {
         sql.close();
         return arrayList;
     }
-
-
 }

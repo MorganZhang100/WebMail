@@ -23,8 +23,8 @@ public class POP3Manager {
 
     public static void main(String[] args) throws IOException {
 
-        String server = "pop.163.com";
-        String user = "zfzzyx";
+        String server = "pop.gmail.com";
+        String user = "morgantest601";
         String password = "zfzztc114";
 //        String server = "pop.gmail.com";
 //        String user = "morganzhang100@gmail.com";
@@ -163,7 +163,7 @@ public class POP3Manager {
             String raw = getMessagedetail(in, mail);
             mail.setRaw(raw);
 
-            if(!mail.isComplate()) System.out.println(mail.toStringBrief());
+            if(!mail.isComplate()) System.out.println(mail.toString());
             mail.toStorePreparedStatement();
         }
     }

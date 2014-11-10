@@ -3,6 +3,8 @@ package cs601.webmail.manager;
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DecodeManager {
 
@@ -25,12 +27,12 @@ public class DecodeManager {
                     int u = Character.digit((char) bytes[++i], 16);
                     int l = Character.digit((char) bytes[++i], 16);
                     if (u == -1 || l == -1) {
-                        System.out.println("QP error");
+                        //System.out.println("QP error");
                         //throw new DecoderException("Invalid quoted-printable encoding");
                     }
                     buffer.write((char) ((u << 4) + l));
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("QP error");
+                    //System.out.println("QP error");
                     //throw new DecoderException("Invalid quoted-printable encoding");
                 }
             } else {
@@ -80,5 +82,32 @@ public class DecodeManager {
             return tmp;
         }
         return utfBytes;
+    }
+
+    public static String getUTF8FromSubject(String s) throws UnsupportedEncodingException {
+        Matcher m = resultOfRegExSearch(s, "(?<==\\?)[UTF\\-8gb2312]+(?=\\?)");
+        if(m.find()) {
+            String charset = m.group();
+
+            m = resultOfRegExSearch(s,"(?<=" + charset + "\\?)[\\S\\s]?(?=\\?)");
+            String encoding = null;
+            if(m.find()) encoding = m.group();
+
+            String body = null;
+            m = resultOfRegExSearch(s,"(?<=" + charset + "\\?" + encoding + "\\?)[\\S\\s]+(?=\\?=)");
+            if(m.find()) body = m.group();
+
+            if(encoding.equals("B")) body = DecodeManager.Base64(body,charset);
+            else if(encoding.equals("Q")) body = DecodeManager.DP(body,charset);
+            return body;
+        }
+        else return s;
+    }
+
+    static Matcher resultOfRegExSearch(String s, String regEx) {
+        System.out.println(s + "  " + regEx);
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(s);
+        return m;
     }
 }
