@@ -53,4 +53,13 @@ window.onhashchange = function() {
             "json"
         );
     }
+
+    if(hashKey == "compose") {
+        $("#down_right_big").empty();
+        $("#down_right_big").prepend("<div class=\"row\" id=\"compose_detail\" ></div>");
+        $("#compose_detail").prepend("<div class=\"col-lg-12 compose_down\"><a class=\"btn btn-primary col-lg-2\" id=\"send_button\">Send</a></div>");
+        $("#compose_detail").prepend("<textarea class=\"compose_body col-lg-12 form-control\" rows=\"20\"/></textarea>");
+        $("#compose_detail").prepend("<input type=\"text\" class=\"compose_head col-lg-12 form-control\" placeholder=\"Subject:\"/>");
+        $("#compose_detail").prepend("<input type=\"text\" class=\"compose_head col-lg-12 form-control\" placeholder=\"To:\"/>");
+    }
 }

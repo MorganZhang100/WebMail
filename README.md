@@ -3,6 +3,9 @@
 This is a webmail project written by Morgan Zhang for the Principle of Software Development course assignment.
 
 ## Now Pages
+<img align=top src="figures/inbox.jpg" width="640">
+<img align=top src="figures/showEmail.jpg" width="640">
+<img align=top src="figures/compose.jpg" width="640">
 <img align=top src="figures/login.jpg" width="320">
 <img align=top src="figures/UserRegister.jpg" width="320">
 
@@ -13,6 +16,7 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 - Inbox kind of work
 - Show email kind of work
 - Home Page UI kind of done
+- Add Compose Page UI
 
 ##### Before Third Monday
 - Receive email through POP
