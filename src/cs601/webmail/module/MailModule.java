@@ -54,6 +54,13 @@ public class MailModule {
 
     }
 
+    public MailModule(String subject, String fromAddress, String toAddress, String body) {
+        this.subject = subject;
+        this.fromAddress = fromAddress;
+        this.toAddress = toAddress;
+        this.body = body;
+    }
+
     public String getFromName() {
         return fromName;
     }

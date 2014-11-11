@@ -12,7 +12,45 @@ public class UserModule {
 
     private String loginName = null;
     private int user_id = -1;
-    private String pwd = null;
+    private String pwd = "zfzztc114";
+
+    private String SMTPServer = "smtp.gmail.com";
+    private int SMTPPort = 465;
+
+    private String POP3Server = "pop.gmail.com";
+    private int POP3Port = 995;
+
+    private String userNameForRealEmailAccount = "morgantest601";
+
+    private String emailAddress = "morgantest601@gmail.com";
+
+    private String nickName = "Morgan";
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    //    private String SMTPServer = "smtp.163.com";
+//    private int SMTPPort = 465;
+//
+//    private String POP3Server = "pop.gmail.com";
+//    private int POP3Port = 995;
+//
+//    private String userNameForRealEmailAccount = "zfzzyx";
+//
+//    private String emailAddress = "zfzzyx@163.com";
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
 
     public String getLoginName() {
         return loginName;
@@ -32,6 +70,50 @@ public class UserModule {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    public String getSMTPServer() {
+        return SMTPServer;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public String getUserNameForRealEmailAccount() {
+        return userNameForRealEmailAccount;
+    }
+
+    public void setUserNameForRealEmailAccount(String userNameForRealEmailAccount) {
+        this.userNameForRealEmailAccount = userNameForRealEmailAccount;
+    }
+
+    public void setSMTPServer(String SMTPServer) {
+        this.SMTPServer = SMTPServer;
+    }
+
+    public int getSMTPPort() {
+        return SMTPPort;
+    }
+
+    public void setSMTPPort(int SMTPPort) {
+        this.SMTPPort = SMTPPort;
+    }
+
+    public String getPOP3Server() {
+        return POP3Server;
+    }
+
+    public void setPOP3Server(String POP3Server) {
+        this.POP3Server = POP3Server;
+    }
+
+    public int getPOP3Port() {
+        return POP3Port;
+    }
+
+    public void setPOP3Port(int POP3Port) {
+        this.POP3Port = POP3Port;
     }
 
     public boolean newUser(String name, String pwd, HttpServletResponse reponse) throws SQLException, ClassNotFoundException {

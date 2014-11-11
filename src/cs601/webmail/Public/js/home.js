@@ -57,9 +57,25 @@ window.onhashchange = function() {
     if(hashKey == "compose") {
         $("#down_right_big").empty();
         $("#down_right_big").prepend("<div class=\"row\" id=\"compose_detail\" ></div>");
-        $("#compose_detail").prepend("<div class=\"col-lg-12 compose_down\"><a class=\"btn btn-primary col-lg-2\" id=\"send_button\">Send</a></div>");
-        $("#compose_detail").prepend("<textarea class=\"compose_body col-lg-12 form-control\" rows=\"20\"/></textarea>");
-        $("#compose_detail").prepend("<input type=\"text\" class=\"compose_head col-lg-12 form-control\" placeholder=\"Subject:\"/>");
-        $("#compose_detail").prepend("<input type=\"text\" class=\"compose_head col-lg-12 form-control\" placeholder=\"To:\"/>");
+        $("#compose_detail").prepend("<div class=\"col-lg-12 compose_down\"><a class=\"btn btn-primary col-lg-2\" href=\"#send\" id=\"send_button\">Send</a></div>");
+        $("#compose_detail").prepend("<textarea class=\"compose_body col-lg-12 form-control\" rows=\"20\" id=\"body\"/></textarea>");
+        $("#compose_detail").prepend("<input type=\"text\" class=\"compose_head col-lg-12 form-control\" placeholder=\"Subject:\" id=\"subject\"/>");
+        $("#compose_detail").prepend("<input type=\"text\" class=\"compose_head col-lg-12 form-control\" placeholder=\"To:\" id=\"toAddress\"/>");
+    }
+
+    if(hashKey == "send") {
+        $.post(
+            "HomeComposePost",
+            {
+                subject : $("#subject").val(),
+                toAddress : $("#toAddress").val(),
+                body : $("#body").val()
+            },
+            function(result)
+            {
+                alert(result.success);
+            },
+            "json"
+        );
     }
 }
