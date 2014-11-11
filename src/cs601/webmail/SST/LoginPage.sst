@@ -1,0 +1,21 @@
+<div class="container">
+    <h2 class="form-signin-heading text-center">Sign in with your Account</h2>
+    <div class="card card-signin">
+        <img class="img-circle profile-img" src="http://localhost:8081/img/avatar.png" alt="">
+        <form class="form-signin" role="form">
+            <input type="email" class="form-control" placeholder="Email" id="loginName" required autofocus>
+            <input type="password" class="form-control" placeholder="Password" id="Password" required>
+            <a class="btn btn-lg btn-primary btn-block" id="login_button">Sign in</a>
+            <div>
+                <a class="pull-right">Need help?</a>
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me"> Stay signed in
+                </label>
+            </div>
+        </form>
+    </div>
+    <p class="text-center">
+        <a href="register">Create an account</a>
+    </p>
+</div>
+<script src="http://localhost:8081/js/login.js"></script>

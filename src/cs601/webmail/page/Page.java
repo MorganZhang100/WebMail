@@ -99,7 +99,7 @@ public abstract class Page {
         out.println("</head>" + "<body>");
 	}
 
-	public abstract void body() throws SQLException, ClassNotFoundException;
+	public abstract void body() throws SQLException, ClassNotFoundException, IOException;
 
     public void footerMore() {} // overwrite by other page
 

@@ -13,6 +13,7 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 ##### Before fifth Monday
 - SMTP kind of done
 - Send email kind of work
+- Add SimpleStringTemplate( a very Simple String Template)
 
 ##### Before Forth Monday
 - Add SSL
