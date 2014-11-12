@@ -3,8 +3,15 @@ $("#register_button").click(
         $.post(
             "RegisterPost",
             {
-                name: $('#loginName').val(),
-                pwd: $('#Password').val()
+                name: $("#loginName").val(),
+                pwd: $("#Password").val(),
+                nickName: $("#NickName").val(),
+                realEmailAddress: $("#YourRealEmailAddress").val(),
+                realEmailPwd: $("#YourRealEmailPwd").val(),
+                popServerAddress: $("#POPServerAddress").val(),
+                popServerPort: $("#POPServerPort").val(),
+                smtpServerAddress: $("#SMTPServerAddress").val(),
+                smtpServerPort: $("#SMTPServerPort").val()
             },
             function(result)
             {

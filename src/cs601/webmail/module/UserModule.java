@@ -23,16 +23,9 @@ public class UserModule {
     private String userNameForRealEmailAccount = "morgantest601";
 
     private String emailAddress = "morgantest601@gmail.com";
+    private String emailPwd = "zfzztc114";
 
     private String nickName = "Morgan";
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
 
     //    private String SMTPServer = "smtp.163.com";
 //    private int SMTPPort = 465;
@@ -43,6 +36,38 @@ public class UserModule {
 //    private String userNameForRealEmailAccount = "zfzzyx";
 //
 //    private String emailAddress = "zfzzyx@163.com";
+
+    public UserModule(String name, String pwd, String nickName, String realEmailAddress, String realEmailPwd, String popServerAddress, int popServerPort, String smtpServerAddress, int smtpServerPort) {
+        this.loginName = name;
+        this.pwd = pwd;
+        this.nickName = nickName;
+        this.emailAddress = realEmailAddress;
+        this.emailPwd = realEmailPwd;
+        this.POP3Server = popServerAddress;
+        this.POP3Port = popServerPort;
+        this.SMTPServer = smtpServerAddress;
+        this.SMTPPort = smtpServerPort;
+    }
+
+    public UserModule() {
+
+    }
+
+    public String getEmailPwd() {
+        return emailPwd;
+    }
+
+    public void setEmailPwd(String emailPwd) {
+        this.emailPwd = emailPwd;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public String getEmailAddress() {
         return emailAddress;
@@ -116,28 +141,6 @@ public class UserModule {
         this.POP3Port = POP3Port;
     }
 
-    public boolean newUser(String name, String pwd, HttpServletResponse reponse) throws SQLException, ClassNotFoundException {
-        SQLQueryManager sql = new SQLQueryManager("select * from USER where login_name = '" + name + "';");
-        ResultSet rs = sql.query();
-
-        if(rs.next()) {
-            sql.close();
-            return false;
-        }
-        else {
-            long currentTime = System.currentTimeMillis();
-
-            sql.newQuery("insert into USER(login_name,pwd,add_time) values('" + name + "','" + pwd + "'," + currentTime + " );");
-            sql.execute();
-            sql.close();
-
-            loginName = name;
-            this.userLogin(reponse);
-
-            return true;
-        }
-    }
-
     public boolean getCurrentUser(HttpServletRequest request) throws SQLException, ClassNotFoundException {
         String name = CookieManager.getCookieValue(request, "login_name");
         this.loginName = name;
@@ -199,6 +202,26 @@ public class UserModule {
         else {
             sql.close();
             return false;
+        }
+    }
+
+    public boolean newUser(HttpServletResponse response) throws SQLException, ClassNotFoundException {
+        SQLQueryManager sql = new SQLQueryManager("select * from USER where login_name = '" + this.loginName + "';");
+        ResultSet rs = sql.query();
+
+        if(rs.next()) {
+            sql.close();
+            return false;
+        }
+        else {
+            long currentTime = System.currentTimeMillis();
+
+            sql.newUser(this,currentTime);
+            sql.close();
+
+            this.userLogin(response);
+
+            return true;
         }
     }
 }

@@ -56,3 +56,12 @@ body {
   height: 96px;
   margin: 0 auto 10px;
 }
+
+.bigBox{
+    width:510px;
+    padding:30px;
+}
+
+.smallBox{
+    width:205px;
+}
