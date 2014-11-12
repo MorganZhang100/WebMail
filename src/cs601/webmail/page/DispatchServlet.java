@@ -16,7 +16,6 @@ public class DispatchServlet extends HttpServlet {
 	public static Map<String,Class> mapping = new HashMap<String, Class>();
 	static {
 		mapping.put("/", LoginPage.class);
-        mapping.put("/news", NewsPage.class);
         mapping.put("/register", RegisterPage.class);
         mapping.put("/home", HomePage.class);
         mapping.put("/RegisterPost", RegisterPost.class);

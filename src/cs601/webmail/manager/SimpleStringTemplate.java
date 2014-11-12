@@ -34,7 +34,7 @@ public class SimpleStringTemplate {
     }
 
     public void add(String oldString,String newString) {
-        this.content = this.content.replaceAll("$"+oldString+"$", newString);
+        this.content = this.content.replaceAll("\\$"+oldString+"\\$", newString);
     }
 
     public String render() {
