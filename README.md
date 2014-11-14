@@ -16,7 +16,8 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 ##### Before fifth Monday
 - SMTP kind of done
 - Send email kind of work
-- Add SimpleStringTemplate( a very Simple String Template)
+- Add SimpleStringTemplate( a very Simple String Template with only two functions)
+- Add Paging management
 
 ##### Before Forth Monday
 - Add SSL
@@ -25,7 +26,6 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 - Show email kind of work
 - Home Page UI kind of done
 - Add Compose Page UI
-- Add Paging management
 
 ##### Before Third Monday
 - Receive email through POP
