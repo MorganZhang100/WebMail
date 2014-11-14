@@ -8,7 +8,8 @@
 }
 
 #mid_containter{
-    height:40px;
+    padding-top:5px;
+    padding-bottom:5px;
 }
 
 #mid_big_containter{
@@ -134,4 +135,8 @@
     background:rgb(237, 235, 235);
     padding-top:8px;
     padding-bottom:8px;
+}
+
+.mid_right_buttons{
+    margin-left:5px;
 }

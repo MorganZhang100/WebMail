@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -26,11 +27,16 @@ public class HomeInboxPost extends PostHandler {
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
 
+        String pageNumber =request.getParameter("pageNumber");
+
+        pageNumber = URLDecoder.decode(pageNumber, "utf-8");
+        int IntpageNumber = Integer.parseInt(pageNumber);
+
         UserModule user = new UserModule();
         user.getCurrentUser(request);
 
         MailModule mail = new MailModule();
-        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, 9);
+        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, IntpageNumber);
 
         JSONObject msg = new JSONObject();
         JSONArray mailsBrief = new JSONArray();

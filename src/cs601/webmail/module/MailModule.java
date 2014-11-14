@@ -259,9 +259,8 @@ public class MailModule {
         }
     }
 
-    public ArrayList<MailModule> getBriefUserMails(UserModule user, int mailAmount) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
-        //SQLQueryManager sql = new SQLQueryManager("select from_name,subject,body from MAIL where user_id = " + user.getUser_id() + " order by add_time desc limit 0," + mailAmount +"; ");
-        SQLQueryManager sql = new SQLQueryManager("select mail_id,from_name,subject,body,content_transfer_encoding,charset from MAIL where user_id = " + 0 + " order by add_time desc limit 0," + mailAmount +"; ");
+    public ArrayList<MailModule> getBriefUserMails(UserModule user, int pageNumber) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
+        SQLQueryManager sql = new SQLQueryManager("select mail_id,from_name,subject,body,content_transfer_encoding,charset from MAIL where user_id = " + 0 + " order by add_time desc limit " + pageNumber * 5 + "," + (pageNumber + 1) * 5 + ";");
         ResultSet rs = sql.query();
 
         ArrayList<MailModule> arrayList = new ArrayList<MailModule>();

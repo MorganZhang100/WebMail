@@ -1,23 +1,4 @@
-$("#inbox_button").click(
-    function() {
-        $.post(
-            "HomeInboxPost",
-            {
-
-            },
-            function(result)
-            {
-                $("#down_right_big").empty();
-                var i;
-                for(i=0; i<result.mailAmount; i++) {
-                    //
-                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
-                }
-            },
-            "json"
-        );
-    }
-)
+if(location.hash == "") window.location = "home#inbox/0";
 
 window.onhashchange = function() {
     var hashStr = location.hash.replace("#","");
@@ -37,6 +18,33 @@ window.onhashchange = function() {
                 $("#email_detail").prepend("<div class=\"email_body\" >" + result.body + "</div>");
                 $("#email_detail").prepend("<div class=\"email_head\" ><span class=\"col-lg-6\" >" + result.from_name + "&lt;" + result.from_address + "&gt; </span><span class=\"col-lg-6\" > To me &lt;" + result.to_address + "&gt;</span></div>");
                 $("#email_detail").prepend("<div class=\"email_subject\" ><span class=\"col-lg-12\" >" + result.subject + "</span></div>");
+            },
+            "json"
+        );
+    }
+
+    if(hashKey == "inbox") {
+        if(hashValue == undefined) {
+            hashValue = 0;
+        }
+        prePageNumber = hashValue > 0 ? hashValue -1 : 0;
+        aftPageNumber = parseInt(hashValue) + 1;
+
+        $.post(
+            "HomeInboxPost",
+            {
+                pageNumber: hashValue
+            },
+            function(result)
+            {
+                $("#down_right_big").empty();
+                var i;
+                for(i=0; i<result.mailAmount; i++) {
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+                }
+
+                $("#pre_button").attr("href","#inbox/" + prePageNumber);
+                $("#aft_button").attr("href","#inbox/" + aftPageNumber);
             },
             "json"
         );
