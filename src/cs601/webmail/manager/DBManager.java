@@ -45,7 +45,7 @@ public class DBManager {
     }
 
     public void newEmail(MailModule mail) throws SQLException {
-        PreparedStatement insert = db.prepareStatement("insert into MAIL(user_id,subject,from_name,from_address,to_name,to_address,body,to_addresses,cc_addresses,bcc_addresses,mail_state,raw,sent_date_string,is_complete,message_id,add_time) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement insert = db.prepareStatement("insert into MAIL(user_id,subject,from_name,from_address,to_name,to_address,body,to_addresses,cc_addresses,bcc_addresses,mail_state,raw,sent_date_string,is_complete,message_id,add_time,read_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         insert.setInt(1,0);
         insert.setString(2, mail.getSubject());
         insert.setString(3, mail.getFromName());
@@ -65,6 +65,7 @@ public class DBManager {
         insert.setInt(14, mail.getIsComplateInt());
         insert.setString(15, mail.getMessageId());
         insert.setInt(16, (int) System.currentTimeMillis()/1000);
+        insert.setInt(17, 0); //read_flag = 0: unRead, =1: read;
 
         int n = insert.executeUpdate();
         if(n!=1) {

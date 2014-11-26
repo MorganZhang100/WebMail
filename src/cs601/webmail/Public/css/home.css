@@ -144,3 +144,7 @@
 .email_brief_span{
     overflow:hidden;
 }
+
+.unread{
+    background:white;
+}

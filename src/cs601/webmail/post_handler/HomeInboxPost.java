@@ -51,6 +51,7 @@ public class HomeInboxPost extends PostHandler {
             oneMailBrief.put("subject",mail.getSubject());
             oneMailBrief.put("body",mail.getBody());
             oneMailBrief.put("mail_id",mail.getMailId());
+            oneMailBrief.put("read_flag",mail.getReadFlag());
 
             mailsBrief.put(oneMailBrief);
         }

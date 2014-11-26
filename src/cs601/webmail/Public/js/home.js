@@ -2,6 +2,8 @@ if(location.hash == "") window.location = "home#inbox/0";
 
 $("#check_mail_button").click(
     function() {
+        $("#unread_button").remove();
+
         $.post(
             "HomeCheckEmailPost",
             {},
@@ -10,7 +12,7 @@ $("#check_mail_button").click(
                 $("#down_right_big").empty();
                 var i;
                 for(i=0; i<result.mailAmount; i++) {
-                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
                 }
 
                 $("#pre_button").attr("href","#inbox/0");
@@ -22,9 +24,24 @@ $("#check_mail_button").click(
 );
 
 window.onhashchange = function() {
+
+    $("#unread_button").remove();
+
     var hashStr = location.hash.replace("#","");
     var hashKey = hashStr.split("/")[0];
     var hashValue = hashStr.split("/")[1];
+
+    if(hashKey == "unread") {
+        $.post(
+            "HomeUnReadPost",
+            {
+                mail_id : hashValue
+            },
+            function(result)
+            {},
+            "json"
+        );
+    }
 
     if(hashKey == "detail") {
         $.post(
@@ -39,6 +56,8 @@ window.onhashchange = function() {
                 $("#email_detail").prepend("<div class=\"email_body\" >" + result.body + "</div>");
                 $("#email_detail").prepend("<div class=\"email_head\" ><span class=\"col-lg-6\" >" + result.from_name + "&lt;" + result.from_address + "&gt; </span><span class=\"col-lg-6\" > To me &lt;" + result.to_address + "&gt;</span></div>");
                 $("#email_detail").prepend("<div class=\"email_subject\" ><span class=\"col-lg-12\" >" + result.subject + "</span></div>");
+
+                $("#mid_right_big_left_buttons").prepend("<a href=\"#unread/" + hashValue + "\" class=\"btn btn-default mid_right_buttons\" id=\"unread_button\">UnRead</a>");
             },
             "json"
         );
@@ -61,11 +80,14 @@ window.onhashchange = function() {
                 $("#down_right_big").empty();
                 var i;
                 for(i=0; i<result.mailAmount; i++) {
-                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+
+                    if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
                 }
 
                 $("#pre_button").attr("href","#inbox/" + prePageNumber);
                 $("#aft_button").attr("href","#inbox/" + aftPageNumber);
+
             },
             "json"
         );

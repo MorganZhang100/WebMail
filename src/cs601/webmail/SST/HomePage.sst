@@ -27,7 +27,7 @@
                        <a href="#inbox/0" class="btn btn-default mid_right_buttons" id="pre_button">Pre</a>
                        <a href="#inbox/1" class="btn btn-default mid_right_buttons" id="aft_button">Aft</a>
                    </div>
-                   <div class="pull-left">
+                   <div class="pull-left" id="mid_right_big_left_buttons">
                        <a href="#check" class="btn btn-default mid_right_buttons" id="check_mail_button">Check</a>
                    </div>
                </div>

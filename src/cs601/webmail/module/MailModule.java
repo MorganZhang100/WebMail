@@ -34,6 +34,7 @@ public class MailModule {
     public MimeMessage msg = null;
     private String sentDate = null;
     private int mailState = -1; //-1是初始值，0是正常，1是删除了（在垃圾箱），2是彻底删除了（垃圾箱也没有了）
+    private int readFlag = 0; // 0:unRead, 1:read
 
     public int getMailState() {
         return mailState;
@@ -75,8 +76,16 @@ public class MailModule {
         this.bccAddresses = bccAddresses;
     }
 
+    public int getReadFlag() {
+        return readFlag;
+    }
+
+    public void setReadFlag(int readFlag) {
+        this.readFlag = readFlag;
+    }
+
     public MailModule(UserModule user,int mail_id) throws SQLException, UnsupportedEncodingException, ClassNotFoundException {
-        DBManager sql = new DBManager("select mail_id,from_name,from_address,to_address,subject,body,to_addresses,cc_addresses,bcc_addresses,sent_date_string,mail_state from MAIL where user_id = " + 0 + " and mail_id = " + mail_id + " ; ");
+        DBManager sql = new DBManager("select mail_id,from_name,from_address,to_address,subject,body,to_addresses,cc_addresses,bcc_addresses,sent_date_string,mail_state,read_flag from MAIL where user_id = " + 0 + " and mail_id = " + mail_id + " ; ");
         ResultSet rs = sql.query();
 
         if(rs.next()) {
@@ -90,6 +99,12 @@ public class MailModule {
             this.ccAddresses = rs.getString("cc_addresses");
             this.bccAddresses = rs.getString("bcc_addresses");
             this.mailState = rs.getInt("mail_state");
+            this.readFlag = rs.getInt("read_flag");
+
+            if(this.readFlag == 0) {
+                sql.newQuery("update MAIL set read_flag = 1 where mail_id = " + mail_id + ";");
+                sql.execute();
+            }
             sql.close();
         }
         //**此处应该处理rs.next()不存在的情况
@@ -249,7 +264,7 @@ public class MailModule {
     }
 
     public ArrayList<MailModule> getBriefUserMails(UserModule user, int pageNumber) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
-        DBManager sql = new DBManager("select mail_id,from_name,subject,body from MAIL where user_id = " + 0 + " order by add_time desc limit " + pageNumber * 5 + "," + (pageNumber + 1) * 5 + ";");
+        DBManager sql = new DBManager("select mail_id,from_name,subject,body,read_flag from MAIL where user_id = " + 0 + " order by add_time desc limit " + pageNumber * 5 + "," + (pageNumber + 1) * 5 + ";");
         ResultSet rs = sql.query();
 
         ArrayList<MailModule> arrayList = new ArrayList<MailModule>();
@@ -259,6 +274,7 @@ public class MailModule {
             mail.setMailId(rs.getInt("mail_id"));
             mail.setFromName(rs.getString("from_name"));
             mail.setSubject(rs.getString("subject"));
+            mail.setReadFlag(rs.getInt("read_flag"));
 
             String body = rs.getString("body");
             mail.setBody(body.substring(0, 5));
@@ -484,5 +500,10 @@ public class MailModule {
         this.ccAddresses = getMailAddressByRaw("cc", mimeMessage);
         this.bccAddresses = getMailAddressByRaw("bcc",mimeMessage);
         this.mailState = 0;
+    }
+
+    public void unRead() throws SQLException, ClassNotFoundException {
+        DBManager sql = new DBManager("update MAIL set read_flag = 0 where mail_id = " + this.mailId + ";");
+        sql.execute();
     }
 }
