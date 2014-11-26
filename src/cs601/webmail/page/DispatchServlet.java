@@ -26,6 +26,9 @@ public class DispatchServlet extends HttpServlet {
         mapping.put("/HomeComposePost", HomeComposePost.class);
         mapping.put("/HomeCheckEmailPost", HomeCheckEmailPost.class);
         mapping.put("/HomeUnReadPost", HomeUnReadPost.class);
+        mapping.put("/HomeDeleteToTrashPost", HomeDeleteToTrashPost.class);
+        mapping.put("/HomeTrashFolderPost", HomeTrashFolderPost.class);
+        mapping.put("/HomeEmptyAllTrashPost", HomeEmptyAllTrashPost.class);
 	}
 
     @Override

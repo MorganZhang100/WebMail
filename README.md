@@ -17,6 +17,7 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 - Email Decode kind of done( by JavaMail)
 - Check New Email Button
 - Read / UnRead Function
+- Delete Email, Empty Trash
 
 ##### Before fifth Monday
 - SMTP kind of done

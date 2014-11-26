@@ -1,5 +1,6 @@
 package cs601.webmail.post_handler;
 
+import cs601.webmail.manager.DBManager;
 import cs601.webmail.module.MailModule;
 import cs601.webmail.module.UserModule;
 import org.json.JSONException;
@@ -13,8 +14,8 @@ import java.net.URLDecoder;
 import java.sql.SQLException;
 
 
-public class HomeEmailDetail extends PostHandler {
-	public HomeEmailDetail(HttpServletRequest request, HttpServletResponse response) {
+public class HomeEmptyAllTrashPost extends PostHandler {
+	public HomeEmptyAllTrashPost(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 	}
 
@@ -25,24 +26,15 @@ public class HomeEmailDetail extends PostHandler {
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
 
-        String mail_id =request.getParameter("mail_id");
-
-        mail_id = URLDecoder.decode(mail_id, "utf-8");
-        int IntMailId = Integer.parseInt(mail_id);
-
         UserModule user = new UserModule();
         user.getCurrentUser(request);
 
-        MailModule mail = new MailModule(user,IntMailId);
+        DBManager sql = new DBManager("update MAIL set mail_state = 2 where user_id = " + user.getUser_id() + " and mail_state = 1;");
+        sql.execute();
 
         JSONObject msg = new JSONObject();
 
-        msg.put("subject",mail.getSubject());
-        msg.put("from_name",mail.getFromName());
-        msg.put("from_address",mail.getFromAddress());
-        msg.put("to_address",mail.getToFirstAddress());
-        msg.put("body",mail.getBody());
-        msg.put("mail_state",mail.getMailState());
+        msg.put("state","done");
 
         out.print(msg);
     }

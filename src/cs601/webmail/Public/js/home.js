@@ -26,6 +26,8 @@ $("#check_mail_button").click(
 window.onhashchange = function() {
 
     $("#unread_button").remove();
+    $("#delete_button").remove();
+    $("#empty_trash_button").remove();
 
     var hashStr = location.hash.replace("#","");
     var hashKey = hashStr.split("/")[0];
@@ -39,6 +41,32 @@ window.onhashchange = function() {
             },
             function(result)
             {},
+            "json"
+        );
+    }
+
+    if(hashKey == "delete") {
+        $.post(
+            "HomeDeleteToTrashPost",
+            {
+                mail_id : hashValue
+            },
+            function(result)
+            {
+                window.location = "home#inbox/0";
+            },
+            "json"
+        );
+    }
+
+    if(hashKey == "emptyall") {
+        $.post(
+            "HomeEmptyAllTrashPost",
+            {},
+            function(result)
+            {
+                window.location = "home#trash/0";
+            },
             "json"
         );
     }
@@ -58,6 +86,7 @@ window.onhashchange = function() {
                 $("#email_detail").prepend("<div class=\"email_subject\" ><span class=\"col-lg-12\" >" + result.subject + "</span></div>");
 
                 $("#mid_right_big_left_buttons").prepend("<a href=\"#unread/" + hashValue + "\" class=\"btn btn-default mid_right_buttons\" id=\"unread_button\">UnRead</a>");
+                if(result.mail_state == 0) $("#mid_right_big_left_buttons").prepend("<a href=\"#delete/" + hashValue + "\" class=\"btn btn-default mid_right_buttons\" id=\"delete_button\">Delete</a>");
             },
             "json"
         );
@@ -87,6 +116,37 @@ window.onhashchange = function() {
 
                 $("#pre_button").attr("href","#inbox/" + prePageNumber);
                 $("#aft_button").attr("href","#inbox/" + aftPageNumber);
+
+            },
+            "json"
+        );
+    }
+
+    if(hashKey == "trash") {
+        if(hashValue == undefined) {
+            hashValue = 0;
+        }
+        prePageNumber = hashValue > 0 ? hashValue -1 : 0;
+        aftPageNumber = parseInt(hashValue) + 1;
+
+        $.post(
+            "HomeTrashFolderPost",
+            {
+                pageNumber: hashValue
+            },
+            function(result)
+            {
+                $("#down_right_big").empty();
+                var i;
+                for(i=0; i<result.mailAmount; i++) {
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+
+                    if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
+                }
+                $("#mid_right_big_left_buttons").prepend("<a href=\"#emptyall\" class=\"btn btn-default mid_right_buttons\" id=\"empty_trash_button\">Empty</a>");
+
+                $("#pre_button").attr("href","#trash/" + prePageNumber);
+                $("#aft_button").attr("href","#trash/" + aftPageNumber);
 
             },
             "json"

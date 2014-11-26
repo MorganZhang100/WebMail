@@ -35,7 +35,7 @@ public class HomeCheckEmailPost extends PostHandler {
         POP3Manager pop3Manager = new POP3Manager(user);
 
         MailModule mail = new MailModule();
-        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, 0);
+        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, 0, 0);
 
         JSONObject msg = new JSONObject();
         JSONArray mailsBrief = new JSONArray();

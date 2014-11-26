@@ -13,8 +13,8 @@ import java.net.URLDecoder;
 import java.sql.SQLException;
 
 
-public class HomeEmailDetail extends PostHandler {
-	public HomeEmailDetail(HttpServletRequest request, HttpServletResponse response) {
+public class HomeDeleteToTrashPost extends PostHandler {
+	public HomeDeleteToTrashPost(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 	}
 
@@ -34,15 +34,11 @@ public class HomeEmailDetail extends PostHandler {
         user.getCurrentUser(request);
 
         MailModule mail = new MailModule(user,IntMailId);
+        mail.deleteToTrash();
 
         JSONObject msg = new JSONObject();
 
-        msg.put("subject",mail.getSubject());
-        msg.put("from_name",mail.getFromName());
-        msg.put("from_address",mail.getFromAddress());
-        msg.put("to_address",mail.getToFirstAddress());
-        msg.put("body",mail.getBody());
-        msg.put("mail_state",mail.getMailState());
+        msg.put("state","done");
 
         out.print(msg);
     }

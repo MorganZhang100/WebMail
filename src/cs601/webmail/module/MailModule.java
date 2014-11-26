@@ -85,7 +85,7 @@ public class MailModule {
     }
 
     public MailModule(UserModule user,int mail_id) throws SQLException, UnsupportedEncodingException, ClassNotFoundException {
-        DBManager sql = new DBManager("select mail_id,from_name,from_address,to_address,subject,body,to_addresses,cc_addresses,bcc_addresses,sent_date_string,mail_state,read_flag from MAIL where user_id = " + 0 + " and mail_id = " + mail_id + " ; ");
+        DBManager sql = new DBManager("select mail_id,from_name,from_address,to_address,subject,body,to_addresses,cc_addresses,bcc_addresses,sent_date_string,mail_state,read_flag from MAIL where user_id = " + user.getUser_id() + " and mail_id = " + mail_id + " ; ");
         ResultSet rs = sql.query();
 
         if(rs.next()) {
@@ -263,8 +263,8 @@ public class MailModule {
         }
     }
 
-    public ArrayList<MailModule> getBriefUserMails(UserModule user, int pageNumber) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
-        DBManager sql = new DBManager("select mail_id,from_name,subject,body,read_flag from MAIL where user_id = " + 0 + " order by add_time desc limit " + pageNumber * 5 + "," + (pageNumber + 1) * 5 + ";");
+    public ArrayList<MailModule> getBriefUserMails(UserModule user, int pageNumber, int tempMailState) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
+        DBManager sql = new DBManager("select mail_id,from_name,subject,body,read_flag from MAIL where user_id = " + user.getUser_id() + " and mail_state = " + tempMailState + " order by add_time desc limit " + pageNumber * 5 + "," + (pageNumber + 1) * 5 + ";");
         ResultSet rs = sql.query();
 
         ArrayList<MailModule> arrayList = new ArrayList<MailModule>();
@@ -504,6 +504,11 @@ public class MailModule {
 
     public void unRead() throws SQLException, ClassNotFoundException {
         DBManager sql = new DBManager("update MAIL set read_flag = 0 where mail_id = " + this.mailId + ";");
+        sql.execute();
+    }
+
+    public void deleteToTrash() throws SQLException, ClassNotFoundException {
+        DBManager sql = new DBManager("update MAIL set mail_state = 1 where mail_id = " + this.mailId + ";");
         sql.execute();
     }
 }

@@ -54,6 +54,9 @@
                        <a href="">Spam</a>
                    </div>
                    <div class="left_buttons">
+                       <a href="#trash">Trash</a>
+                   </div>
+                   <div class="left_buttons">
                        <a href="">Advanced Search</a>
                    </div>
                </div>

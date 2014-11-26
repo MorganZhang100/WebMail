@@ -1,6 +1,5 @@
 package cs601.webmail.post_handler;
 
-import cs601.webmail.manager.POP3Manager;
 import cs601.webmail.module.MailModule;
 import cs601.webmail.module.UserModule;
 import org.json.JSONArray;
@@ -16,8 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class HomeInboxPost extends PostHandler {
-	public HomeInboxPost(HttpServletRequest request, HttpServletResponse response) {
+public class HomeTrashFolderPost extends PostHandler {
+	public HomeTrashFolderPost(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 	}
 
@@ -38,7 +37,7 @@ public class HomeInboxPost extends PostHandler {
         int IntpageNumber = Integer.parseInt(pageNumber);
 
         MailModule mail = new MailModule();
-        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, IntpageNumber,0);
+        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, IntpageNumber,1);
 
         JSONObject msg = new JSONObject();
         JSONArray mailsBrief = new JSONArray();
