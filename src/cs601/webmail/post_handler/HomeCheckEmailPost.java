@@ -16,8 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class HomeInboxPost extends PostHandler {
-	public HomeInboxPost(HttpServletRequest request, HttpServletResponse response) {
+public class HomeCheckEmailPost extends PostHandler {
+	public HomeCheckEmailPost(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 	}
 
@@ -32,13 +32,10 @@ public class HomeInboxPost extends PostHandler {
         UserModule user = new UserModule();
         user.getCurrentUser(request);
 
-        String pageNumber =request.getParameter("pageNumber");
-
-        pageNumber = URLDecoder.decode(pageNumber, "utf-8");
-        int IntpageNumber = Integer.parseInt(pageNumber);
+        POP3Manager pop3Manager = new POP3Manager(user);
 
         MailModule mail = new MailModule();
-        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, IntpageNumber);
+        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, 0);
 
         JSONObject msg = new JSONObject();
         JSONArray mailsBrief = new JSONArray();

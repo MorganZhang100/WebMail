@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserModule {
 
@@ -20,12 +22,12 @@ public class UserModule {
     private String POP3Server = "pop.gmail.com";
     private int POP3Port = 995;
 
-    private String userNameForRealEmailAccount = "morgantest601";
+    private String userNameForRealEmailAccount = "m organtest601";
 
-    private String emailAddress = "morgantest601@gmail.com";
-    private String emailPwd = "zfzztc114";
+    private String emailAddress = "m organtest601@gmail.com";
+    private String emailPwd = "z fzztc114";
 
-    private String nickName = "Morgan";
+    private String nickName = "M organ";
 
     //    private String SMTPServer = "smtp.163.com";
 //    private int SMTPPort = 465;
@@ -145,11 +147,26 @@ public class UserModule {
         String name = CookieManager.getCookieValue(request, "login_name");
         this.loginName = name;
 
-        DBManager sql = new DBManager("select user_id from USER where login_name = '" + name + "'; ");
+        DBManager sql = new DBManager("select user_id,login_name,pwd,nick_name,real_email_address,real_email_pwd,pop_server_address,pop_server_port,smtp_server_address,smtp_server_port from USER where login_name = '" + name + "'; ");
         ResultSet rs = sql.query();
 
         if(rs.next()) {
             this.user_id = rs.getInt("user_id");
+            this.loginName = rs.getString("login_name");
+            this.pwd = rs.getString("pwd");
+            this.nickName = rs.getString("nick_name");
+            this.emailAddress = rs.getString("real_email_address");
+            this.emailPwd = rs.getString("real_email_pwd");
+            this.POP3Server = rs.getString("pop_server_address");
+            this.POP3Port = rs.getInt("pop_server_port");
+            this.SMTPServer = rs.getString("smtp_server_address");
+            this.SMTPPort = rs.getInt("smtp_server_port");
+
+            Pattern p = Pattern.compile("[\\S\\s]+(?=@)");
+            Matcher m = p.matcher(this.emailAddress);
+
+            this.userNameForRealEmailAccount = null;
+            if(m.find()) this.userNameForRealEmailAccount = m.group();
 
             sql.close();
             return true;
@@ -214,7 +231,7 @@ public class UserModule {
             return false;
         }
         else {
-            long currentTime = System.currentTimeMillis();
+            int currentTime = (int)System.currentTimeMillis()/1000;
 
             sql.newUser(this,currentTime);
             sql.close();

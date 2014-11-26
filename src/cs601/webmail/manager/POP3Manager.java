@@ -2,6 +2,7 @@ package cs601.webmail.manager;
 
 
 import cs601.webmail.module.MailModule;
+import cs601.webmail.module.UserModule;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -24,14 +25,15 @@ public class POP3Manager {
     private SSLSocket s;
     private boolean debug = true;
 
-    public static void main(String[] args) throws IOException {
+    public POP3Manager(UserModule user) throws IOException {
+        String popServer = user.getPOP3Server();
+        int popPort = user.getPOP3Port();
 
-        String server = "pop.gmail.com";
-        String user = "morgantest601";
-        String password = "zfzztc114";
+        String userName = user.getUserNameForRealEmailAccount();
+        String pwd = user.getEmailPwd();
 
-        POP3Manager pop3Manager = new POP3Manager(server,995);
-        pop3Manager.recieveMail(user,password);
+        POP3Manager pop3Manager = new POP3Manager(popServer,popPort);
+        pop3Manager.recieveMail(userName,pwd);
     }
 
     public POP3Manager(String server, int port) throws IOException{
@@ -142,8 +144,7 @@ public class POP3Manager {
     //retr
     public void retr(int mailNum,BufferedReader in,BufferedWriter out) throws Exception {
         String result;
-        //for(int i=1;i<=mailNum;i++){
-        for(int i=1;i<=5;i++){
+        for(int i=1;i<=mailNum;i++){
             result = getResult(sendServer("retr "+i,in,out));
             if(!"+OK".equals(result)){
                 throw new IOException("Error in receiving email");

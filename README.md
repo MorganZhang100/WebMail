@@ -15,6 +15,7 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 ## What's done
 ##### Before seventh Monday
 - Email Decode kind of done( by JavaMail)
+- Check New Email Button
 
 ##### Before fifth Monday
 - SMTP kind of done

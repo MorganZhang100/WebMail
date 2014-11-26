@@ -64,7 +64,7 @@ public class DBManager {
         insert.setString(13, mail.getSentDate());
         insert.setInt(14, mail.getIsComplateInt());
         insert.setString(15, mail.getMessageId());
-        insert.setInt(16, (int) System.currentTimeMillis());
+        insert.setInt(16, (int) System.currentTimeMillis()/1000);
 
         int n = insert.executeUpdate();
         if(n!=1) {
@@ -72,11 +72,11 @@ public class DBManager {
         }
     }
 
-    public void newUser(UserModule user, long addTime) throws SQLException {
+    public void newUser(UserModule user, int addTime) throws SQLException {
         PreparedStatement insert = db.prepareStatement("insert into USER(login_name,pwd,add_time,nick_name,real_email_address,real_email_pwd,pop_server_address,pop_server_port,smtp_server_address,smtp_server_port) values(?,?,?,?,?,?,?,?,?,?)");
         insert.setString(1,user.getLoginName());
         insert.setString(2, user.getPwd());
-        insert.setLong(3, addTime);
+        insert.setInt(3, addTime);
         insert.setString(4, user.getNickName());
         insert.setString(5, user.getEmailAddress());
         insert.setString(6, user.getEmailPwd());
