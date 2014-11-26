@@ -40,7 +40,7 @@ window.onhashchange = function() {
                 $("#down_right_big").empty();
                 var i;
                 for(i=0; i<result.mailAmount; i++) {
-                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
                 }
 
                 $("#pre_button").attr("href","#inbox/" + prePageNumber);

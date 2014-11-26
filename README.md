@@ -13,6 +13,9 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 <img align=top src="figures/UserRegister.jpg" width="320">
 
 ## What's done
+##### Before seventh Monday
+- Email Decode kind of done( by JavaMail)
+
 ##### Before fifth Monday
 - SMTP kind of done
 - Send email kind of work

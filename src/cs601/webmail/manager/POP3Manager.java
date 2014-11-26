@@ -1,15 +1,18 @@
 package cs601.webmail.manager;
 
+
 import cs601.webmail.module.MailModule;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -117,26 +120,17 @@ public class POP3Manager {
     }
 
     //detail in email
-    public String getMessagedetail(BufferedReader in,MailModule mail){
+    public String getMessagedetail(BufferedReader in){
         String message = "";
         String line;
-        boolean body = false;
-        String bodyContent = "";
 
         try{
             line = in.readLine();
-            searchForInformation(line,mail);
 
             while(!".".equalsIgnoreCase(line)){
-                message = message + line;
+                message = message + line + "\n";
                 line = in.readLine();
-
-                if(!body) searchForInformation(line,mail);
-                else if(!line.equals(".")) bodyContent = bodyContent + line;
-                if(line.equals("")) body = true;
             }
-
-            mail.setBody(bodyContent);
 
         }catch(Exception e){
             e.printStackTrace();
@@ -146,7 +140,7 @@ public class POP3Manager {
     }
 
     //retr
-    public void retr(int mailNum,BufferedReader in,BufferedWriter out) throws IOException, SQLException, ClassNotFoundException {
+    public void retr(int mailNum,BufferedReader in,BufferedWriter out) throws Exception {
         String result;
         //for(int i=1;i<=mailNum;i++){
         for(int i=1;i<=5;i++){
@@ -158,8 +152,9 @@ public class POP3Manager {
 
             System.out.println("#"+i+" email");
 
-            String raw = getMessagedetail(in, mail);
+            String raw = getMessagedetail(in);
             mail.setRaw(raw);
+            mail.setEmailByRaw();
 
             if(!mail.isComplate()) System.out.println(mail.toString());
             mail.toStorePreparedStatement();
@@ -199,64 +194,4 @@ public class POP3Manager {
         return m;
     }
 
-    void searchForInformation(String s, MailModule mail) {
-        //for Content-Type
-        Matcher m = resultOfRegExSearch(s, "(?<=Content-Type: )[\\S\\s]+(?=;)");
-        if(m.find()) mail.setContentType(m.group());
-
-        //for Message-ID
-        m = resultOfRegExSearch(s, "(?<=Message-I[Dd]: <)[\\S\\s]+(?=>)");
-        if(m.find()) mail.setMessageId(m.group());
-
-        //for charset
-        m = resultOfRegExSearch(s, "(?<=charset=)[\\S\\s]+");
-        if(m.find()) {
-            String charset = m.group().replaceAll("^\"", "").replaceAll("\"$", "");
-            mail.setCharset(charset);
-        }
-
-        //for Subject
-        m = resultOfRegExSearch(s, "(?<=Subject: )[\\S\\s]+");
-        if(m.find()) mail.setSubject(m.group());
-
-        //for Content-Transfer-Encoding
-        m = resultOfRegExSearch(s, "(?<=Content-Transfer-Encoding: )[\\S\\s]+");
-        if(m.find()) mail.setContentTransferEncoding(m.group());
-
-        //for MIME-Version
-        m = resultOfRegExSearch(s, "(?<=[MIMEMime]-Version: )[\\S\\s]+");
-        if(m.find()) mail.setMimeVersion(m.group());
-
-        //for DATE
-        m = resultOfRegExSearch(s, "(?<=Date: )[\\S\\s]+");
-        if(m.find()) mail.setDate(m.group());
-
-        //for FromName
-        m = resultOfRegExSearch(s, "(?<=From: )[\\S\\s]+(?=<)");
-        if(m.find()) {
-            mail.setFromName(m.group());
-
-            //for FromAddress
-            m = resultOfRegExSearch(s, "(?<=<)[\\S\\s]+(?=>)");
-            if(m.find()) mail.setFromAddress(m.group());
-        }
-
-        //for ToName
-        m = resultOfRegExSearch(s, "(?<=To: )[\\S\\s]+");
-        if(m.find()) {
-            String onlyAddress = m.group();
-            Matcher m2 = resultOfRegExSearch(s, "(?<=To: )[\\S\\s]+(?=<)");
-            if(m2.find()) {
-                mail.setToName(m2.group());
-
-                //for ToAddress
-                m2 = resultOfRegExSearch(s, "(?<=<)[\\S\\s]+(?=>)");
-                if(m2.find()) mail.setToAddress(m2.group());
-            }
-            else {
-                mail.setToName("");
-                mail.setToAddress(onlyAddress);
-            }
-        }
-    }
 }

@@ -1,6 +1,6 @@
 package cs601.webmail.module;
 
-import cs601.webmail.manager.SQLQueryManager;
+import cs601.webmail.manager.DBManager;
 import cs601.webmail.manager.CookieManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -145,7 +145,7 @@ public class UserModule {
         String name = CookieManager.getCookieValue(request, "login_name");
         this.loginName = name;
 
-        SQLQueryManager sql = new SQLQueryManager("select user_id from USER where login_name = '" + name + "'; ");
+        DBManager sql = new DBManager("select user_id from USER where login_name = '" + name + "'; ");
         ResultSet rs = sql.query();
 
         if(rs.next()) {
@@ -173,7 +173,7 @@ public class UserModule {
         String name = CookieManager.getCookieValue(request,"login_name");
         if(name == null) return false;
         else {
-            SQLQueryManager sql = new SQLQueryManager("select * from USER where login_name = '" + name + "';");
+            DBManager sql = new DBManager("select * from USER where login_name = '" + name + "';");
             ResultSet rs = sql.query();
 
             if(rs.next()) {
@@ -191,7 +191,7 @@ public class UserModule {
     }
 
     public boolean isValidUser(HttpServletRequest request,HttpServletResponse response) throws SQLException, ClassNotFoundException {
-        SQLQueryManager sql = new SQLQueryManager("select * from USER where login_name = '" + loginName + "' and pwd ='" + pwd + "';");
+        DBManager sql = new DBManager("select * from USER where login_name = '" + loginName + "' and pwd ='" + pwd + "';");
         ResultSet rs = sql.query();
 
         if(rs.next()) {
@@ -206,7 +206,7 @@ public class UserModule {
     }
 
     public boolean newUser(HttpServletResponse response) throws SQLException, ClassNotFoundException {
-        SQLQueryManager sql = new SQLQueryManager("select * from USER where login_name = '" + this.loginName + "';");
+        DBManager sql = new DBManager("select * from USER where login_name = '" + this.loginName + "';");
         ResultSet rs = sql.query();
 
         if(rs.next()) {

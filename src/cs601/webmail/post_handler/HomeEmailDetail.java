@@ -2,7 +2,6 @@ package cs601.webmail.post_handler;
 
 import cs601.webmail.module.MailModule;
 import cs601.webmail.module.UserModule;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 
 public class HomeEmailDetail extends PostHandler {
@@ -42,7 +40,7 @@ public class HomeEmailDetail extends PostHandler {
         msg.put("subject",mail.getSubject());
         msg.put("from_name",mail.getFromName());
         msg.put("from_address",mail.getFromAddress());
-        msg.put("to_address",mail.getToAddress());
+        msg.put("to_address",mail.getToFirstAddress());
         msg.put("body",mail.getBody());
 
         out.print(msg);

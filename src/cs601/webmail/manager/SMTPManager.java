@@ -160,8 +160,8 @@ public class SMTPManager {
             helo(user.getSMTPServer(),in,out);//HELO
             authLogin(user,in,out);//AUTH LOGIN
             mailfrom(mail.getFromAddress(),in,out);//MAIL FROM
-            rcpt(mail.getToAddress(),in,out);//RCPT
-            data(user.getNickName(),mail.getFromAddress(),mail.getToAddress(),mail.getSubject(),mail.getBody(),in,out);//DATA
+            rcpt(mail.getToFirstAddress(),in,out);//RCPT
+            data(user.getNickName(),mail.getFromAddress(),mail.getToFirstAddress(),mail.getSubject(),mail.getBody(),in,out);//DATA
             quit(in,out);//QUIT
         }catch(Exception e){
             e.printStackTrace();

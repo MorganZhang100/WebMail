@@ -5,20 +5,20 @@ import cs601.webmail.module.UserModule;
 
 import java.sql.*;
 
-public class SQLQueryManager {
+public class DBManager {
 
 	String query;
     String dbFile = "/Users/Morgan/Documents/MorganZhang1991-webmail/src/cs601/webmail/MorganWebMail.sqlite";
     Connection db = null;
     Statement statement = null;
 
-    public SQLQueryManager() throws ClassNotFoundException, SQLException {
+    public DBManager() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         db = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
         statement = db.createStatement();
     }
 
-    public SQLQueryManager(String s) throws ClassNotFoundException, SQLException {
+    public DBManager(String s) throws ClassNotFoundException, SQLException {
         this.query = s;
         Class.forName("org.sqlite.JDBC");
         db = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
@@ -45,20 +45,23 @@ public class SQLQueryManager {
     }
 
     public void newEmail(MailModule mail) throws SQLException {
-        PreparedStatement insert = db.prepareStatement("insert into MAIL(user_id,subject,from_name,from_address,to_name,to_address,body,content_type,charset,content_transfer_encoding,mime_version,raw,date_string,is_complete,message_id,add_time) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement insert = db.prepareStatement("insert into MAIL(user_id,subject,from_name,from_address,to_name,to_address,body,to_addresses,cc_addresses,bcc_addresses,mail_state,raw,sent_date_string,is_complete,message_id,add_time) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         insert.setInt(1,0);
         insert.setString(2, mail.getSubject());
         insert.setString(3, mail.getFromName());
         insert.setString(4, mail.getFromAddress());
         insert.setString(5, mail.getToName());
-        insert.setString(6, mail.getToAddress());
+        insert.setString(6, mail.getToFirstAddress());
         insert.setString(7, mail.getBody());
-        insert.setString(8, mail.getContentType());
-        insert.setString(9, mail.getCharset());
-        insert.setString(10, mail.getContentTransferEncoding());
-        insert.setString(11, mail.getMimeVersion());
+
+        insert.setString(8, mail.getToAddresses());
+        insert.setString(9, mail.getCcAddresses());
+        insert.setString(10, mail.getBccAddresses());
+
+        insert.setInt(11, mail.getMailState());
+
         insert.setString(12, mail.getRaw());
-        insert.setString(13, mail.getDate());
+        insert.setString(13, mail.getSentDate());
         insert.setInt(14, mail.getIsComplateInt());
         insert.setString(15, mail.getMessageId());
         insert.setInt(16, (int) System.currentTimeMillis());

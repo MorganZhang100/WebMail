@@ -140,3 +140,7 @@
 .mid_right_buttons{
     margin-left:5px;
 }
+
+.email_brief_span{
+    overflow:hidden;
+}
