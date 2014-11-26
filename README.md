@@ -2,7 +2,7 @@
 
 This is a webmail project written by Morgan Zhang for the Principle of Software Development course assignment.
 
-## Now Pages
+## Some Pages
 <img align=top src="figures/inbox.png" width="640">
 <br />
 <img align=top src="figures/showEmail.png" width="640">
@@ -13,6 +13,16 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 <img align=top src="figures/UserRegister.jpg" width="320">
 
 ## What's done
+
+##### Finished Features
+- Basic Features
+1,2,4,5,6,7,8,9,10,12,14,15,19;
+
+- Subjective Criteria Part
+27,28,29
+
+Total Score: 44 or 59( with Subjective Criteria Part)
+
 ##### Before seventh Monday
 - Email Decode kind of done( by JavaMail)
 - Check New Email Button
