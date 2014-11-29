@@ -7,7 +7,7 @@
            </div>
            <div class="top_right_div">
                <a href="#logout" class="pull-right" id="logout_button">Sign out</a>
-               <span class="pull-right" id="user_login_name">Hello, $userLoginName$</span>
+               <span class="pull-right" id="user_login_name">Hello, $userNickName$</span>
            </div>
        </div>
    </div>
@@ -58,6 +58,9 @@
                    </div>
                    <div class="left_buttons">
                        <a href="">Advanced Search</a>
+                   </div>
+                   <div class="left_buttons">
+                       <a href="#edit">Edit User Information</a>
                    </div>
                </div>
                <div class="col-lg-9" id="down_right_big">

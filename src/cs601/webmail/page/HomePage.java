@@ -24,7 +24,7 @@ public class HomePage extends Page {
         user.getCurrentUser(request);
 
         SimpleStringTemplate SST = new SimpleStringTemplate("HomePage.sst");
-        SST.add("userLoginName",user.getLoginName());
+        SST.add("userNickName",user.getNickName());
         out.println(SST.render());
 	}
 }

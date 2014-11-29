@@ -148,3 +148,13 @@
 .unread{
     background:white;
 }
+
+.change_user_information_labels{
+    margin-top:8px;
+    margin-bottom:3px;
+}
+
+.change_user_information_buttons{
+    margin-top:10px;
+    margin-bottom:10px;
+}

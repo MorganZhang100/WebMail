@@ -241,4 +241,37 @@ public class UserModule {
             return true;
         }
     }
+
+    public boolean changeInformation(String loginName, String nickName, String realEmailAddress, String realEmailPwd, String popServerAddress, int intPopPort, String smtpServerAddress, int intSmtpPort) throws SQLException, ClassNotFoundException {
+        DBManager sql = new DBManager("select * from USER where login_name = '" + loginName + "' and user_id != " + this.user_id + ";");
+        ResultSet rs = sql.query();
+
+        if(rs.next()) {
+            sql.close();
+            return false;
+        }
+        else {
+            sql.newQuery("update USER set login_name = '" + loginName + "', nick_name = '" + nickName + "', real_email_address = '" + realEmailAddress + "', real_email_pwd = '" + realEmailPwd + "', pop_server_address = '" + popServerAddress + "', pop_server_port = " + intPopPort + ", smtp_server_address = '" + smtpServerAddress + "',smtp_server_port = " + intSmtpPort + " where user_id = " + this.user_id + "; ");
+            sql.execute();
+
+            sql.close();
+
+            return true;
+        }
+    }
+
+    public boolean changePwd(String oldPwd, String newPwd) throws SQLException, ClassNotFoundException {
+        if(!this.pwd.equals(oldPwd)) {
+            System.out.println("this.pwd = " + this.pwd);
+            System.out.println("oldPwd = " + oldPwd);
+            return false;
+        }
+
+        DBManager sql = new DBManager("update USER set pwd = '" + newPwd + "' where user_id = " + this.user_id + "; ");
+        sql.execute();
+        sql.close();
+
+        return true;
+    }
+
 }

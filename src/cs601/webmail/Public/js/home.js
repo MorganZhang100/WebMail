@@ -92,6 +92,52 @@ window.onhashchange = function() {
         );
     }
 
+    if(hashKey == "edit") {
+         $.post(
+             "HomeEditUserInformationPost",
+             {},
+             function(result)
+             {
+                 $("#down_right_big").empty();
+                 $("#down_right_big").prepend("<div class=\"row\" id=\"user_information\" ></div>");
+                 $("#user_information").prepend(
+                     "<div class=\"user_left col-lg-6\" >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">Nick Name</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"nickName\" name=\"nickName\" value=" + result.nick_name + " >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">Login Name</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"loginName\" name=\"loginName\" value=" + result.login_name + " >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">Email Address</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"emailAddress\" name=\"emailAddress\" value=" + result.email_address + " >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">Email Password</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"emailPwd\" name=\"emailPwd\" value=" + result.email_pwd + " >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">POP Server Address</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"popServer\" name=\"popServer\" value=" + result.pop_server + " >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">POP Server Port</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"popPort\" name=\"popPort\" value=" + result.pop_port + " >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">SMTP Server Address</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"smtpServer\" name=\"smtpServer\" value=" + result.smtp_server + " >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">SMTP Server Port</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"smtpPort\" name=\"smtpPort\" value=" + result.smtp_port + " >" +
+
+                             "<a class=\"btn btn-primary change_user_information_buttons\" id=\"user_information_change_button\" onclick=\"saveUserInformationChange()\">Save Change</a> " +
+                     "</div>" +
+
+                     "<div class=\"user_left col-lg-6\" >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">Old Password</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"oldPassword\" name=\"oldPassword\" >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">New Password</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"newPasswordOne\" name=\"newPasswordOne\" >" +
+                             "<label for=\"NickName\" class=\"change_user_information_labels\">Repeat New Password</label>" +
+                             "<input type=\"text\" class=\"form-control\" id=\"newPasswordTwo\" name=\"newPasswordTwo\" >" +
+
+                             "<a class=\"btn btn-primary change_user_information_buttons\" id=\"user_pwd_change_button\" onclick=\"saveUserPwdChange()\">Change Password</a> " +
+                     "</div>"
+                 );
+             },
+             "json"
+         );
+    }
+
     if(hashKey == "inbox") {
         if(hashValue == undefined) {
             hashValue = 0;
@@ -185,6 +231,53 @@ window.onhashchange = function() {
             function(result)
             {
                 alert(result.success);
+            },
+            "json"
+        );
+    }
+}
+
+function saveUserInformationChange() {
+    $.post(
+        "HomeChangeUserInformationPost",
+        {
+            loginName: $("#loginName").val(),
+            nickName: $("#nickName").val(),
+            emailAddress: $("#emailAddress").val(),
+            emailPwd: $("#emailPwd").val(),
+            popServer: $("#popServer").val(),
+            popPort: $("#popPort").val(),
+            smtpServer: $("#smtpServer").val(),
+            smtpPort: $("#smtpPort").val()
+        },
+        function(result)
+        {
+            if(result.state == "success") alert("Change Success");
+            window.location = "#inbox/0";
+        },
+        "json"
+    );
+}
+
+function saveUserPwdChange() {
+    if($("#newPasswordOne").val() != $("#newPasswordTwo").val())
+    {
+        alert("New Password Incorrect!");
+    }
+    else {
+        $.post(
+            "HomeChangeUserPwdPost",
+            {
+                oldPwd: $("#oldPassword").val(),
+                newPwd: $("#newPasswordOne").val()
+            },
+            function(result)
+            {
+                if(result.state == "success") {
+                    alert("Change Success");
+                    window.location = "#inbox/0";
+                }
+                else alert(result.state);
             },
             "json"
         );

@@ -29,6 +29,9 @@ public class DispatchServlet extends HttpServlet {
         mapping.put("/HomeDeleteToTrashPost", HomeDeleteToTrashPost.class);
         mapping.put("/HomeTrashFolderPost", HomeTrashFolderPost.class);
         mapping.put("/HomeEmptyAllTrashPost", HomeEmptyAllTrashPost.class);
+        mapping.put("/HomeEditUserInformationPost", HomeEditUserInformationPost.class);
+        mapping.put("/HomeChangeUserInformationPost", HomeChangeUserInformationPost.class);
+        mapping.put("/HomeChangeUserPwdPost", HomeChangeUserPwdPost.class);
 	}
 
     @Override
@@ -36,6 +39,7 @@ public class DispatchServlet extends HttpServlet {
                           HttpServletResponse response) throws ServletException, IOException {
 //        super.doPost(req, resp);
         String uri = request.getRequestURI();
+        System.out.println("Post: " + uri);
         PostHandler p = createPostHandler(uri, request, response);
         if ( p==null ) {
             response.sendRedirect("/files/error.html");

@@ -13,8 +13,8 @@ import java.net.URLDecoder;
 import java.sql.SQLException;
 
 
-public class LoginPost extends PostHandler {
-	public LoginPost(HttpServletRequest request, HttpServletResponse response) {
+public class HomeChangeUserPwdPost extends PostHandler {
+	public HomeChangeUserPwdPost(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 	}
 
@@ -25,28 +25,28 @@ public class LoginPost extends PostHandler {
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
 
-        String name =request.getParameter("name");
-        String pwd =request.getParameter("pwd");
+        String oldPwd =request.getParameter("oldPwd");
+        String newPwd =request.getParameter("newPwd");
 
-        name = URLDecoder.decode(name, "utf-8");
-        pwd = URLDecoder.decode(pwd,"utf-8");
+        oldPwd = URLDecoder.decode(oldPwd, "utf-8");
+        newPwd = URLDecoder.decode(newPwd, "utf-8");
 
-        pwd = DecodeManager.getMD5(pwd.getBytes());
+        oldPwd = DecodeManager.getMD5(oldPwd.getBytes());
+        newPwd = DecodeManager.getMD5(newPwd.getBytes());
 
         UserModule user = new UserModule();
-        user.setLoginName(name);
-        user.setPwd(pwd);
+        user.getCurrentUser(request);
 
-        if(user.isValidUser(request,response)) {
-            JSONObject msg = new JSONObject();
+        JSONObject msg = new JSONObject();
+
+        if(user.changePwd(oldPwd,newPwd))
+        {
             msg.put("state","success");
-            out.print(msg);
         }
         else {
-            JSONObject msg = new JSONObject();
-            msg.put("state","fail");
-            msg.put("message","Login name or password not correct");
-            out.print(msg);
+            msg.put("state","Incorrect Old Password");
         }
+
+        out.print(msg);
     }
 }
