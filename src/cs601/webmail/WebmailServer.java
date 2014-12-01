@@ -1,12 +1,12 @@
 package cs601.webmail;
 
 import cs601.webmail.page.DispatchServlet;
-import org.eclipse.jetty.server.NCSARequestLog;
-import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.server.handler.RequestLogHandler;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 public class WebmailServer {
 	public static void main(String[] args) throws Exception {
@@ -16,7 +16,30 @@ public class WebmailServer {
 		}
 		String staticFilesDir = args[0];
 		String logDir = args[1];
-        Server server = new Server(8080);
+        Server server = new Server();
+
+        HttpConfiguration httpConfig = new HttpConfiguration();
+        httpConfig.setSecureScheme("https");
+        httpConfig.setSecurePort(8443);
+
+        HttpConfiguration https_config = new HttpConfiguration(httpConfig);
+        https_config.addCustomizer(new SecureRequestCustomizer());
+        SslContextFactory sslContextFactory = new SslContextFactory("keystore");
+        sslContextFactory.setKeyStorePassword("123qwe");
+
+        ServerConnector httpsConnector = new ServerConnector(server,
+                new SslConnectionFactory(sslContextFactory, "http/1.1"),
+                new HttpConnectionFactory(https_config)
+        );
+
+        httpsConnector.setPort(8443);
+        httpsConnector.setIdleTimeout(50000);
+
+        ServerConnector httpConnector = new ServerConnector(server);
+        httpConnector.setPort(8080);
+        httpConnector.setIdleTimeout(50000);
+        server.setConnectors(new Connector[]{ httpsConnector,httpConnector});
+
 
 		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath("/");
@@ -31,7 +54,7 @@ public class WebmailServer {
         holderHome.setInitParameter("resourceBase",staticFilesDir);
         holderHome.setInitParameter("dirAllowed","true");
         holderHome.setInitParameter("pathInfoOnly","true");
-		context.addServlet(holderHome, "/files/*");
+		context.addServlet(holderHome, "/Public/*");
 
         // Lastly, the default servlet for root content (always needed, to satisfy servlet spec)
         // It is important that this is last.

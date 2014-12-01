@@ -1,7 +1,7 @@
 <div class="container">
     <h2 class="form-signin-heading text-center">Sign in with your Account</h2>
     <div class="card card-signin">
-        <img class="img-circle profile-img" src="http://localhost:8081/img/avatar.png" alt="">
+        <img class="img-circle profile-img" src="Public/img/avatar.png" alt="">
         <form class="form-signin" role="form">
             <input type="email" class="form-control" placeholder="Email" id="loginName" required autofocus>
             <input type="password" class="form-control" placeholder="Password" id="Password" required>
@@ -18,4 +18,4 @@
         <a href="register">Create an account</a>
     </p>
 </div>
-<script src="http://localhost:8081/js/login.js"></script>
+<script src="Public/js/login.js"></script>

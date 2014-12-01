@@ -37,8 +37,13 @@ public class HomeInboxPost extends PostHandler {
         pageNumber = URLDecoder.decode(pageNumber, "utf-8");
         int IntpageNumber = Integer.parseInt(pageNumber);
 
+        String folderId =request.getParameter("folderId");
+
+        folderId = URLDecoder.decode(folderId, "utf-8");
+        int IntfolderId = Integer.parseInt(folderId);
+
         MailModule mail = new MailModule();
-        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, IntpageNumber,0);
+        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, IntpageNumber,0,IntfolderId);
 
         JSONObject msg = new JSONObject();
         JSONArray mailsBrief = new JSONArray();

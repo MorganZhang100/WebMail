@@ -1,4 +1,7 @@
-if(location.hash == "") window.location = "home#inbox/0";
+if(location.hash == "") {
+    window.location = "home#inbox/0";
+    showUserFolders("user_folders");
+}
 
 $("#check_mail_button").click(
     function() {
@@ -28,6 +31,7 @@ window.onhashchange = function() {
     $("#unread_button").remove();
     $("#delete_button").remove();
     $("#empty_trash_button").remove();
+    $("#foldersDiv").remove();
 
     var hashStr = location.hash.replace("#","");
     var hashKey = hashStr.split("/")[0];
@@ -71,6 +75,23 @@ window.onhashchange = function() {
         );
     }
 
+    if(hashKey == "addFolder") {
+        $.post(
+            "HomeAddNewFolderPost",
+            {
+                name : $("#newFolderInput").val()
+            },
+            function(result)
+            {
+                if(result.state == "done") {
+                    showUserFolders("user_folders");
+                    window.location = "#inbox/0";
+                }
+            },
+            "json"
+        );
+    }
+
     if(hashKey == "detail") {
         $.post(
             "HomeEmailDetail",
@@ -87,6 +108,16 @@ window.onhashchange = function() {
 
                 $("#mid_right_big_left_buttons").prepend("<a href=\"#unread/" + hashValue + "\" class=\"btn btn-default mid_right_buttons\" id=\"unread_button\">UnRead</a>");
                 if(result.mail_state == 0) $("#mid_right_big_left_buttons").prepend("<a href=\"#delete/" + hashValue + "\" class=\"btn btn-default mid_right_buttons\" id=\"delete_button\">Delete</a>");
+                $("#mid_right_big_left_buttons").prepend(
+                    "<div class=\"btn-group\" id=\"foldersDiv\">" +
+                        "<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\">" +
+                            "Folder <span class=\"caret\"></span>" +
+                        "</button>" +
+                        "<ul class=\"dropdown-menu\" role=\"menu\" id=\"folderMenu\">" +
+                        "</ul>" +
+                    "</div>"
+                );
+                showUserFolders("folderMenu");
             },
             "json"
         );
@@ -148,7 +179,8 @@ window.onhashchange = function() {
         $.post(
             "HomeInboxPost",
             {
-                pageNumber: hashValue
+                pageNumber: hashValue,
+                folderId: 0
             },
             function(result)
             {
@@ -163,6 +195,27 @@ window.onhashchange = function() {
                 $("#pre_button").attr("href","#inbox/" + prePageNumber);
                 $("#aft_button").attr("href","#inbox/" + aftPageNumber);
 
+            },
+            "json"
+        );
+    }
+
+    if(hashKey == "folder") {
+        $.post(
+            "HomeInboxPost",
+            {
+                pageNumber: 0,
+                folderId: hashValue
+            },
+            function(result)
+            {
+                $("#down_right_big").empty();
+                var i;
+                for(i=0; i<result.mailAmount; i++) {
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+
+                    if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
+                }
             },
             "json"
         );
@@ -282,4 +335,44 @@ function saveUserPwdChange() {
             "json"
         );
     }
+}
+
+function showUserFolders(showPlace) {
+    $.post(
+        "HomeShowUserFoldersPost",
+        {},
+        function(result)
+        {
+            if(result.state == "done") {
+                if(showPlace == "user_folders") $("#user_folders").empty();
+                var i;
+                for(i=0; i<result.folderAmount; i++) {
+                    if(showPlace == "user_folders") $("#user_folders").prepend("<div class=\"left_buttons\"><a href=\"#folder/" + result.folders[i].id + "\">" + result.folders[i].name + "</a></div>");
+                    if(showPlace == "folderMenu") $("#folderMenu").prepend("<li><a onclick=changeFolder(" + result.folders[i].id + ")>" + result.folders[i].name + "</a></li>");
+                }
+            }
+        },
+        "json"
+    );
+}
+
+function changeFolder(aimFolderId) {
+    var hashStr = location.hash.replace("#","");
+    var hashKey = hashStr.split("/")[0];
+    var id = hashStr.split("/")[1];
+
+    $.post(
+        "HomeChangeFolderPost",
+        {
+            mailId: id,
+            folderId: aimFolderId
+        },
+        function(result)
+        {
+            if(result.state == "done") {
+                window.location = "#folder/" + aimFolderId;
+            }
+        },
+        "json"
+    );
 }

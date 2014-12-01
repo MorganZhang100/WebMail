@@ -31,9 +31,10 @@ public class POP3Manager {
 
         String userName = user.getUserNameForRealEmailAccount();
         String pwd = user.getEmailPwd();
+        int userId = user.getUser_id();
 
         POP3Manager pop3Manager = new POP3Manager(popServer,popPort);
-        pop3Manager.recieveMail(userName,pwd);
+        pop3Manager.recieveMail(userName,pwd,userId);
     }
 
     public POP3Manager(String server, int port) throws IOException{
@@ -142,7 +143,7 @@ public class POP3Manager {
     }
 
     //retr
-    public void retr(int mailNum,BufferedReader in,BufferedWriter out) throws Exception {
+    public void retr(int mailNum,BufferedReader in,BufferedWriter out,int userId) throws Exception {
         String result;
         for(int i=1;i<=mailNum;i++){
             result = getResult(sendServer("retr "+i,in,out));
@@ -156,6 +157,7 @@ public class POP3Manager {
             String raw = getMessagedetail(in);
             mail.setRaw(raw);
             mail.setEmailByRaw();
+            mail.setUserId(userId);
 
             if(!mail.isComplate()) System.out.println(mail.toString());
             mail.toStorePreparedStatement();
@@ -172,7 +174,7 @@ public class POP3Manager {
     }
 
     //receiving email
-    public boolean recieveMail(String user,String password){
+    public boolean recieveMail(String user,String password,int userId){
         try{
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
@@ -180,7 +182,7 @@ public class POP3Manager {
             pass(password,in,out);
             int mailNum;
             mailNum = stat(in,out);
-            retr(mailNum,in,out);
+            retr(mailNum,in,out,userId);
             quit(in,out);
         }catch(Exception e){
             e.printStackTrace();

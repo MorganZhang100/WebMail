@@ -13,7 +13,7 @@ public class RegisterPage extends Page {
 
     @Override
     public void headerMore() {
-        out.println("<link href=\"http://localhost:8081/css/login.css\" rel=\"stylesheet\">" );
+        out.println("<link href=\"Public/css/login.css\" rel=\"stylesheet\">" );
     }
 
 	@Override

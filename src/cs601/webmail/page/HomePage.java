@@ -15,7 +15,7 @@ public class HomePage extends Page {
 
     @Override
     public void headerMore() {
-        out.println("<link href=\"http://localhost:8081/css/home.css\" rel=\"stylesheet\">");
+        out.println("<link href=\"Public/css/home.css\" rel=\"stylesheet\">");
     }
 
 	@Override

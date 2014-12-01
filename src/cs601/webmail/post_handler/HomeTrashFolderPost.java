@@ -37,7 +37,7 @@ public class HomeTrashFolderPost extends PostHandler {
         int IntpageNumber = Integer.parseInt(pageNumber);
 
         MailModule mail = new MailModule();
-        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, IntpageNumber,1);
+        ArrayList<MailModule> mailList = mail.getBriefUserMails(user, IntpageNumber,1,0);
 
         JSONObject msg = new JSONObject();
         JSONArray mailsBrief = new JSONArray();

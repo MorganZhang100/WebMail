@@ -156,5 +156,13 @@
 
 .change_user_information_buttons{
     margin-top:10px;
-    margin-bottom:10px;
+    margin-bottom:5px;
+}
+
+.left_input{
+    margin-top:15px;
+}
+
+.left_input a{
+    margin-top:6px;
 }

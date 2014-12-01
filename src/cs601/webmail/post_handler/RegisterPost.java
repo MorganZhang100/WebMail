@@ -50,7 +50,6 @@ public class RegisterPost extends PostHandler {
 
         UserModule user = new UserModule(name, pwd, nickName, realEmailAddress, realEmailPwd, popServerAddress, IntPopPort, smtpServerAddress, IntSmtpPort);
 
-
         if(user.newUser(response)) {
             JSONObject msg = new JSONObject();
             msg.put("state","success");

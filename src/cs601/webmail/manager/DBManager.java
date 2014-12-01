@@ -45,8 +45,8 @@ public class DBManager {
     }
 
     public void newEmail(MailModule mail) throws SQLException {
-        PreparedStatement insert = db.prepareStatement("insert into MAIL(user_id,subject,from_name,from_address,to_name,to_address,body,to_addresses,cc_addresses,bcc_addresses,mail_state,raw,sent_date_string,is_complete,message_id,add_time,read_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        insert.setInt(1,0);
+        PreparedStatement insert = db.prepareStatement("insert into MAIL(user_id,subject,from_name,from_address,to_name,to_address,body,to_addresses,cc_addresses,bcc_addresses,mail_state,raw,sent_date_string,is_complete,message_id,add_time,read_flag,folder_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        insert.setInt(1,mail.getUserId());
         insert.setString(2, mail.getSubject());
         insert.setString(3, mail.getFromName());
         insert.setString(4, mail.getFromAddress());
@@ -66,6 +66,7 @@ public class DBManager {
         insert.setString(15, mail.getMessageId());
         insert.setInt(16, (int) System.currentTimeMillis()/1000);
         insert.setInt(17, 0); //read_flag = 0: unRead, =1: read;
+        insert.setInt(18, 0); //read_flag = 0: unRead, =1: read;
 
         int n = insert.executeUpdate();
         if(n!=1) {
@@ -75,7 +76,7 @@ public class DBManager {
 
     public void newUser(UserModule user, int addTime) throws SQLException {
         PreparedStatement insert = db.prepareStatement("insert into USER(login_name,pwd,add_time,nick_name,real_email_address,real_email_pwd,pop_server_address,pop_server_port,smtp_server_address,smtp_server_port) values(?,?,?,?,?,?,?,?,?,?)");
-        insert.setString(1,user.getLoginName());
+        insert.setString(1, user.getLoginName());
         insert.setString(2, user.getPwd());
         insert.setInt(3, addTime);
         insert.setString(4, user.getNickName());
@@ -85,6 +86,17 @@ public class DBManager {
         insert.setInt(8, user.getPOP3Port());
         insert.setString(9, user.getSMTPServer());
         insert.setInt(10, user.getSMTPPort());
+
+        int n = insert.executeUpdate();
+        if(n!=1) {
+            System.err.println("Bad update");
+        }
+    }
+
+    public void newFolder(UserModule user, String newFolderName) throws SQLException {
+        PreparedStatement insert = db.prepareStatement("insert into FOLDER(user_id,name) values(?,?)");
+        insert.setInt(1, user.getUser_id());
+        insert.setString(2, newFolderName);
 
         int n = insert.executeUpdate();
         if(n!=1) {

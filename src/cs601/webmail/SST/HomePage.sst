@@ -45,7 +45,7 @@
                    </div>
                    <div class="left_buttons">
                        <a href="#inbox" id="inbox_button" >Inbox</a>
-                       <script src="http://localhost:8081/js/home.js"></script>
+                       <script src="Public/js/home.js"></script>
                    </div>
                    <div class="left_buttons">
                        <a href="">Sent</a>
@@ -61,6 +61,14 @@
                    </div>
                    <div class="left_buttons">
                        <a href="#edit">Edit User Information</a>
+                   </div>
+                   <div class="left_input">
+                       <input type="text" id="newFolderInput"/>
+                       <a href="#addFolder" class="btn btn-default btn-sm">Add New Folder</a>
+                   </div>
+                   <div class="left_buttons">
+                   </div>
+                   <div id="user_folders">
                    </div>
                </div>
                <div class="col-lg-9" id="down_right_big">

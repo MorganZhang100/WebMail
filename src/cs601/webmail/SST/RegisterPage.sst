@@ -48,10 +48,8 @@
                 <a class="btn btn-lg btn-primary btn-block" id="register_button">Register</a> 
             </div>
             
-            
-        
     <p class="text-center">
         <a href="/">back to login page</a>
     </p>
 </div>
-<script src="http://localhost:8081/js/register.js"></script>
+<script src="Public/js/register.js"></script>

@@ -87,12 +87,12 @@ public abstract class Page {
                 "    <title>Morgan Mail</title>\n" +
                 "\n" +
                 "    <!-- Bootstrap -->\n" +
-                "    <link href=\"http://localhost:8081/todc-bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n" +
+                "    <link href=\"Public/todc-bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n" +
                 "    <!-- TODC Bootstrap theme -->\n" +
-                "    <link href=\"http://localhost:8081/todc-bootstrap/css/todc-bootstrap.min.css\" rel=\"stylesheet\">" +
-                "    <script src=\"http://localhost:8081/js/jquery-1.11.1.min.js\"></script>\n" +
+                "    <link href=\"Public/todc-bootstrap/css/todc-bootstrap.min.css\" rel=\"stylesheet\">" +
+                "    <script src=\"Public/js/jquery-1.11.1.min.js\"></script>\n" +
                 "    <!-- Include all compiled plugins (below), or include individual files as needed -->\n" +
-                "    <script src=\"http://localhost:8081/todc-bootstrap/js/bootstrap.min.js\"></script>");
+                "    <script src=\"Public/todc-bootstrap/js/bootstrap.min.js\"></script>");
 
         headerMore();
 

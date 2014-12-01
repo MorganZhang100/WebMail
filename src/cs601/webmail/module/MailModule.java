@@ -35,6 +35,8 @@ public class MailModule {
     private String sentDate = null;
     private int mailState = -1; //-1是初始值，0是正常，1是删除了（在垃圾箱），2是彻底删除了（垃圾箱也没有了）
     private int readFlag = 0; // 0:unRead, 1:read
+    private int folderId = 0;
+    private int userId = 0;
 
     public int getMailState() {
         return mailState;
@@ -84,8 +86,24 @@ public class MailModule {
         this.readFlag = readFlag;
     }
 
+    public int getFolderId() {
+        return folderId;
+    }
+
+    public void setFolderId(int folderId) {
+        this.folderId = folderId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public MailModule(UserModule user,int mail_id) throws SQLException, UnsupportedEncodingException, ClassNotFoundException {
-        DBManager sql = new DBManager("select mail_id,from_name,from_address,to_address,subject,body,to_addresses,cc_addresses,bcc_addresses,sent_date_string,mail_state,read_flag from MAIL where user_id = " + user.getUser_id() + " and mail_id = " + mail_id + " ; ");
+        DBManager sql = new DBManager("select mail_id,from_name,from_address,to_address,subject,body,to_addresses,cc_addresses,bcc_addresses,sent_date_string,mail_state,read_flag,folder_id from MAIL where user_id = " + user.getUser_id() + " and mail_id = " + mail_id + " ; ");
         ResultSet rs = sql.query();
 
         if(rs.next()) {
@@ -100,6 +118,7 @@ public class MailModule {
             this.bccAddresses = rs.getString("bcc_addresses");
             this.mailState = rs.getInt("mail_state");
             this.readFlag = rs.getInt("read_flag");
+            this.folderId = rs.getInt("folder_id");
 
             if(this.readFlag == 0) {
                 sql.newQuery("update MAIL set read_flag = 1 where mail_id = " + mail_id + ";");
@@ -263,8 +282,12 @@ public class MailModule {
         }
     }
 
-    public ArrayList<MailModule> getBriefUserMails(UserModule user, int pageNumber, int tempMailState) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
-        DBManager sql = new DBManager("select mail_id,from_name,subject,body,read_flag from MAIL where user_id = " + user.getUser_id() + " and mail_state = " + tempMailState + " order by add_time desc limit " + pageNumber * 5 + "," + (pageNumber + 1) * 5 + ";");
+    public ArrayList<MailModule> getBriefUserMails(UserModule user, int pageNumber, int tempMailState,int tempFolderId) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
+        String sqlString = "select mail_id,from_name,subject,body,read_flag from MAIL where user_id = " + user.getUser_id() + " and mail_state = " + tempMailState ;
+        if(tempFolderId != 0) sqlString = sqlString + " and folder_id = " + tempFolderId;
+        sqlString = sqlString + " order by add_time desc limit " + pageNumber * 5 + "," + (pageNumber + 1) * 5 + ";";
+
+        DBManager sql = new DBManager(sqlString);
         ResultSet rs = sql.query();
 
         ArrayList<MailModule> arrayList = new ArrayList<MailModule>();
@@ -509,6 +532,11 @@ public class MailModule {
 
     public void deleteToTrash() throws SQLException, ClassNotFoundException {
         DBManager sql = new DBManager("update MAIL set mail_state = 1 where mail_id = " + this.mailId + ";");
+        sql.execute();
+    }
+
+    public void changeFolder(UserModule user,int mailId, int folderId) throws SQLException, ClassNotFoundException {
+        DBManager sql = new DBManager("update MAIL set folder_id = " + folderId + " where mail_id = " + mailId + " and user_id = " + user.getUser_id() + " ;");
         sql.execute();
     }
 }
