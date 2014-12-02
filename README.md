@@ -14,12 +14,17 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 
 ## What's done
 
+##### Final Week
+- Receive Attachment
+
 ##### Before seventh Monday
 - Email Decode kind of done( by JavaMail)
 - Check New Email Button
 - Read / UnRead Function
 - Delete Email, Empty Trash
 - Edit User Information / Pwd
+- HTTPS Support
+- User Define Folder
 
 ##### Before fifth Monday
 - SMTP kind of done

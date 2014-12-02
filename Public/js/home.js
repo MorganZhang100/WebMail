@@ -102,9 +102,10 @@ window.onhashchange = function() {
             {
                 $("#down_right_big").empty();
                 $("#down_right_big").prepend("<div class=\"row\" id=\"email_detail\" ></div>");
+                $("#email_detail").prepend("<div class=\"email_attachment\" id=\"email_attachment\"></div>");
                 $("#email_detail").prepend("<div class=\"email_body\" >" + result.body + "</div>");
                 $("#email_detail").prepend("<div class=\"email_head\" ><span class=\"col-lg-6\" >" + result.from_name + "&lt;" + result.from_address + "&gt; </span><span class=\"col-lg-6\" > To me &lt;" + result.to_address + "&gt;</span></div>");
-                $("#email_detail").prepend("<div class=\"email_subject\" ><span class=\"col-lg-12\" >" + result.subject + "</span></div>");
+                $("#email_detail").prepend("<div class=\"email_subject\"><span class=\"col-lg-12\" >" + result.subject + "</span></div>");
 
                 $("#mid_right_big_left_buttons").prepend("<a href=\"#unread/" + hashValue + "\" class=\"btn btn-default mid_right_buttons\" id=\"unread_button\">UnRead</a>");
                 if(result.mail_state == 0) $("#mid_right_big_left_buttons").prepend("<a href=\"#delete/" + hashValue + "\" class=\"btn btn-default mid_right_buttons\" id=\"delete_button\">Delete</a>");
@@ -118,6 +119,11 @@ window.onhashchange = function() {
                     "</div>"
                 );
                 showUserFolders("folderMenu");
+
+                var i;
+                for(i=0; i<result.attachmentAmount; i++) {
+                    $("#email_attachment").prepend("<div><a href=\"/Public/tem/" + result.attachments[i].name + "\" target=\"_blank\">" + result.attachments[i].name + "</a></div>");
+                }
             },
             "json"
         );

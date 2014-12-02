@@ -155,9 +155,10 @@ public class POP3Manager {
             System.out.println("#"+i+" email");
 
             String raw = getMessagedetail(in);
+
+            mail.setUserId(userId);
             mail.setRaw(raw);
             mail.setEmailByRaw();
-            mail.setUserId(userId);
 
             if(!mail.isComplate()) System.out.println(mail.toString());
             mail.toStorePreparedStatement();

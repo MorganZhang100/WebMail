@@ -1,6 +1,8 @@
 package cs601.webmail.manager;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 import java.util.regex.Matcher;
@@ -135,6 +137,16 @@ public class DecodeManager {
             e.printStackTrace();
         }
         return s;
+    }
+
+    public static byte[] getByteArrayFromInputStream(InputStream in) throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024*4];
+        int n;
+        while ( (n=in.read(buffer)) !=-1) {
+            out.write(buffer,0,n);
+        }
+        return out.toByteArray();
     }
 
 }

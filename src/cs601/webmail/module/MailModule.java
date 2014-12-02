@@ -1,9 +1,9 @@
 package cs601.webmail.module;
 
 import cs601.webmail.manager.DBManager;
-import cs601.webmail.manager.DecodeManager;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -103,7 +103,7 @@ public class MailModule {
     }
 
     public MailModule(UserModule user,int mail_id) throws SQLException, UnsupportedEncodingException, ClassNotFoundException {
-        DBManager sql = new DBManager("select mail_id,from_name,from_address,to_address,subject,body,to_addresses,cc_addresses,bcc_addresses,sent_date_string,mail_state,read_flag,folder_id from MAIL where user_id = " + user.getUser_id() + " and mail_id = " + mail_id + " ; ");
+        DBManager sql = new DBManager("select mail_id,from_name,from_address,to_address,subject,body,to_addresses,cc_addresses,bcc_addresses,sent_date_string,mail_state,read_flag,folder_id,message_id from MAIL where user_id = " + user.getUser_id() + " and mail_id = " + mail_id + " ; ");
         ResultSet rs = sql.query();
 
         if(rs.next()) {
@@ -119,6 +119,7 @@ public class MailModule {
             this.mailState = rs.getInt("mail_state");
             this.readFlag = rs.getInt("read_flag");
             this.folderId = rs.getInt("folder_id");
+            this.messageId = rs.getString("message_id");
 
             if(this.readFlag == 0) {
                 sql.newQuery("update MAIL set read_flag = 1 where mail_id = " + mail_id + ";");
@@ -523,6 +524,43 @@ public class MailModule {
         this.ccAddresses = getMailAddressByRaw("cc", mimeMessage);
         this.bccAddresses = getMailAddressByRaw("bcc",mimeMessage);
         this.mailState = 0;
+        getAttachmentByRaw((Part)mimeMessage);
+    }
+
+    public void getAttachmentByRaw(Part part) throws Exception {
+        String fileName = "";
+        if (part.isMimeType("multipart/*")) {
+            Multipart mp = (Multipart) part.getContent();
+            for (int i = 0; i < mp.getCount(); i++) {
+                BodyPart mpart = mp.getBodyPart(i);
+                String disposition = mpart.getDisposition();
+                if ((disposition != null)
+                        && ((disposition.equals(Part.ATTACHMENT)) || (disposition
+                        .equals(Part.INLINE)))) {
+                    fileName = mpart.getFileName();
+                    if (fileName.toLowerCase().indexOf("gb2312") != -1) {
+                        fileName = MimeUtility.decodeText(fileName);
+                    }
+                    storeAttachment(fileName, mpart.getInputStream());
+                } else if (mpart.isMimeType("multipart/*")) {
+                    getAttachmentByRaw(mpart);
+                } else {
+                    fileName = mpart.getFileName();
+                    if ((fileName != null) && (fileName.toLowerCase().indexOf("GB2312") != -1)) {
+                        fileName = MimeUtility.decodeText(fileName);
+                        storeAttachment(fileName, mpart.getInputStream());
+                    }
+                }
+            }
+        } else if (part.isMimeType("message/rfc822")) {
+            getAttachmentByRaw((Part) part.getContent());
+        }
+    }
+
+    private void storeAttachment(String fileName, InputStream in) throws Exception {
+        DBManager sql = new DBManager();
+        sql.newAttachment(fileName,in,this.messageId,this.userId);
+        sql.close();
     }
 
     public void unRead() throws SQLException, ClassNotFoundException {

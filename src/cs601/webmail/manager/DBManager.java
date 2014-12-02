@@ -3,6 +3,7 @@ package cs601.webmail.manager;
 import cs601.webmail.module.MailModule;
 import cs601.webmail.module.UserModule;
 
+import java.io.InputStream;
 import java.sql.*;
 
 public class DBManager {
@@ -64,7 +65,7 @@ public class DBManager {
         insert.setString(13, mail.getSentDate());
         insert.setInt(14, mail.getIsComplateInt());
         insert.setString(15, mail.getMessageId());
-        insert.setInt(16, (int) System.currentTimeMillis()/1000);
+        insert.setInt(16, (int) System.currentTimeMillis() / 1000);
         insert.setInt(17, 0); //read_flag = 0: unRead, =1: read;
         insert.setInt(18, 0); //read_flag = 0: unRead, =1: read;
 
@@ -97,6 +98,20 @@ public class DBManager {
         PreparedStatement insert = db.prepareStatement("insert into FOLDER(user_id,name) values(?,?)");
         insert.setInt(1, user.getUser_id());
         insert.setString(2, newFolderName);
+
+        int n = insert.executeUpdate();
+        if(n!=1) {
+            System.err.println("Bad update");
+        }
+    }
+
+    public void newAttachment(String fileName, InputStream in,String messageId, int userId) throws Exception {
+        PreparedStatement insert = db.prepareStatement("insert into ATTA (name,content,message_id,user_id) values(?,?,?,?); ");
+        insert.setString(1,fileName);
+        byte[] contentBytes = DecodeManager.getByteArrayFromInputStream(in);
+        insert.setBytes(2,contentBytes);
+        insert.setString(3,messageId);
+        insert.setInt(4,userId);
 
         int n = insert.executeUpdate();
         if(n!=1) {
