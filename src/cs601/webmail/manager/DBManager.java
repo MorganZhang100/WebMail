@@ -105,17 +105,26 @@ public class DBManager {
         }
     }
 
-    public void newAttachment(String fileName, InputStream in,String messageId, int userId) throws Exception {
-        PreparedStatement insert = db.prepareStatement("insert into ATTA (name,content,message_id,user_id) values(?,?,?,?); ");
+    public int newAttachment(String fileName, InputStream in,String messageId, int userId, String cid) throws Exception {
+        PreparedStatement insert = db.prepareStatement("insert into ATTA (name,content,message_id,user_id,content_id) values(?,?,?,?,?); ");
         insert.setString(1,fileName);
         byte[] contentBytes = DecodeManager.getByteArrayFromInputStream(in);
         insert.setBytes(2,contentBytes);
-        insert.setString(3,messageId);
-        insert.setInt(4,userId);
+        insert.setString(3, messageId);
+        insert.setInt(4, userId);
+        insert.setString(5, cid);
 
         int n = insert.executeUpdate();
         if(n!=1) {
             System.err.println("Bad update");
         }
+
+        this.query = "select id from ATTA where content_id = '" + cid + "'";
+        ResultSet rs = this.query();
+        if(rs.next()) {
+            int attaId = rs.getInt("id");
+            return attaId;
+        }
+        return -1;
     }
 }

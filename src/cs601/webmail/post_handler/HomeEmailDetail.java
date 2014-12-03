@@ -51,18 +51,20 @@ public class HomeEmailDetail extends PostHandler {
 
         JSONArray attachmentsArray = new JSONArray();
 
-        DBManager sql = new DBManager("select name,content from ATTA where user_id = " + user.getUser_id() + " and message_id = '" + mail.getMessageId() + "';");
+        DBManager sql = new DBManager("select id,name,content from ATTA where user_id = " + user.getUser_id() + " and message_id = '" + mail.getMessageId() + "';");
         ResultSet rs = sql.query();
 
         int i = 0;
         while(rs.next()) {
             JSONObject attachment = new JSONObject();
+            int attaId = rs.getInt("id");
             String attaName = rs.getString("name");
             byte[] content = rs.getBytes("content");
 
+            attachment.put("id",attaId);
             attachment.put("name",attaName);
 
-            File file = new File("./Public/tem/" + attaName);
+            File file = new File("./Public/tem/" + attaId);
             try {
                 FileOutputStream fop = new FileOutputStream(file);
 

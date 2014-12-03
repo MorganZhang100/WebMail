@@ -122,7 +122,7 @@ window.onhashchange = function() {
 
                 var i;
                 for(i=0; i<result.attachmentAmount; i++) {
-                    $("#email_attachment").prepend("<div><a href=\"/Public/tem/" + result.attachments[i].name + "\" target=\"_blank\">" + result.attachments[i].name + "</a></div>");
+                    $("#email_attachment").prepend("<div><a href=\"/Public/tem/" + result.attachments[i].id + "\" target=\"_blank\">" + result.attachments[i].name + "</a></div>");
                 }
             },
             "json"

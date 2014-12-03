@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
@@ -529,26 +530,30 @@ public class MailModule {
 
     public void getAttachmentByRaw(Part part) throws Exception {
         String fileName = "";
+        String cid = "";
+
         if (part.isMimeType("multipart/*")) {
             Multipart mp = (Multipart) part.getContent();
             for (int i = 0; i < mp.getCount(); i++) {
                 BodyPart mpart = mp.getBodyPart(i);
+                MimeBodyPart mimeBodyPart = (MimeBodyPart)mpart;
+                cid = mimeBodyPart.getContentID();
+
                 String disposition = mpart.getDisposition();
-                if ((disposition != null)
-                        && ((disposition.equals(Part.ATTACHMENT)) || (disposition
-                        .equals(Part.INLINE)))) {
+                if ((disposition != null) && ((disposition.equals(Part.ATTACHMENT)) || (disposition.equals(Part.INLINE)))) {
                     fileName = mpart.getFileName();
+
                     if (fileName.toLowerCase().indexOf("gb2312") != -1) {
                         fileName = MimeUtility.decodeText(fileName);
                     }
-                    storeAttachment(fileName, mpart.getInputStream());
+                    storeAttachment(fileName, mpart.getInputStream(),cid);
                 } else if (mpart.isMimeType("multipart/*")) {
                     getAttachmentByRaw(mpart);
                 } else {
                     fileName = mpart.getFileName();
                     if ((fileName != null) && (fileName.toLowerCase().indexOf("GB2312") != -1)) {
                         fileName = MimeUtility.decodeText(fileName);
-                        storeAttachment(fileName, mpart.getInputStream());
+                        storeAttachment(fileName, mpart.getInputStream(),cid);
                     }
                 }
             }
@@ -557,10 +562,15 @@ public class MailModule {
         }
     }
 
-    private void storeAttachment(String fileName, InputStream in) throws Exception {
+    private void storeAttachment(String fileName, InputStream in, String cid) throws Exception {
         DBManager sql = new DBManager();
-        sql.newAttachment(fileName,in,this.messageId,this.userId);
+        int attaId = sql.newAttachment(fileName,in,this.messageId,this.userId,cid);
         sql.close();
+
+        String srcCid = cid.replace("<","").replace(">","");
+        srcCid = "\"cid:" + srcCid + "\"";
+
+        this.body = this.body.replaceAll(srcCid,"\"/Public/tem/" + attaId + "\"");
     }
 
     public void unRead() throws SQLException, ClassNotFoundException {

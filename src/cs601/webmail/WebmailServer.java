@@ -47,7 +47,7 @@ public class WebmailServer {
 
 		        // add a simple Servlet at "/dynamic/*"
         ServletHolder holderDynamic = new ServletHolder("dynamic", DispatchServlet.class);
-		context.addServlet(holderDynamic, "/*");
+        context.addServlet(holderDynamic, "/*");
 
         // add special pathspec of "/home/" content mapped to the homePath
         ServletHolder holderHome = new ServletHolder("static-home", DefaultServlet.class);

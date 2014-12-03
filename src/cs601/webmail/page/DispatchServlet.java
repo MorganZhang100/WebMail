@@ -40,9 +40,9 @@ public class DispatchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-//        super.doPost(req, resp);
         String uri = request.getRequestURI();
         System.out.println("Post: " + uri);
+
         PostHandler p = createPostHandler(uri, request, response);
         if ( p==null ) {
             response.sendRedirect("/files/error.html");
@@ -57,14 +57,15 @@ public class DispatchServlet extends HttpServlet {
 		throws ServletException, IOException
 	{
 		String uri = request.getRequestURI();
-        System.out.println(uri);
-		Page p = createPage(uri, request, response);
-		if ( p==null ) {
-			response.sendRedirect("/files/error.html");
-			return;
-		}
-		response.setContentType("text/html");
-		p.generate();
+        System.out.print("GET: " + uri);
+
+        Page p = createPage(uri, request, response);
+        if (p == null) {
+            response.sendRedirect("/files/error.html");
+            return;
+        }
+        response.setContentType("text/html");
+        p.generate();
 	}
 
     public Page createPage(String uri,

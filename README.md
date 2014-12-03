@@ -16,6 +16,7 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 
 ##### Final Week
 - Receive Attachment
+- Inline Image
 
 ##### Before seventh Monday
 - Email Decode kind of done( by JavaMail)
