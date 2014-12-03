@@ -584,6 +584,7 @@ public class MailModule {
                 BodyPart mpart = mp.getBodyPart(i);
                 MimeBodyPart mimeBodyPart = (MimeBodyPart)mpart;
                 cid = mimeBodyPart.getContentID();
+                if(cid == null) cid = "";
 
                 String disposition = mpart.getDisposition();
                 if ((disposition != null) && ((disposition.equals(Part.ATTACHMENT)) || (disposition.equals(Part.INLINE)))) {
