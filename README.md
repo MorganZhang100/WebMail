@@ -12,6 +12,7 @@ http://104.131.144.128:8080/
 - Inline Image
 - Email Simple & Advance Search
 - Sort Email
+- Sent Folder
 
 ##### Before seventh Monday
 - Email Decode kind of done( by JavaMail)

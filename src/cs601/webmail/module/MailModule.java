@@ -39,6 +39,21 @@ public class MailModule {
     private int folderId = 0;
     private int userId = 0;
 
+    public MailModule(int sentIntMailId, UserModule user) throws SQLException, ClassNotFoundException {
+        DBManager sql = new DBManager("select id,from_address,to_address,subject,body from SENT where user_id = " + user.getUser_id() + " and id = " + sentIntMailId + " ; ");
+        ResultSet rs = sql.query();
+
+        if(rs.next()) {
+            this.setMailId(rs.getInt("id"));
+            this.setFromName(rs.getString("from_address"));
+            this.setToFirstAddress(rs.getString("to_address"));
+            this.setSubject(rs.getString("subject"));
+            this.setBody(rs.getString("body"));
+
+            sql.close();
+        }
+    }
+
     public int getMailState() {
         return mailState;
     }
@@ -302,7 +317,8 @@ public class MailModule {
             mail.setReadFlag(rs.getInt("read_flag"));
 
             String body = rs.getString("body");
-            mail.setBody(body.substring(0, 8));
+            if(body.length()>8) mail.setBody(body.substring(0, 8));
+            else mail.setBody(body);
 
             mail.setSentDate(rs.getString("sent_date_string"));
 
@@ -616,5 +632,37 @@ public class MailModule {
     public void changeFolder(UserModule user,int mailId, int folderId) throws SQLException, ClassNotFoundException {
         DBManager sql = new DBManager("update MAIL set folder_id = " + folderId + " where mail_id = " + mailId + " and user_id = " + user.getUser_id() + " ;");
         sql.execute();
+    }
+
+    public void saveToSentFolder(int userId, String subject, String body, String toAddresses, String fromAddress) throws SQLException, ClassNotFoundException {
+        DBManager sql = new DBManager("insert into Sent (user_id,subject,body,to_address,from_address) values( " + userId + ", '" + subject + "', '" + body + "', '" + toAddresses + "', '" + fromAddress + "')");
+        sql.execute();
+    }
+
+    public ArrayList<MailModule> getBriefUserSentMails(int userId) throws SQLException, ClassNotFoundException {
+        String sqlString = "select id,from_address,subject,body,to_address from SENT where user_id = " + userId + "  order by id desc ;";
+        System.out.println(sqlString);
+
+        DBManager sql = new DBManager(sqlString);
+        ResultSet rs = sql.query();
+
+        ArrayList<MailModule> arrayList = new ArrayList<MailModule>();
+
+        while(rs.next()) {
+            MailModule mail = new MailModule();
+            mail.setMailId(rs.getInt("id"));
+            mail.setFromName(rs.getString("from_address"));
+            mail.setToFirstAddress(rs.getString("to_address"));
+            mail.setSubject(rs.getString("subject"));
+            mail.setReadFlag(0);
+
+            String body = rs.getString("body");
+            if(body.length()>8) mail.setBody(body.substring(0, 8));
+            else mail.setBody(body);
+
+            arrayList.add(mail);
+        }
+        sql.close();
+        return arrayList;
     }
 }

@@ -39,6 +39,7 @@ public class HomeComposePost extends PostHandler {
         user.getCurrentUser(request);
 
         MailModule mail = new MailModule(subject,user.getEmailAddress(),toAddress,body);
+        mail.saveToSentFolder(user.getUser_id(),subject,body,toAddress,user.getEmailAddress());
 
         SMTPManager smtp = new SMTPManager(user);
         boolean result = smtp.sendMail(mail,user);

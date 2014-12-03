@@ -38,6 +38,8 @@ public class DispatchServlet extends HttpServlet {
         mapping.put("/HomeSimpleSearchPost", HomeSimpleSearchPost.class);
         mapping.put("/HomeAdvanceSearchPost", HomeAdvanceSearchPost.class);
         mapping.put("/HomeSortPost", HomeSortPost.class);
+        mapping.put("/HomeSentFolderPost", HomeSentFolderPost.class);
+        mapping.put("/HomeSentDetail", HomeSentDetail.class);
 	}
 
     @Override

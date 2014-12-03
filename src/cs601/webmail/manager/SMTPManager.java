@@ -92,7 +92,7 @@ public class SMTPManager {
             throw new IOException("user id error!");
         }
 
-        result=sendServer(encode.encode(user.getPwd().getBytes()),in,out);
+        result=sendServer(encode.encode(user.getEmailPwd().getBytes()),in,out);
 
         if(result!=235){
             throw new IOException("auth login failed!");

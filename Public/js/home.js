@@ -187,6 +187,25 @@ window.onhashchange = function() {
         );
     }
 
+    if(hashKey == "sentDetail") {
+        $.post(
+            "HomeSentDetail",
+            {
+                mail_id : hashValue
+            },
+            function(result)
+            {
+                $("#down_right_big").empty();
+                $("#down_right_big").prepend("<div class=\"row\" id=\"email_detail\" ></div>");
+                $("#email_detail").prepend("<div class=\"email_attachment\" id=\"email_attachment\"></div>");
+                $("#email_detail").prepend("<div class=\"email_body\" >" + result.body + "</div>");
+                $("#email_detail").prepend("<div class=\"email_head\" ><span class=\"col-lg-6\" >" + result.from_name + "&lt;" + result.from_address + "&gt; </span><span class=\"col-lg-6\" > To me &lt;" + result.to_address + "&gt;</span></div>");
+                $("#email_detail").prepend("<div class=\"email_subject\"><span class=\"col-lg-12\" >" + result.subject + "</span></div>");
+            },
+            "json"
+        );
+    }
+
     if(hashKey == "edit") {
          $.post(
              "HomeEditUserInformationPost",
@@ -297,6 +316,29 @@ window.onhashchange = function() {
 
                 $("#pre_button").attr("href","#inbox/" + prePageNumber);
                 $("#aft_button").attr("href","#inbox/" + aftPageNumber);
+
+            },
+            "json"
+        );
+    }
+
+    if(hashKey == "sentFolder") {
+        if(hashValue == undefined) {
+            hashValue = 0;
+        }
+
+        $.post(
+            "HomeSentFolderPost",
+            {},
+            function(result)
+            {
+                $("#down_right_big").empty();
+                var i;
+                for(i=0; i<result.mailAmount; i++) {
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#sentDetail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].to_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-4 email_brief_span\" >" + result.mailsBrief[i].body + "</span><span class=\"col-lg-2 email_brief_span\" >" + result.mailsBrief[i].time + "</span></div></a></div>");
+
+                    if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
+                }
 
             },
             "json"

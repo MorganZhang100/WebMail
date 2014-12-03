@@ -48,7 +48,7 @@
                        <script src="Public/js/home.js"></script>
                    </div>
                    <div class="left_buttons">
-                       <a href="">Sent</a>
+                       <a href="#sentFolder">Sent</a>
                    </div>
                    <div class="left_buttons">
                        <a href="">Spam</a>
