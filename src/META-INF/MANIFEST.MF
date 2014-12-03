@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Class-Path: sqlite-jdbc-3.8.7.jar javax.mail.jar jetty-alpn-client-9.2
+ .3.v20140905.jar jetty-alpn-server-9.2.3.v20140905.jar jetty-annotati
+ ons-9.2.3.v20140905.jar jetty-client-9.2.3.v20140905.jar jetty-contin
+ uation-9.2.3.v20140905.jar jetty-deploy-9.2.3.v20140905.jar jetty-htt
+ p-9.2.3.v20140905.jar jetty-io-9.2.3.v20140905.jar jetty-jaas-9.2.3.v
+ 20140905.jar jetty-jaspi-9.2.3.v20140905.jar jetty-jmx-9.2.3.v2014090
+ 5.jar jetty-jndi-9.2.3.v20140905.jar jetty-plus-9.2.3.v20140905.jar j
+ etty-proxy-9.2.3.v20140905.jar jetty-quickstart-9.2.3.v20140905.jar j
+ etty-rewrite-9.2.3.v20140905.jar jetty-security-9.2.3.v20140905.jar j
+ etty-server-9.2.3.v20140905.jar jetty-servlet-9.2.3.v20140905.jar jet
+ ty-servlets-9.2.3.v20140905.jar jetty-util-9.2.3.v20140905.jar jetty-
+ webapp-9.2.3.v20140905.jar jetty-xml-9.2.3.v20140905.jar servlet-api-
+ 3.1.jar json-jena-1.0.jar
+Main-Class: cs601.webmail.WebmailServer
+

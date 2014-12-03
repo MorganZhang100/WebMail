@@ -9,7 +9,7 @@ import java.sql.*;
 public class DBManager {
 
 	String query;
-    String dbFile = "/Users/Morgan/Documents/MorganZhang1991-webmail/src/cs601/webmail/MorganWebMail.sqlite";
+    String dbFile = "./MorganWebMail.sqlite";
     Connection db = null;
     Statement statement = null;
 

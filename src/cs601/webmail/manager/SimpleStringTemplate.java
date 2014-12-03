@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class SimpleStringTemplate {
 
-    private static String rootDir = "./src/cs601/webmail/SST/";
+    private static String rootDir = "./SST/";
     private String content = "";
 
     public SimpleStringTemplate(String fileName) throws IOException {
