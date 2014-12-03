@@ -116,6 +116,8 @@ window.onhashchange = function() {
         );
     }
 
+
+
     if(hashKey == "detail") {
         $.post(
             "HomeEmailDetail",
@@ -196,6 +198,32 @@ window.onhashchange = function() {
                  );
              },
              "json"
+         );
+    }
+
+    if(hashKey == "advanceSearch") {
+         $("#down_right_big").empty();
+         $("#down_right_big").prepend("<div class=\"row\" id=\"user_information\" ></div>");
+         $("#user_information").prepend(
+             "<div class=\"user_left col-lg-6\" >" +
+                     "<label class=\"change_user_information_labels\">Subject</label>" +
+                     "<input type=\"text\" class=\"form-control\" id=\"subject\">" +
+                     "<label class=\"change_user_information_labels\">From Name</label>" +
+                     "<input type=\"text\" class=\"form-control\" id=\"fromName\">" +
+                     "<label class=\"change_user_information_labels\">To Name</label>" +
+                     "<input type=\"text\" class=\"form-control\" id=\"toName\">" +
+
+                     "<a href=\"#as\" class=\"btn btn-primary change_user_information_buttons\" id=\"advanceSearchButton\" onclick=\"advanceSearch()\">Search</a> " +
+             "</div>" +
+
+             "<div class=\"user_left col-lg-6\" >" +
+                     "<label class=h\"change_user_information_labels\">Body</label>" +
+                     "<input type=\"text\" class=\"form-control\" id=\"body\">" +
+                     "<label class=\"change_user_information_labels\">From Address</label>" +
+                     "<input type=\"text\" class=\"form-control\" id=\"fromAddress\">" +
+                     "<label class=\"change_user_information_labels\">To Address</label>" +
+                     "<input type=\"text\" class=\"form-control\" id=\"toAddress\">" +
+             "</div>"
          );
     }
 
@@ -401,6 +429,32 @@ function changeFolder(aimFolderId) {
         {
             if(result.state == "done") {
                 window.location = "#folder/" + aimFolderId;
+            }
+        },
+        "json"
+    );
+}
+
+function advanceSearch() {
+    $("#unread_button").remove();
+    $.post(
+        "HomeAdvanceSearchPost",
+        {
+            subject : $("#subject").val(),
+            body : $("#body").val(),
+            fromAddress : $("#fromAddress").val(),
+            fromName : $("#fromName").val(),
+            toAddress : $("#toAddress").val(),
+            toName : $("#toName").val()
+        },
+        function(result)
+        {
+            $("#down_right_big").empty();
+            var i;
+            for(i=0; i<result.mailAmount; i++) {
+                $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+
+                if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
             }
         },
         "json"

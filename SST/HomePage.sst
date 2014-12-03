@@ -57,7 +57,7 @@
                        <a href="#trash">Trash</a>
                    </div>
                    <div class="left_buttons">
-                       <a href="">Advanced Search</a>
+                       <a href="#advanceSearch">Advanced Search</a>
                    </div>
                    <div class="left_buttons">
                        <a href="#edit">Edit User Information</a>

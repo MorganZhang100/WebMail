@@ -149,4 +149,24 @@ public class DBManager {
         this.close();
         return mailArray;
     }
+
+    public ArrayList<MailModule> advanceSearch(String searchField, String key, UserModule user) throws SQLException, UnsupportedEncodingException, ClassNotFoundException {
+        this.query = "select mail_id from MAIL where user_id = " + user.getUser_id() + " and " + searchField + " like '%" + key + "%';";
+        ResultSet rs = this.query();
+
+        ArrayList mailIdArray = new ArrayList();
+        ArrayList<MailModule> mailArray = new ArrayList<MailModule>();
+
+        while(rs.next()) {
+            mailIdArray.add(rs.getInt("mail_id"));
+        }
+
+        for(int i=0; i<mailIdArray.size(); i++) {
+            MailModule oneMail = new MailModule(user,(Integer)mailIdArray.get(i));
+            mailArray.add(oneMail);
+        }
+
+        this.close();
+        return mailArray;
+    }
 }
