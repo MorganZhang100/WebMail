@@ -26,6 +26,30 @@ $("#check_mail_button").click(
     }
 );
 
+$("#top_search_button").click(
+    function() {
+        $("#unread_button").remove();
+
+        $.post(
+            "HomeSimpleSearchPost",
+            {
+                key : $("#top_search_input").val()
+            },
+            function(result)
+            {
+                $("#down_right_big").empty();
+                var i;
+                for(i=0; i<result.mailAmount; i++) {
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+
+                    if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
+                }
+            },
+            "json"
+        );
+    }
+);
+
 window.onhashchange = function() {
 
     $("#unread_button").remove();

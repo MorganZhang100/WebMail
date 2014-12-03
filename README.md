@@ -10,6 +10,7 @@ http://104.131.144.128:8080/
 ##### Final Week
 - Receive Attachment
 - Inline Image
+- Email Simple Search
 
 ##### Before seventh Monday
 - Email Decode kind of done( by JavaMail)

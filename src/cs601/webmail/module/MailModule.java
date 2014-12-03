@@ -302,7 +302,7 @@ public class MailModule {
             mail.setReadFlag(rs.getInt("read_flag"));
 
             String body = rs.getString("body");
-            mail.setBody(body.substring(0, 5));
+            mail.setBody(body.substring(0, 8));
 
             arrayList.add(mail);
         }

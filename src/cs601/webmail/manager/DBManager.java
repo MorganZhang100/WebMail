@@ -4,7 +4,9 @@ import cs601.webmail.module.MailModule;
 import cs601.webmail.module.UserModule;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBManager {
 
@@ -126,5 +128,25 @@ public class DBManager {
             return attaId;
         }
         return -1;
+    }
+
+    public ArrayList<MailModule> simpleSearch(String key, UserModule user) throws SQLException, UnsupportedEncodingException, ClassNotFoundException {
+        this.query = "select mail_id from MAIL where user_id = " + user.getUser_id() + " and ( subject like '%" + key + "%' or from_name like '%" + key + "%' or from_address like '%" + key + "%' or to_address like '%" + key + "%' or to_name like '%" + key + "%' or body like '%" + key + "%');";
+        ResultSet rs = this.query();
+
+        ArrayList mailIdArray = new ArrayList();
+        ArrayList<MailModule> mailArray = new ArrayList<MailModule>();
+
+        while(rs.next()) {
+            mailIdArray.add(rs.getInt("mail_id"));
+        }
+
+        for(int i=0; i<mailIdArray.size(); i++) {
+            MailModule oneMail = new MailModule(user,(Integer)mailIdArray.get(i));
+            mailArray.add(oneMail);
+        }
+
+        this.close();
+        return mailArray;
     }
 }
