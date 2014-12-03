@@ -285,7 +285,7 @@ public class MailModule {
     }
 
     public ArrayList<MailModule> getBriefUserMails(UserModule user, int pageNumber, int tempMailState,int tempFolderId) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
-        String sqlString = "select mail_id,from_name,subject,body,read_flag from MAIL where user_id = " + user.getUser_id() + " and mail_state = " + tempMailState ;
+        String sqlString = "select mail_id,from_name,subject,body,read_flag,sent_date_string from MAIL where user_id = " + user.getUser_id() + " and mail_state = " + tempMailState ;
         if(tempFolderId != 0) sqlString = sqlString + " and folder_id = " + tempFolderId;
         sqlString = sqlString + " order by add_time desc limit " + pageNumber * 5 + "," + (pageNumber + 1) * 5 + ";";
 
@@ -304,11 +304,41 @@ public class MailModule {
             String body = rs.getString("body");
             mail.setBody(body.substring(0, 8));
 
+            mail.setSentDate(rs.getString("sent_date_string"));
+
             arrayList.add(mail);
         }
         sql.close();
         return arrayList;
     }
+
+    public ArrayList<MailModule> getSortedBriefUserMails(UserModule user, int tempMailState,String type) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
+        String sqlString = "select mail_id,from_name,subject,body,read_flag,sent_date_string from MAIL where user_id = " + user.getUser_id() + " and mail_state = " + tempMailState + " order by " + type + " desc ;";
+        System.out.println(sqlString);
+
+        DBManager sql = new DBManager(sqlString);
+        ResultSet rs = sql.query();
+
+        ArrayList<MailModule> arrayList = new ArrayList<MailModule>();
+
+        while(rs.next()) {
+            MailModule mail = new MailModule();
+            mail.setMailId(rs.getInt("mail_id"));
+            mail.setFromName(rs.getString("from_name"));
+            mail.setSubject(rs.getString("subject"));
+            mail.setReadFlag(rs.getInt("read_flag"));
+
+            String body = rs.getString("body");
+            mail.setBody(body.substring(0, 8));
+
+            mail.setSentDate(rs.getString("sent_date_string"));
+
+            arrayList.add(mail);
+        }
+        sql.close();
+        return arrayList;
+    }
+
 
     /**
      * 获得发件人的地址和姓名

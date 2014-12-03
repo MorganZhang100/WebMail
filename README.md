@@ -11,6 +11,7 @@ http://104.131.144.128:8080/
 - Receive Attachment
 - Inline Image
 - Email Simple & Advance Search
+- Sort Email
 
 ##### Before seventh Monday
 - Email Decode kind of done( by JavaMail)

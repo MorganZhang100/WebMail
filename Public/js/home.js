@@ -56,6 +56,7 @@ window.onhashchange = function() {
     $("#delete_button").remove();
     $("#empty_trash_button").remove();
     $("#foldersDiv").remove();
+    $("#sortDiv").remove();
 
     var hashStr = location.hash.replace("#","");
     var hashKey = hashStr.split("/")[0];
@@ -116,7 +117,38 @@ window.onhashchange = function() {
         );
     }
 
+    if(hashKey == "sort") {
+        $.post(
+            "HomeSortPost",
+            {
+                type : hashValue
+            },
+            function(result)
+            {
+                $("#down_right_big").empty();
+                var i;
+                for(i=0; i<result.mailAmount; i++) {
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-4 email_brief_span\" >" + result.mailsBrief[i].body + "</span><span class=\"col-lg-2 email_brief_span\" >" + result.mailsBrief[i].time + "</span></div></a></div>");
 
+                    if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
+                }
+
+                $("#mid_right_big_left_buttons").prepend(
+                    "<div class=\"btn-group\" id=\"sortDiv\">" +
+                        "<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\">" +
+                            "Sort <span class=\"caret\"></span>" +
+                        "</button>" +
+                        "<ul class=\"dropdown-menu\" role=\"menu\" id=\"folderMenu\">" +
+                        "<li><a href=\"#sort/from_name\">From Name</a></li>" +
+                        "<li><a href=\"#sort/subject\">Subject</a></li>" +
+                        "<li><a href=\"#sort/sent_date_string\">Time</a></li>" +
+                        "</ul>" +
+                    "</div>"
+                );
+            },
+            "json"
+        );
+    }
 
     if(hashKey == "detail") {
         $.post(
@@ -245,10 +277,23 @@ window.onhashchange = function() {
                 $("#down_right_big").empty();
                 var i;
                 for(i=0; i<result.mailAmount; i++) {
-                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-4 email_brief_span\" >" + result.mailsBrief[i].body + "</span><span class=\"col-lg-2 email_brief_span\" >" + result.mailsBrief[i].time + "</span></div></a></div>");
 
                     if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
                 }
+
+                $("#mid_right_big_left_buttons").prepend(
+                    "<div class=\"btn-group\" id=\"sortDiv\">" +
+                        "<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\">" +
+                            "Sort <span class=\"caret\"></span>" +
+                        "</button>" +
+                        "<ul class=\"dropdown-menu\" role=\"menu\" id=\"folderMenu\">" +
+                        "<li><a href=\"#sort/from_name\">From Name</a></li>" +
+                        "<li><a href=\"#sort/subject\">Subject</a></li>" +
+                        "<li><a href=\"#sort/sent_date_string\">Time</a></li>" +
+                        "</ul>" +
+                    "</div>"
+                );
 
                 $("#pre_button").attr("href","#inbox/" + prePageNumber);
                 $("#aft_button").attr("href","#inbox/" + aftPageNumber);
@@ -270,7 +315,7 @@ window.onhashchange = function() {
                 $("#down_right_big").empty();
                 var i;
                 for(i=0; i<result.mailAmount; i++) {
-                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-4 email_brief_span\" >" + result.mailsBrief[i].body + "</span><span class=\"col-lg-2 email_brief_span\" >" + result.mailsBrief[i].time + "</span></div></a></div>");
 
                     if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
                 }
@@ -296,7 +341,7 @@ window.onhashchange = function() {
                 $("#down_right_big").empty();
                 var i;
                 for(i=0; i<result.mailAmount; i++) {
-                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#detail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].from_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-4 email_brief_span\" >" + result.mailsBrief[i].body + "</span><span class=\"col-lg-2 email_brief_span\" >" + result.mailsBrief[i].time + "</span></div></a></div>");
 
                     if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
                 }

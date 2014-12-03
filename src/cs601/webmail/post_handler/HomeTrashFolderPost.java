@@ -51,6 +51,7 @@ public class HomeTrashFolderPost extends PostHandler {
             oneMailBrief.put("body",mail.getBody());
             oneMailBrief.put("mail_id",mail.getMailId());
             oneMailBrief.put("read_flag",mail.getReadFlag());
+            oneMailBrief.put("time",mail.getSentDate());
 
             mailsBrief.put(oneMailBrief);
         }

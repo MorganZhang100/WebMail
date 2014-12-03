@@ -33,11 +33,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="MailModule.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cs601/webmail/module/MailModule.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3340" max-vertical-offset="8130">
+              <caret line="315" column="91" selection-start-line="315" selection-start-column="91" selection-end-line="315" selection-end-column="91" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="DBManager.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs601/webmail/manager/DBManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2046" max-vertical-offset="2670">
-              <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="400" max-vertical-offset="2670">
+              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#901#902#0" expanded="true" />
@@ -49,11 +59,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="home.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Public/js/home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8894231" vertical-offset="195" max-vertical-offset="7020">
-              <caret line="50" column="2" selection-start-line="50" selection-start-column="2" selection-end-line="50" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4717" max-vertical-offset="7695">
+              <caret line="344" column="0" selection-start-line="344" selection-start-column="0" selection-end-line="344" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeTrashFolderPost.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeTrashFolderPost.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="825">
+              <caret line="53" column="56" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeInboxPost.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeInboxPost.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="900">
+              <caret line="59" column="56" selection-start-line="59" selection-start-column="56" selection-end-line="59" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeSortPost.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeSortPost.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="810">
+              <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -62,8 +102,8 @@
       <file leaf-file-name="DispatchServlet.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs601/webmail/page/DispatchServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="433" max-vertical-offset="1500">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1515">
+              <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -79,50 +119,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/PostHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="383" max-vertical-offset="1020">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeEditUserInformationPost.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeEditUserInformationPost.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeChangeUserPwdPost.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeChangeUserPwdPost.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="53" max-vertical-offset="690">
-              <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeChangeUserInformationPost.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeChangeUserInformationPost.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="53" max-vertical-offset="810">
-              <caret line="42" column="56" selection-start-line="26" selection-start-column="8" selection-end-line="42" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomePage.sst" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="HomePage.sst" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SST/HomePage.sst">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="1260">
+            <state vertical-scroll-proportion="0.4318182" vertical-offset="600" max-vertical-offset="1260">
               <caret line="59" column="46" selection-start-line="59" selection-start-column="46" selection-end-line="59" selection-end-column="46" />
               <folding />
             </state>
@@ -135,8 +135,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.2222223" vertical-offset="0" max-vertical-offset="975">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state vertical-scroll-proportion="-7.7777777" vertical-offset="0" max-vertical-offset="990">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -155,7 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/cs601/webmail/manager/SQLQueryHandler.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeComposePost.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/manager/BasicStringTemplate.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/Public/css/login.css" />
@@ -176,13 +175,11 @@
         <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeChangeUserPwdPost.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/module/UserModule.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeCheckEmailPost.java" />
-        <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeTrashFolderPost.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/RegisterPost.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeshowUserFoldersPost.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeShowUserFoldersPost.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeAddNewFolderPost.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/Public/css/home.css" />
-        <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeInboxPost.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/Public/js/home.js" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/page/Page.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/page/LoginPage.java" />
@@ -198,14 +195,17 @@
         <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeEmailDetail.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/manager/SimpleStringTemplate.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/WebmailServer.java" />
-        <option value="$PROJECT_DIR$/src/cs601/webmail/module/MailModule.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeSimpleSearchPost.java" />
         <option value="$PROJECT_DIR$/SST/HomePage.sst" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/manager/DBManager.java" />
-        <option value="$PROJECT_DIR$/src/cs601/webmail/page/DispatchServlet.java" />
         <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeAdvanceSearchPost.java" />
-        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/cs601/webmail/page/DispatchServlet.java" />
+        <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeInboxPost.java" />
+        <option value="$PROJECT_DIR$/src/cs601/webmail/module/MailModule.java" />
+        <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeSortPost.java" />
         <option value="$PROJECT_DIR$/Public/js/home.js" />
+        <option value="$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeTrashFolderPost.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -835,20 +835,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/LogoutPost.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
-          <caret line="27" column="22" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/RegisterPost.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="885">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeComposePost.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="660">
@@ -1101,30 +1087,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeInboxPost.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="885">
-          <caret line="45" column="52" selection-start-line="45" selection-start-column="52" selection-end-line="45" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs601/webmail/manager/DecodeManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1544" max-vertical-offset="2280">
           <caret line="141" column="52" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="52" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/module/MailModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1810" max-vertical-offset="7710">
-          <caret line="201" column="18" selection-start-line="201" selection-start-column="18" selection-end-line="201" selection-end-column="18" />
-          <folding>
-            <element signature="e#9945#9946#0" expanded="true" />
-            <element signature="e#9972#9973#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1170,32 +1137,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/manager/DBManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2046" max-vertical-offset="2670">
-          <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#901#902#0" expanded="true" />
-            <element signature="e#931#932#0" expanded="true" />
-            <element signature="e#5565#5577#0" expanded="true" />
-            <element signature="e#6357#6369#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/PostHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="383" max-vertical-offset="1020">
           <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/page/DispatchServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="433" max-vertical-offset="1500">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1208,29 +1153,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/page/DispatchServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.2222223" vertical-offset="0" max-vertical-offset="975">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1515">
+          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SST/HomePage.sst">
+    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeInboxPost.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="1260">
-          <caret line="59" column="46" selection-start-line="59" selection-start-column="46" selection-end-line="59" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="900">
+          <caret line="59" column="56" selection-start-line="59" selection-start-column="56" selection-end-line="59" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/manager/DBManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="400" max-vertical-offset="2670">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#901#902#0" expanded="true" />
+            <element signature="e#931#932#0" expanded="true" />
+            <element signature="e#5565#5577#0" expanded="true" />
+            <element signature="e#6357#6369#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/module/MailModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3340" max-vertical-offset="8130">
+          <caret line="315" column="91" selection-start-line="315" selection-start-column="91" selection-end-line="315" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeSortPost.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="810">
+          <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Public/js/home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8894231" vertical-offset="195" max-vertical-offset="7020">
-          <caret line="50" column="2" selection-start-line="50" selection-start-column="2" selection-end-line="50" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4717" max-vertical-offset="7695">
+          <caret line="344" column="0" selection-start-line="344" selection-start-column="0" selection-end-line="344" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs601/webmail/post_handler/HomeTrashFolderPost.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="825">
+          <caret line="53" column="56" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.7777777" vertical-offset="0" max-vertical-offset="990">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SST/HomePage.sst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4318182" vertical-offset="600" max-vertical-offset="1260">
+          <caret line="59" column="46" selection-start-line="59" selection-start-column="46" selection-end-line="59" selection-end-column="46" />
           <folding />
         </state>
       </provider>
