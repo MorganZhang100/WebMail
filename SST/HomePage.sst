@@ -20,9 +20,6 @@
                </div>
                <div class="col-lg-9" id="mid_right_big">
                    <div class="pull-right">
-<!--                        <a href=""class="btn btn-default" ><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-                       <a href=""class="btn btn-default" ><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
- -->
                        <span id="mid_right_number"></span>
                        <a href="#inbox/0" class="btn btn-default mid_right_buttons" id="pre_button">Pre</a>
                        <a href="#inbox/1" class="btn btn-default mid_right_buttons" id="aft_button">Aft</a>
@@ -49,9 +46,6 @@
                    </div>
                    <div class="left_buttons">
                        <a href="#sentFolder">Sent</a>
-                   </div>
-                   <div class="left_buttons">
-                       <a href="">Spam</a>
                    </div>
                    <div class="left_buttons">
                        <a href="#trash">Trash</a>

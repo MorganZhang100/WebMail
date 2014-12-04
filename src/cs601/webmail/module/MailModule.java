@@ -1,6 +1,7 @@
 package cs601.webmail.module;
 
 import cs601.webmail.manager.DBManager;
+import cs601.webmail.manager.DecodeManager;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -39,6 +40,7 @@ public class MailModule {
     private int folderId = 0;
     private int userId = 0;
 
+    //create mail from sent mails
     public MailModule(int sentIntMailId, UserModule user) throws SQLException, ClassNotFoundException {
         DBManager sql = new DBManager("select id,from_address,to_address,subject,body from SENT where user_id = " + user.getUser_id() + " and id = " + sentIntMailId + " ; ");
         ResultSet rs = sql.query();
@@ -312,13 +314,13 @@ public class MailModule {
         while(rs.next()) {
             MailModule mail = new MailModule();
             mail.setMailId(rs.getInt("mail_id"));
-            mail.setFromName(rs.getString("from_name"));
-            mail.setSubject(rs.getString("subject"));
+            mail.setFromName(DecodeManager.getSafeHTMLOutputFromString(rs.getString("from_name")));
+            mail.setSubject(DecodeManager.getSafeHTMLOutputFromString(rs.getString("subject")));
             mail.setReadFlag(rs.getInt("read_flag"));
 
             String body = rs.getString("body");
-            if(body.length()>8) mail.setBody(body.substring(0, 8));
-            else mail.setBody(body);
+            if(body.length()>8) mail.setBody(DecodeManager.getSafeHTMLOutputFromString(body.substring(0, 8)));
+            else mail.setBody(DecodeManager.getSafeHTMLOutputFromString(body));
 
             mail.setSentDate(rs.getString("sent_date_string"));
 
@@ -340,13 +342,13 @@ public class MailModule {
         while(rs.next()) {
             MailModule mail = new MailModule();
             mail.setMailId(rs.getInt("mail_id"));
-            mail.setFromName(rs.getString("from_name"));
-            mail.setSubject(rs.getString("subject"));
+            mail.setFromName(DecodeManager.getSafeHTMLOutputFromString(rs.getString("from_name")));
+            mail.setSubject(DecodeManager.getSafeHTMLOutputFromString(rs.getString("subject")));
             mail.setReadFlag(rs.getInt("read_flag"));
 
             String body = rs.getString("body");
-            mail.setBody(body.substring(0, 8));
-
+            if(body.length() > 8) mail.setBody(DecodeManager.getSafeHTMLOutputFromString(body.substring(0, 8)));
+            else mail.setBody(DecodeManager.getSafeHTMLOutputFromString(body));
             mail.setSentDate(rs.getString("sent_date_string"));
 
             arrayList.add(mail);
@@ -652,14 +654,14 @@ public class MailModule {
         while(rs.next()) {
             MailModule mail = new MailModule();
             mail.setMailId(rs.getInt("id"));
-            mail.setFromName(rs.getString("from_address"));
-            mail.setToFirstAddress(rs.getString("to_address"));
-            mail.setSubject(rs.getString("subject"));
+            mail.setFromName(DecodeManager.getSafeHTMLOutputFromString(rs.getString("from_address")));
+            mail.setToFirstAddress(DecodeManager.getSafeHTMLOutputFromString(rs.getString("to_address")));
+            mail.setSubject(DecodeManager.getSafeHTMLOutputFromString(rs.getString("subject")));
             mail.setReadFlag(0);
 
             String body = rs.getString("body");
-            if(body.length()>8) mail.setBody(body.substring(0, 8));
-            else mail.setBody(body);
+            if(body.length()>8) mail.setBody(DecodeManager.getSafeHTMLOutputFromString(body.substring(0, 8)));
+            else mail.setBody(DecodeManager.getSafeHTMLOutputFromString(body));
 
             arrayList.add(mail);
         }

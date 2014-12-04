@@ -149,4 +149,9 @@ public class DecodeManager {
         return out.toByteArray();
     }
 
+    public static String getSafeHTMLOutputFromString(String s) {
+        String output = s.replaceAll("<","&lt;").replaceAll(">","&gt;");
+        return output;
+    }
+
 }

@@ -13,6 +13,9 @@ http://104.131.144.128:8080/
 - Email Simple & Advance Search
 - Sort Email
 - Sent Folder
+- Add Error & ico File
+- Forward Email
+- Add Output filter
 
 ##### Before seventh Monday
 - Email Decode kind of done( by JavaMail)

@@ -1,5 +1,6 @@
 package cs601.webmail.post_handler;
 
+import cs601.webmail.manager.DecodeManager;
 import cs601.webmail.manager.POP3Manager;
 import cs601.webmail.module.MailModule;
 import cs601.webmail.module.UserModule;
@@ -52,12 +53,12 @@ public class HomeInboxPost extends PostHandler {
         for(i=0;i<mailList.size();i++) {
             mail = mailList.get(i);
             JSONObject oneMailBrief = new JSONObject();
-            oneMailBrief.put("from_name",mail.getFromName());
-            oneMailBrief.put("subject",mail.getSubject());
-            oneMailBrief.put("body",mail.getBody());
-            oneMailBrief.put("mail_id",mail.getMailId());
-            oneMailBrief.put("read_flag",mail.getReadFlag());
-            oneMailBrief.put("time",mail.getSentDate());
+            oneMailBrief.put("from_name", mail.getFromName());
+            oneMailBrief.put("subject", mail.getSubject());
+            oneMailBrief.put("body", mail.getBody());
+            oneMailBrief.put("mail_id", mail.getMailId());
+            oneMailBrief.put("read_flag", mail.getReadFlag());
+            oneMailBrief.put("time", mail.getSentDate());
 
             mailsBrief.put(oneMailBrief);
         }

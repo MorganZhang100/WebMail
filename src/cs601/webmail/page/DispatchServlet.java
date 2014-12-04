@@ -40,6 +40,7 @@ public class DispatchServlet extends HttpServlet {
         mapping.put("/HomeSortPost", HomeSortPost.class);
         mapping.put("/HomeSentFolderPost", HomeSentFolderPost.class);
         mapping.put("/HomeSentDetail", HomeSentDetail.class);
+        mapping.put("/HomeForwardPost", HomeForwardPost.class);
 	}
 
     @Override
