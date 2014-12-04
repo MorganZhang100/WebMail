@@ -85,6 +85,7 @@ public abstract class Page {
                 "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
                 "    <title>Morgan Mail</title>\n" +
+                "    <link rel=\"icon\" type=\"image/ico\" href=\"/Public/img/favicon.ico\"/>" +
                 "\n" +
                 "    <!-- Bootstrap -->\n" +
                 "    <link href=\"Public/todc-bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n" +

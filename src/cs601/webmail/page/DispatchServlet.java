@@ -50,7 +50,7 @@ public class DispatchServlet extends HttpServlet {
 
         PostHandler p = createPostHandler(uri, request, response);
         if ( p==null ) {
-            response.sendRedirect("/files/error.html");
+            response.sendRedirect("/Public/error.html");
             return;
         }
         response.setContentType("text/html");
@@ -66,7 +66,7 @@ public class DispatchServlet extends HttpServlet {
 
         Page p = createPage(uri, request, response);
         if (p == null) {
-            response.sendRedirect("/files/error.html");
+            response.sendRedirect("/Public/error.html");
             return;
         }
         response.setContentType("text/html");
