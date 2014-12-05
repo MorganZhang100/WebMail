@@ -2,6 +2,7 @@ package cs601.webmail;
 
 import cs601.webmail.page.DispatchServlet;
 import org.eclipse.jetty.server.*;
+import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.server.handler.RequestLogHandler;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -43,7 +44,7 @@ public class WebmailServer {
 
 		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath("/");
-		server.setHandler(context);
+		//server.setHandler(context);
 
 		        // add a simple Servlet at "/dynamic/*"
         ServletHolder holderDynamic = new ServletHolder("dynamic", DispatchServlet.class);
@@ -76,6 +77,11 @@ public class WebmailServer {
 		RequestLogHandler requestLogHandler = new RequestLogHandler();
 		requestLogHandler.setRequestLog(requestLog);
 		requestLogHandler.setServer(server);
+
+        HandlerCollection handlerCollection = new HandlerCollection();
+        handlerCollection.addHandler(requestLogHandler);
+        handlerCollection.addHandler(context);
+        server.setHandler(handlerCollection);
 
 		server.start();
 		server.join();
