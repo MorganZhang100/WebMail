@@ -354,7 +354,7 @@ window.onhashchange = function() {
                 $("#down_right_big").empty();
                 var i;
                 for(i=0; i<result.mailAmount; i++) {
-                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#sentDetail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].to_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-4 email_brief_span\" >" + result.mailsBrief[i].body + "</span><span class=\"col-lg-2 email_brief_span\" >" + result.mailsBrief[i].time + "</span></div></a></div>");
+                    $("#down_right_big").prepend("<div class=\"row\"><a class=\"email_brief\" href=\"#sentDetail/" + result.mailsBrief[i].mail_id + "\" id=\"detail_" + result.mailsBrief[i].mail_id + "\" ><div><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].to_name + "</span><span class=\"col-lg-3 email_brief_span\" >" + result.mailsBrief[i].subject + "</span><span class=\"col-lg-6 email_brief_span\" >" + result.mailsBrief[i].body + "</span></div></a></div>");
 
                     if(result.mailsBrief[i].read_flag == 0) $("#detail_" + result.mailsBrief[i].mail_id).addClass("unread");
                 }
