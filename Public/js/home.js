@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+    showUserFolders("user_folders");
+});
+
 if(location.hash == "") {
     window.location = "home#inbox/0";
     showUserFolders("user_folders");
