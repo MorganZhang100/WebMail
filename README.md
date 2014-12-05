@@ -2,8 +2,16 @@
 
 This is a webmail project written by Morgan Zhang for the Principle of Software Development course assignment.
 
-#### Test Server Address
-http://104.131.144.128:8080/
+## Summary
+- All First 21 features are done.
+- For advanced feature, Morgan WebMail can receive attachment.
+
+##### Test Server Address
+- http://104.131.144.128:8080/
+- https://104.131.144.128:8443/
+- Test Account
+Login name : 123
+Password : qwe
 
 ## What's done
 
@@ -16,6 +24,7 @@ http://104.131.144.128:8080/
 - Add Error & ico File
 - Forward Email
 - Add Output filter
+- Server Log
 
 ##### Before seventh Monday
 - Email Decode kind of done( by JavaMail)
