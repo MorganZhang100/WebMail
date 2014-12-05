@@ -33,12 +33,10 @@ public class DBManager {
     }
 
     public int execute() throws SQLException {
-        //System.out.println(query);
         return statement.executeUpdate(query);
     }
 
     public ResultSet query() throws SQLException {
-        //System.out.println(query);
         return statement.executeQuery(query);
     }
 

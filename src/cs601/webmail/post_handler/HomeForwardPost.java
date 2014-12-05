@@ -52,8 +52,6 @@ public class HomeForwardPost extends PostHandler {
         msg.put("subject","Fwd: " + DecodeManager.getSafeHTMLOutputFromString(mail.getSubject()));
         msg.put("body",DecodeManager.getSafeHTMLOutputFromString(mail.getBody()));
 
-        System.out.println(mail.getSubject() + mail.getBody());
-
         out.print(msg);
     }
 }

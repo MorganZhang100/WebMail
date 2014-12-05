@@ -332,7 +332,6 @@ public class MailModule {
 
     public ArrayList<MailModule> getSortedBriefUserMails(UserModule user, int tempMailState,String type) throws SQLException, ClassNotFoundException, UnsupportedEncodingException {
         String sqlString = "select mail_id,from_name,subject,body,read_flag,sent_date_string from MAIL where user_id = " + user.getUser_id() + " and mail_state = " + tempMailState + " order by " + type + " desc ;";
-        System.out.println(sqlString);
 
         DBManager sql = new DBManager(sqlString);
         ResultSet rs = sql.query();
@@ -644,7 +643,6 @@ public class MailModule {
 
     public ArrayList<MailModule> getBriefUserSentMails(int userId) throws SQLException, ClassNotFoundException {
         String sqlString = "select id,from_address,subject,body,to_address from SENT where user_id = " + userId + "  order by id desc ;";
-        System.out.println(sqlString);
 
         DBManager sql = new DBManager(sqlString);
         ResultSet rs = sql.query();
