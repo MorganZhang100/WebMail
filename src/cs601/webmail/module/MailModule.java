@@ -159,23 +159,6 @@ public class MailModule {
         this.body = body;
     }
 
-//    public MailModule(int mailId) throws SQLException, ClassNotFoundException, MessagingException {
-//        DBManager sql = new DBManager("select raw from MAIL where mail_id = " + mailId + " ; ");
-//        ResultSet rs = sql.query();
-//
-//        if(rs.next()) {
-//            this.raw = rs.getString("raw");
-//            sql.close();
-//        }
-//
-//        Session emptySession = null;
-//
-//        //String t = "Received: from mail163 (unknown [192.168.194.97])\tby mfast1 (Coremail) with SMTP id tcCowEBp8mJK4zJUuVd1AQ--.17924S2;\tTue, 07 Oct 2014 02:45:30 +0800 (CST)From: =?UTF-8?B?572R5piT6YKu5Lu25Lit5b+D?= <mail@service.netease.com>Sender: mail@service.netease.comTo: zfzzyx <zfzzyx@163.com>Message-ID: <1537494165.8300714.1412621130103.JavaMail.mail@service.netease.com>Subject: =?UTF-8?B?6YKu5Lu25bey6KKr5a6i5oi356uv5oiQ5Yqf?= =?UTF-8?B?5pS25Y+W5bm25Zyo5pyN5Yqh5Zmo5LiK5Yig6Zmk?=MIME-Version: 1.0Content-Type: text/html; charset=UTF-8Content-Transfer-Encoding: quoted-printableX-CM-TRANSID:tcCowEBp8mJK4zJUuVd1AQ--.17924S2X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73\tVFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUnV28lY4IEw2IIxxk0rwA2F7IY1VAKz4vE\tj48ve4kI8wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40Eb4A2aVAYj7AlexkEI4k267\tI2xxyl5I8CrVC2j2CEjI02ccxYII8I67AEr4CY67k08wAv7VCjz48v1sIEY20_WwAm72CE\t4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFcxC0VAqx4xG64AKrs4lw4AK0VCY07AIYI\tkI8VC2zVAC3wAKzVCjr7xvwVAFz4v204v26I0v724l7I0Y6sxI4wCY02Avz4vE-sylc2Ij\tII80xcxEwVAKI48JMxAIw28IcxkI7VAKI48JMxAIw28IcVCjz48v1sIEY20_WwCF72vEw2\tIIxxk0rwCFx2IqxVCFs4IE7xkEbVWUJVW8JwCFI7km07C267AKxVWrJr1j6s0q3s1lx2Iq\txVAqx4xG67AKxVWUGVWUWwC20s026x8GjcxK67AKxVWUJVWUGwC2zVAF1VAY17CE14v26r\t1j6r15MIIYrxkI7VAKI48JYxBIdaVFxhVjvjDSLSnIWfuvWjIFyTuYvjfUn9NVUUUUUX-Originating-IP: [192.168.194.97]Date: Tue, 7 Oct 2014 02:45:30 +0800 (CST)<HTML><BODY><TABLE width=3D\"608\" border=3D\"0\" align=3D\"center\" cellpadding==3D\"0\" cellspacing=3D\"0\">=20=09<TR>=20=09=09<TD height=3D\"84\" background=3D\"http://mimg.126.net/hd/all/htmlmail/1=00322_fw/hd.gif\">&nbsp;</TD>=20=09</TR>=20=09<TR>=20=09=09<TD background=3D\"http://mimg.126.net/hd/all/htmlmail/100322_fw/bg.gi=f\">=20=09=09<DIV style=3D\" padding:25px 40px; font-size:14px; line-height:240%; c=olor:#333\">=20=09=09=09<P style=3D\"margin:0; padding:0\">=E5=B0=8A=E6=95=AC=E7=9A=84=E7=94==A8=E6=88=B7=EF=BC=9A</P>=20=09=09=09<P style=3D\"margin:0; padding:0; text-indent:2em\">=09=09=09=09=E6=82=A8=E7=9A=84=E9=82=AE=E7=AE=B1 <STRONG><A href=3D\"mailto:=zfzzyx@163.com\" target=3D\"_blank\">zfzzyx@163.com</A></STRONG> =E4=BA=8E 201=4=E5=B9=B410=E6=9C=8807=E6=97=A5 02=E6=97=B645=E5=88=86 =E8=A2=AB=E9=82=AE==E4=BB=B6=E5=AE=A2=E6=88=B7=E7=AB=AF=E5=88=A0=E9=99=A4=E4=BA=86 <STRONG sty=le=3D\"color:#F00\">47</STRONG> =E5=B0=81=E9=82=AE=E4=BB=B6=EF=BC=8C=E8=A2=AB==E5=88=A0=E9=82=AE=E4=BB=B6=E5=B7=B2=E5=A4=87=E4=BB=BD=E5=88=B0=E2=80=9C=E5==AE=A2=E6=88=B7=E7=AB=AF=E5=88=A0=E4=BF=A1=E2=80=9D=E9=82=AE=E4=BB=B6=E5=A4==B9=EF=BC=8C=E8=AF=B7=E7=9F=A5=E6=82=89=E3=80=82=09=09=09</P>=20=09=09=09<P style=3D\"margin:0; padding:0; text-indent:2em\">=E8=8B=A5=E9=9D==9E=E6=9C=AC=E4=BA=BA=E6=93=8D=E4=BD=9C=EF=BC=8C=E8=AF=B7=E7=AB=8B=E5=8D=B3==E4=BF=AE=E6=94=B9=E5=AF=86=E7=A0=81=E5=8F=8A=E5=AE=89=E5=85=A8=E4=BF=A1=E6==81=AF=EF=BC=8C<a sys=3D\"1\" interface=3D\"OptionInterface\" param=3D\"optionOu=tLink.smtp\" href=3D\"http://mail.163.com/\" target=3D\"_blank\">=E5=85=B3=E9=97==ADPOP3/IMAP=E6=9C=8D=E5=8A=A1</a>=E3=80=82</P>=09=09=09<P style=3D\"margin:0; padding:0; text-indent:2em\">=E5=BC=BA=E7=83==88=E5=BB=BA=E8=AE=AE=E6=82=A8=E7=BB=91=E5=AE=9A=E6=89=8B=E6=9C=BA=E5=8F=B7==E7=A0=81=E4=BB=A5=E8=8E=B7=E5=8F=96=E7=9F=AD=E4=BF=A1=E5=AE=89=E5=85=A8=E6==8F=90=E9=86=92=E3=80=82<a sys=3D\"1\" interface=3D\"OptionInterface\" param=3D=\"optionOutLink.option_security\" href=3D\"http://mail.163.com/\" target=3D\"_bl=ank\">=E7=BB=91=E5=AE=9A=E6=89=8B=E6=9C=BA=E5=8F=B7=E7=A0=81</a></P> =20=09=09=09<P style=3D\"margin:0; padding:0; text-indent:2em\">=E5=A6=82=E6=82==A8=E4=B8=8D=E9=9C=80=E8=A6=81=E6=8F=90=E9=86=92=E6=9C=8D=E5=8A=A1=EF=BC=8C==E4=B9=9F=E5=8F=AF=E4=BB=A5=E9=80=89=E6=8B=A9=E5=85=B3=E9=97=AD=E6=8F=90=E9==86=92=E3=80=82<a sys=3D\"1\" interface=3D\"OptionInterface\" param=3D\"optionOu=tLink.smtp\" href=3D\"http://mail.163.com/\" target=3D\"_blank\">=E5=85=B3=E9=97==AD=E6=8F=90=E9=86=92</a></P>=20=09=09=09<P style=3D\"margin:0; padding:0; padding-top:15px; text-align:righ=t\">=E7=BD=91=E6=98=93=E9=82=AE=E4=BB=B6=E4=B8=AD=E5=BF=83</P>=09=09=09=09</DIV>=20=09=09</TD>=20=09</TR>=20=09<TR>=20=09=09<TD height=3D\"22\" background=3D\"http://mimg.126.net/hd/all/htmlmail/1=00322_fw/bt.gif\">&nbsp;</TD>=20=09</TR>=20</TABLE>=20</BODY></HTML>";
-//
-//        this.msg = new MimeMessage(emptySession, new ByteArrayInputStream(this.raw.getBytes()));
-//        //**此处应该处理rs.next()不存在的情况
-//    }
-
     public String getFromName() {
         return fromName;
     }
@@ -268,19 +251,7 @@ public class MailModule {
         output += ">> bccAddresses: " + this.bccAddresses + "\n";
         output += ">> sentDate: " + this.sentDate + "\n";
         output += ">> Message-ID: " + this.messageId + "\n";
-        //output += ">> Body: " + "\n" + this.body + "\n\n";
         output += ">> Body: " + "\n" + this.body + "\n----------------------\n";
-        //output += ">> RAW: " + "\n" + this.raw + "\n----------------------\n";
-
-        return output;
-    }
-
-    public String toStringBrief() {
-        String output = ">> Subject: " + this.subject + "\n";
-        output += ">> From: " + this.fromName + "<" + this.fromAddress + ">" + "\n";
-        output += ">> To: " + this.toName + "<" + this.toFirstAddress + ">" + "\n";
-        output += ">> Date: " + this.sentDate + "\n";
-        output += ">> Message-ID: " + this.messageId + "\n\n";
 
         return output;
     }

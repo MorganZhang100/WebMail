@@ -5,6 +5,7 @@ This is a webmail project written by Morgan Zhang for the Principle of Software 
 ## Summary
 - All not advanced features are done.
 - For advanced feature, Morgan WebMail can receive attachment.
+- Special : implementation my own Simple String Template to handle the HTML content.
 
 ##### Test Server Address
 - http://104.131.144.128:8080/

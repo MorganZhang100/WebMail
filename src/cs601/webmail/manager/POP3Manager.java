@@ -191,11 +191,4 @@ public class POP3Manager {
         }
         return true;
     }
-
-    Matcher resultOfRegExSearch(String s, String regEx) {
-        Pattern p = Pattern.compile(regEx);
-        Matcher m = p.matcher(s);
-        return m;
-    }
-
 }
