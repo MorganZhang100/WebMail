@@ -1,17 +1,24 @@
 # Morgan WebMail Project
+This is a webmail project written by Morgan Zhang for CS601 class.  
+For more information please see [here](https://github.com/parrt/cs601/blob/master/projects/webmail.md "More Info").
 
-This is a webmail project written by Morgan Zhang for the Principle of Software Development course assignment.
+Front-end source code files are under Public folder.  
+Back-end source code files are under src folder.
 
-## Summary
-- All not advanced features are done.
-- For advanced feature, Morgan WebMail can receive attachment.
-- Special : implementation my own Simple String Template to handle the HTML content.
+In addition to webmail, I implemented my own Simple String Template to handle the HTML content.
 
 ##### Test Server Address
 - http://104.131.144.128:8080/
 - https://104.131.144.128:8443/
 - Test Account
 Login name : 123 , Password : qwe
+
+
+## Summary
+- All not advanced features are done.
+- For advanced feature, Morgan WebMail can receive attachment.
+- Special : implementation my own Simple String Template to handle the HTML content.
+
 
 ## What's done
 
