@@ -1,6 +1,9 @@
 out/
 Public/tem/
 Log/
+.idea/*
 
 *.class
 Test.*
+*.xml
+*.sqlite
